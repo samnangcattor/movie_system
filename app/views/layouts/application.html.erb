@@ -1,14 +1,28 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>MovieSystem</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
+  <head>
+    <title><%= t "app_name" %></title>
+    <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track": true %>
+    <%= javascript_include_tag "application", "data-turbolinks-track": true %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <div id="wrapper">
+      <%= render "shared/header" %>
+      <%= render "shared/main_nav" %>
+      <div id="main" class="col-md-12">
+        <div id="sidebar_right" class="col-md-2">
+          <%= yield :left %>
+        </div>
 
-<%= yield %>
+        <div id="content" class="col-md-7">
+          <%= yield :context_menu %>
+        </div>
 
-</body>
+        <div id="sidebar_left" class="col-md-3">
+          <%= yield :right %>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>

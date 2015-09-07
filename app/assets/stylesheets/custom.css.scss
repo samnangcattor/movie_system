@@ -5,13 +5,28 @@ body {
     height: 100%;
     #header {
       position: relative;
-      height: 90px;
+      max-width: 1920px;
+      margin: 0 auto;
+      min-width: 1300px;
+      width: 100%;
+      display: block;
+      height: 50px;
       background-color: green;
+    }
+
+    .clearfix {
+      min-height: 1px;
+      top: 0px;
+      font-family: "Segoe UI", Arial, Helvetica, Verdana, sans-serif;
+      font-size: 17px;
+      padding: 0;
+      letter-spacing: 1px;
+      overflow: auto;
     }
 
     #main-nav {
       position: relative;
-      height: 30px;
+      height: 423px;
       background-color: rgb(128, 58, 0);
     }
 

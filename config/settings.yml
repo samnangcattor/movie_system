@@ -1,0 +1,19 @@
+category:
+  name:
+    maximum: 30
+movie:
+  title:
+    maximum: 40
+  description:
+    maximum: 300
+review:
+  review:
+    maximum: 200
+comment:
+  comment:
+    maximum: 200
+request:
+  name:
+    maximum: 200
+  description:
+    maximum: 300

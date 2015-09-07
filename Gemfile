@@ -18,6 +18,7 @@ gem "sdoc", "~> 0.4.0", group: :doc
 gem "jquery-turbolinks"
 gem "devise"
 gem "cancancan"
+gem "config"
 
 group :development, :test do
   gem "pry"

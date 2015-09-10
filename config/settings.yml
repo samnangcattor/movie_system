@@ -1,3 +1,6 @@
+roles:
+  admin: 1
+  normal: 0
 category:
   name:
     maximum: 30

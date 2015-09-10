@@ -103,7 +103,7 @@ ActiveRecord::Schema.define(version: 20150904071802) do
     t.string   "email",                  limit: 255, default: "",             null: false
     t.string   "encrypted_password",     limit: 255, default: "",             null: false
     t.string   "avatar",                 limit: 255
-    t.string   "role",                   limit: 255
+    t.integer  "role",                   limit: 4
     t.string   "reset_password_token",   limit: 255
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"

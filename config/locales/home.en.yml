@@ -1,0 +1,6 @@
+en:
+  layouts:
+    login: "Log in"
+    logout: "Log out"
+    profile: "Profile"
+    setting: "Setting"

@@ -3,25 +3,27 @@ body {
     background: #fff;
     min-height: 100%;
     height: 100%;
-    #header {
-      position: relative;
-      max-width: 1920px;
-      margin: 0 auto;
-      min-width: 1300px;
-      width: 100%;
-      display: block;
-      height: 50px;
-      background-color: green;
-    }
 
-    .clearfix {
-      min-height: 1px;
-      top: 0px;
-      font-family: "Segoe UI", Arial, Helvetica, Verdana, sans-serif;
-      font-size: 17px;
-      padding: 0;
-      letter-spacing: 1px;
-      overflow: auto;
+    .navbar {
+      .row {
+        margin-top: 10px;
+        .logo {
+          text-align: center;
+          background-color: blue;
+        }
+
+        .dynamic_menu {
+          background-color: green;
+        }
+
+        .header_right {
+          background-color: yellow;
+        }
+
+        .link_login {
+          float: right;
+        }
+      }
     }
 
     #main-nav {
@@ -47,5 +49,9 @@ body {
         background-color: yellow;
       }
     }
+  }
+
+  #modal_form_login {
+    text-align: center;
   }
 }

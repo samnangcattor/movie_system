@@ -6,7 +6,10 @@ namespace :db do
     puts "Create admin user"
     FactoryGirl.create :admin
 
-    puts "Create admin user"
+    puts "Create normal user"
     20.times {FactoryGirl.create :user}
+
+    puts "Create 100 movies"
+    100.times {FactoryGirl.create :movie}
   end
 end

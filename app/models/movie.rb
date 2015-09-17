@@ -7,6 +7,6 @@ class Movie < ActiveRecord::Base
 
   validates :title, presence: true, length: {maximum: Settings.movie.title.maximum}
   validates :description, presence: true, length:  {maximum: Settings.movie.description.maximum}
-  validates :publish_dated, presence: true
+  validates :publish_date, presence: true
   validates :link_trailer, presence: true
 end

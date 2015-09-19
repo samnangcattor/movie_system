@@ -33,20 +33,14 @@ body {
     }
 
     #main {
-      min-height: calc(100% - 140px);
       #sidebar_right {
-        height: 1000px;
-        background-color: red;
       }
 
       #content {
-        height: 1000px;
-        background-color: blue;
+        background-color: #E9EAED;
       }
 
       #sidebar_left {
-        height: 1000px;
-        background-color: yellow;
       }
     }
   }

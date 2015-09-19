@@ -1,0 +1,19 @@
+#content {
+  ul {
+    margin-top: 25px;
+    margin-left: 5%;
+    position: static;
+    li {
+       width: calc(20% - 12px);
+      .resize-img-thumbnail {
+        width: 125px;
+        height: 180px;
+      }
+
+      .movie-title {
+        font-size: 12px;
+        font-weight: bold;
+      }
+    }
+  }
+}

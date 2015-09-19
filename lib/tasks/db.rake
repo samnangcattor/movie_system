@@ -11,5 +11,12 @@ namespace :db do
 
     puts "Create 100 movies"
     100.times {FactoryGirl.create :movie}
+
+    puts "Create 100 images"
+    Movie.all.each do |movie|
+      FactoryGirl.create :image, movie: movie
+    end
+
+    puts "Create database is sucessfull"
   end
 end

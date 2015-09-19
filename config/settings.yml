@@ -20,3 +20,13 @@ request:
     maximum: 200
   description:
     maximum: 300
+images:
+  default:
+    - /app/assets/images/default_movie_1.png
+    - /app/assets/images/default_movie_2.png
+    - /app/assets/images/default_movie_3.png
+  status:
+    is_main: 1
+    not_main: 0
+page:
+  per_page_movie: 20

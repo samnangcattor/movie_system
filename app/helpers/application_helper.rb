@@ -10,4 +10,21 @@ module ApplicationHelper
   def devise_mapping
     @devise_mapping ||= Devise.mappings[:user]
   end
+
+  def image_tag_link movie
+    if movie.images.any?
+    else
+      images_tag Settings.images.default_movie
+    end
+  end
+
+  def link_to_movie movie, class_name = nil
+    link_to movie_path(id: movie.id) do
+
+    end
+  end
+
+  def render_pagination collection
+    paginate collection, theme: "twitter-bootstrap-3", pagination_class: "pagination-sm"
+  end
 end

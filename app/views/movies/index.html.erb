@@ -1,0 +1,8 @@
+<% content_for :context_menu do %>
+  <div class="wall">
+    <ul class="list-unstyled list-inline">
+      <%= render @movies %>
+    </ul>
+  </div>
+  <%= render_pagination @movies %>
+<% end %>

@@ -74,7 +74,7 @@ ActiveRecord::Schema.define(version: 20150904071802) do
     t.string   "title",        limit: 255, default: "Default Movie"
     t.string   "description",  limit: 255
     t.string   "link_trailer", limit: 255
-    t.date     "publish_date"
+    t.integer  "publish_date", limit: 4
     t.datetime "created_at",                                         null: false
     t.datetime "updated_at",                                         null: false
   end

@@ -1,4 +1,10 @@
 <li>
-  <%= image_tag movie.images.first.photo, class: "img-thumbnail resize-img-thumbnail" %>
-  <div class="movie-title text-warning"><%= movie.title %></div>
+  <%= link_to movie_path(movie) do %>
+    <%= image_tag movie.images.first.photo, class: "img-thumbnail resize-img-thumbnail",
+      data: {title: movie.title, content: "", trigger: "hover", placement: "bottom",
+      description: movie.description, publish_date: movie.publish_date,
+      image: Settings.images.stream.hd_1080,  movie_id: movie.id, html: true}, rel: "popover" %>
+  <% end %>
+  <p class="movie-title text-warning"><%= movie.title %></p>
 </li>
+

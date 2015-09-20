@@ -4,7 +4,7 @@ class CreateMovies < ActiveRecord::Migration
       t.string :title, default: "Default Movie"
       t.string :description
       t.string :link_trailer
-      t.date :publish_date
+      t.integer :publish_date
 
       t.timestamps null: false
     end

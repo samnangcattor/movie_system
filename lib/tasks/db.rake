@@ -17,6 +17,9 @@ namespace :db do
       FactoryGirl.create :image, movie: movie
     end
 
+    puts "Create 5 categoreis"
+    5.times {FactoryGirl.create :category}
+
     puts "Create database is sucessfull"
   end
 end

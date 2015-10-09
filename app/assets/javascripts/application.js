@@ -15,3 +15,4 @@
 //= require jquery.turbolinks
 //= require bootstrap-sprockets
 //= require popover
+//= require videojs

@@ -13,7 +13,9 @@
  *= require_self
  *= require custom
  *= require movie
+ *= require videojs
  */
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
+

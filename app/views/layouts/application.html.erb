@@ -11,17 +11,12 @@
       <%= render "shared/header" %>
       <%= render "shared/main_nav" %>
       <div id="main" class="col-md-12">
-        <div id="sidebar_right" class="col-md-2">
-          <%= yield :left %>
-        </div>
+
 
         <div id="content" class="col-md-8">
           <%= yield :context_menu %>
         </div>
-
-        <div id="sidebar_left" class="col-md-2">
-          <%= yield :right %>
-        </div>
+        <%= yield %>
       </div>
     </div>
   </body>

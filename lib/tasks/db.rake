@@ -10,7 +10,7 @@ namespace :db do
     20.times {FactoryGirl.create :user}
 
     puts "Create 100 movies"
-    100.times {FactoryGirl.create :movie}
+    30.times {FactoryGirl.create :movie}
 
     puts "Create 100 images"
     Movie.all.each do |movie|
@@ -18,7 +18,14 @@ namespace :db do
     end
 
     puts "Create 5 categoreis"
-    5.times {FactoryGirl.create :category}
+    3.times {FactoryGirl.create :category}
+
+    puts "Create movie with category"
+    Movie.all.each do |movie|
+      Category.all.each do |category|
+        FactoryGirl.create :movie_category, movie: movie, category: category
+      end
+    end
 
     puts "Create database is sucessfull"
   end

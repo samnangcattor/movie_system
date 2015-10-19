@@ -75,6 +75,7 @@ ActiveRecord::Schema.define(version: 20150904071802) do
     t.string   "description",  limit: 255
     t.string   "link_trailer", limit: 255
     t.integer  "publish_date", limit: 4
+    t.string   "link_cover",   limit: 255
     t.datetime "created_at",                                         null: false
     t.datetime "updated_at",                                         null: false
   end

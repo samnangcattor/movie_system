@@ -11,13 +11,12 @@
       <%= render "shared/header" %>
       <%= render "shared/main_nav" %>
       <div id="main" class="col-md-12">
-
-
         <div id="content" class="col-md-8">
           <%= yield :context_menu %>
         </div>
         <%= yield %>
       </div>
     </div>
+     <%= render "shared/flooter"%>
   </body>
 </html>

@@ -4,7 +4,8 @@ body {
   text-align: center;
   color: #aaa;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  background: radial-gradient(#333, hsl(200,30%,6%) );
+  background: radial-gradient(#333, hsl(200,30%,6%));
+
   #wrapper {
     .navbar {
       .row {
@@ -27,8 +28,7 @@ body {
 
     #main-nav {
       position: relative;
-      height: 423px;
-      background-color: rgb(128, 58, 0);
+      height: 500px;
     }
 
     #main {
@@ -36,7 +36,6 @@ body {
       }
 
       #content {
-        margin-left: calc(15%)
       }
 
       #sidebar_left {
@@ -46,5 +45,11 @@ body {
 
   #modal_form_login {
     text-align: center;
+  }
+
+  .resize-photo {
+    height: 500px !important;
+    width: calc(80%) !important;
+    margin-left: 10%;
   }
 }

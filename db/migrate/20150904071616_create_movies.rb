@@ -5,6 +5,7 @@ class CreateMovies < ActiveRecord::Migration
       t.string :description
       t.string :link_trailer
       t.integer :publish_date
+      t.string :link_cover
 
       t.timestamps null: false
     end

@@ -6,6 +6,7 @@ class Movie < ActiveRecord::Base
   has_many :movie_histories, dependent: :destroy
   has_many :reviews, dependent: :destroy
   has_many :images, dependent: :destroy
+  has_many :categories, through: :movie_categories
 
   validates :title, presence: true, length: {maximum: Settings.movie.title.maximum}
   validates :description, presence: true, length:  {maximum: Settings.movie.description.maximum}

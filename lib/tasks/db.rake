@@ -20,7 +20,7 @@ namespace :db do
     puts "Create 5 categoreis"
     3.times {FactoryGirl.create :category}
 
-    puts "Create movie with category"
+    puts "Create movie have contain category"
     Movie.all.each do |movie|
       Category.all.each do |category|
         FactoryGirl.create :movie_category, movie: movie, category: category

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150904071802) do
+ActiveRecord::Schema.define(version: 20151026130509) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -78,6 +78,7 @@ ActiveRecord::Schema.define(version: 20150904071802) do
     t.string   "link_cover",   limit: 255
     t.datetime "created_at",                                         null: false
     t.datetime "updated_at",                                         null: false
+    t.string   "photo",        limit: 255
   end
 
   create_table "requests", force: :cascade do |t|

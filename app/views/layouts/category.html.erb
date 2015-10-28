@@ -7,16 +7,11 @@
     <%= csrf_meta_tags %>
   </head>
   <body>
-    <%= render "shared/header" %>
-    <div id="wrapper">
-      <%= render "shared/main_nav" %>
+
+      <%= render "shared/header" %>
       <div id="main" class="col-md-12">
-        <div id="content" class="col-md-8">
-          <%= yield :context_menu %>
-        </div>
-        <%= yield %>
       </div>
-    </div>
-     <%= render "shared/flooter"%>
+      <%=  yield %>
+      <%= render "shared/flooter"%>
   </body>
 </html>

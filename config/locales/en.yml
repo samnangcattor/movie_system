@@ -2,3 +2,5 @@ en:
   app_name: "Movie Online System"
   click_required: "click here to require that movie"
   keyword: "Keyword: "
+  actions:
+    send_request: "Send request"

@@ -1,0 +1,9 @@
+en:
+  requests:
+    new:
+      description: "Description"
+      name: "Name"
+      request: "Request the movie"
+      title: "Title of movie"
+    show:
+      thank_you: "Thank you for this request, we will upload this movie soon for you..."

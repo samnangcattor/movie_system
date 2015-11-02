@@ -11,6 +11,7 @@
       <%= render "shared/header" %>
       <div id="main" class="col-md-12">
       </div>
+      <%= render "shared/result_search" unless @q.nil? %>
       <%=  yield %>
       <%= render "shared/flooter"%>
   </body>

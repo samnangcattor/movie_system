@@ -1,11 +1,13 @@
 <% content_for :context_menu do %>
   <div class="container">
-    <div class="wall">
-      <ul class="list-unstyled list-inline">
-        <%= render @movies %>
-      </ul>
-    </div>
-    <%= render_pagination @movies %>
+    <% if @movies.present? %>
+      <div class="wall">
+        <ul class="list-unstyled list-inline">
+          <%= render @movies %>
+        </ul>
+      </div>
+      <%= render_pagination @movies %>
+    <% end %>
     <div class="label-publish-date"><%= t "movies.popover.publish_date" %></div>
   </div>
 <% end %>

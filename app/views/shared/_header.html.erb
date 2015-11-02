@@ -1,9 +1,14 @@
 <nav class="navbar-default navbar-fixed-top">
   <div class="container">
     <div class="menu-top">
-      <ul class="nav nav-pills">
+      <ul class="nav nav-tabs">
         <li class="active"></li>
-        <li><%= link_to t("layouts.logo"), root_path %></li>
+        <li>
+          <%= link_to root_path do %>
+            <%= image_tag "http://c2.staticflickr.com/6/5692/22545411515_fe115e7fe8.jpg",
+              id: "logo-page" %>
+          <% end %>
+        </li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
             <%= t "layouts.movie" %> <b class="caret"></b>
@@ -16,6 +21,7 @@
         </li>
         <li><%= link_to t("layouts.animation"), root_path %></li>
         <li><%= link_to t("layouts.required"), root_path %></li>
+        <%= render "shared/search" %>
       </ul>
     </div>
   </div>

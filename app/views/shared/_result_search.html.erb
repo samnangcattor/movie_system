@@ -1,0 +1,26 @@
+<div class="container">
+  <% if @q.conditions.present? %>
+    <div class="result-search">
+      <h3 class="text-left" id="keyword"><%= t "keyword" %><%= params[:q][:title_cont] %></h3>
+      <hr/>
+      <% if @movie_searchs.present? %>
+        <ul class="list-unstyled list-inline">
+          <%  @movie_searchs.each do |movie| %>
+            <%= render "movies/movie", movie: movie %>
+          <% end %>
+        </ul>
+        <%= render_pagination @movie_searchs %>
+      <% else %>
+        <div class="no-result">
+          <h2 class="text-left">Nothing Found</h2>
+          <h3 class="text-left">
+            <%= link_to "#" do %>
+              <i class="glyphicon glyphicon-hand-right"></i>
+                <%= t "click_required" %>
+            <% end %>
+          </h3>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>

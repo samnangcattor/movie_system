@@ -23,6 +23,7 @@ gem "rails_admin", github: "sferik/rails_admin"
 gem "rails_admin_map_field", git: "https://github.com/HieuMeo/RailsAdminMapField.git"
 gem "rails_admin_nestable"
 gem "faker"
+gem "ransack"
 
 group :development, :test do
   gem "pry"

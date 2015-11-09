@@ -4,7 +4,7 @@ namespace :db do
     Rake::Task["db:migrate:reset"].invoke
 
     puts "Create admin user"
-    FactoryGirl.create :admin
+    FactoryGirl.create :admin_user
 
     puts "Create normal user"
     20.times {FactoryGirl.create :user}

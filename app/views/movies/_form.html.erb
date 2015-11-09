@@ -4,6 +4,7 @@
       data-setup="{"aspectRatio":"640:267", "playbackRates": [1, 1.5, 2] }">
     <source src="https://r8---sn-i3b7kned.c.docs.google.com/videoplayback?requiressl=yes&id=d7e813ce4b70d8db&itag=18&source=webdrive&app=texmex&ip=113.22.123.71&ipbits=8&expire=1444406450&sparams=requiressl,id,itag,source,ip,ipbits,expire&signature=403593EFD883515C656F141FDF1AF7662B2E3B89.E92BA50C7AD765BA1151854638020A335AE87D3&key=ck2&mm=525600&mn=sn-i3b7kned&ms=nxu&mt=1444402776&mv=m&nh=IgpwcjAzLmhrZzAxKgkxMjcuMC4wLjE&pl=20&cpn=XjBR83pTjHwPRVYg&c=WEB&cver=html5" type="video/mp4" />
   </video>
+  <%= render "shared/facebook" %>
 </div>
 <div class="container">
   <div class="description_movie">
@@ -15,7 +16,7 @@
       <%= render "contain_category" %>
     </div>
     <div>
-      <%= t "movies.popover.publish_date" %><%= @movie.publish_date %>
+      <%= t "movies.popover.publish_date" %><%= @movie.year_number %>
     </div>
     <hr>
     <div class="wall">

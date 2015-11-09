@@ -9,8 +9,11 @@ namespace :db do
     puts "Create normal user"
     20.times {FactoryGirl.create :user}
 
+    puts "Create year"
+    FactoryGirl.create :year
+
     puts "Create 100 movies"
-    30.times {FactoryGirl.create :movie}
+      30.times {FactoryGirl.create :movie, year: Year.first}
 
     puts "Create 100 images"
     Movie.all.each do |movie|

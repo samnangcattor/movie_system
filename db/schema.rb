@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151109023057) do
+ActiveRecord::Schema.define(version: 20151109083321) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace",     limit: 255
@@ -107,12 +107,14 @@ ActiveRecord::Schema.define(version: 20151109023057) do
     t.string   "title",        limit: 255, default: "Default Movie"
     t.string   "description",  limit: 255
     t.string   "link_trailer", limit: 255
-    t.integer  "publish_date", limit: 4
     t.string   "link_cover",   limit: 255
+    t.integer  "year_id",      limit: 4
     t.datetime "created_at",                                         null: false
     t.datetime "updated_at",                                         null: false
     t.string   "photo",        limit: 255
   end
+
+  add_index "movies", ["year_id"], name: "index_movies_on_year_id", using: :btree
 
   create_table "requests", force: :cascade do |t|
     t.string   "name",        limit: 255
@@ -153,6 +155,12 @@ ActiveRecord::Schema.define(version: 20151109023057) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+
+  create_table "years", force: :cascade do |t|
+    t.integer  "number",     limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
 
   add_foreign_key "images", "movies"
 end

@@ -1,6 +1,8 @@
 class Movie < ActiveRecord::Base
   paginates_per Settings.page.per_page_movie
 
+  belongs_to :year
+
   has_many :movie_categories
   has_many :likes, dependent: :destroy
   has_many :movie_histories, dependent: :destroy
@@ -10,6 +12,7 @@ class Movie < ActiveRecord::Base
 
   validates :title, presence: true, length: {maximum: Settings.movie.title.maximum}
   validates :description, presence: true, length:  {maximum: Settings.movie.description.maximum}
-  validates :publish_date, presence: true
   validates :link_trailer, presence: true
+
+  delegate :number, to: :year, prefix: true, allow_nil: true
 end

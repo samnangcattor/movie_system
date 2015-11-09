@@ -9,7 +9,6 @@ body {
   #wrapper {
     .navbar {
       .row {
-        margin-top: 10px;
         .logo {
           text-align: center;
         }
@@ -82,5 +81,19 @@ body {
   }
   .pagination-sm > li:last-child > a, .pagination-sm > li:last-child > span, .pagination > li:first-child > a, .pagination > li:first-child > span {
     border-radius: 50%;
+  }
+
+  #main-movie {
+    ul {
+      position: static;
+      li {
+        margin-top: 20px;
+        width: calc(20% - 12px);
+        .resize-img-thumbnail {
+          width: 125px;
+          height: 180px;
+        }
+      }
+    }
   }
 }

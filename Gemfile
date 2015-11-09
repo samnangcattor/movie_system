@@ -19,11 +19,9 @@ gem "jquery-turbolinks"
 gem "devise"
 gem "cancancan"
 gem "config"
-gem "rails_admin", github: "sferik/rails_admin"
-gem "rails_admin_map_field", git: "https://github.com/HieuMeo/RailsAdminMapField.git"
-gem "rails_admin_nestable"
-gem "faker"
 gem "ransack"
+gem "activeadmin", github: "activeadmin"
+gem "active_admin_importable"
 
 group :development, :test do
   gem "pry"
@@ -31,7 +29,6 @@ group :development, :test do
   gem "spring"
   gem "faker"
   gem "factory_girl_rails"
-  gem "i18n-tasks"
   gem "rspec-rails"
 end
 

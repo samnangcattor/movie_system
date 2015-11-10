@@ -22,6 +22,9 @@ gem "config"
 gem "ransack"
 gem "activeadmin", github: "activeadmin"
 gem "active_admin_importable"
+gem "omniauth-google-oauth2"
+gem "google-api-client"
+gem "google_drive"
 
 group :development, :test do
   gem "pry"

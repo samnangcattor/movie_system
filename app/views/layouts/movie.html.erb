@@ -9,18 +9,9 @@
   <body>
 
       <%= render "shared/header" %>
-      <div id="main" class="col-md-12">
-        <div id="sidebar_right" class="col-md-2">
-          <%= yield :left %>
-        </div>
-
-        <div id="content_mid">
-          <%= yield :context_mid %>
-        </div>
-
-        <div id="sidebar_left" class="col-md-2">
-          <%= yield :right %>
-        </div>
+      <div id="main">
+        <%= yield :context_mid %>
+        <%= yield %>
       </div>
       <%= render "shared/flooter"%>
   </body>

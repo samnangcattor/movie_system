@@ -1,12 +1,11 @@
-
-<div id="instructions">
-  <video class="video-js vjs-default-skin fix_video" width="640px" height="267px"
-      controls preload="none" poster="http://video-js.zencoder.com/oceans-clip.jpg"
-      data-setup="{"aspectRatio":"640:267", "playbackRates": [1, 1.5, 2] }">
-    <source src="https://googledrive.com/host/0B7kOlRv8XBC3Rm02WE1KME0xVFk" type="video/mp4" />
-  </video>
-  <%= render "shared/facebook" %>
-</div>
+<section class="main-preview-player">
+  <div id="instructions">
+    <video class="video-js vjs-default-skin" controls preload="auto" width="700" height="400" poster="<%= @movie.photo %>" data-setup="{}">
+      <source src="<%= @movie.link_trailer %>" type="video/mp4">
+    </video>
+    <%= render "shared/facebook" %>
+  </div>
+</section>
 <div class="container">
   <div class="description_movie">
     <h3 id="title_movie">

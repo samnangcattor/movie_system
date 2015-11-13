@@ -12,8 +12,6 @@ class MoviesController < ApplicationController
   end
 
   def show
-    @google = GoogleDr.new
-    @file = @google.print_file "0B7kOlRv8XBC3S1FTczB6ZmNkbkE"
     @categories = Category.all.order name: :ASC
     @movie = Movie.find params[:id]
     @movies = Movie.all.order(created_at: :DESC).limit(10)

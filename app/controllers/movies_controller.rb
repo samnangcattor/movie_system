@@ -3,7 +3,7 @@ class MoviesController < ApplicationController
 
   def index
     @categories = Category.all.order name: :ASC
-    if params[:q].present?
+    if params[:search].present?
       @movie_searchs = @q.result(distinct: true).order(created_at: :DESC).page params[:page]
       render layout: "category"
     else
@@ -21,6 +21,8 @@ class MoviesController < ApplicationController
 
   private
   def search_movie
-    @q = Movie.ransack params[:q]
+    q = Hash.new
+    q[:title_cont] = params[:search]
+    @q = Movie.ransack q
   end
 end

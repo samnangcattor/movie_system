@@ -11,4 +11,4 @@ en:
     movie: "Movies"
     animation: "Animation"
     year: "Year"
-    required: "Require Movie"
+    request: "Request Movie"

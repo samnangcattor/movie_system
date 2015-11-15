@@ -22,6 +22,8 @@ gem "config"
 gem "ransack"
 gem "activeadmin", github: "activeadmin"
 gem "active_admin_importable"
+gem "rack-contrib"
+gem "soulmate", :require => "soulmate/server"
 
 group :development, :test do
   gem "pry"

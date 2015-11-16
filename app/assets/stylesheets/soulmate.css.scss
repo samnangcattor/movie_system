@@ -8,9 +8,9 @@
   padding: 0;
   position: absolute;
   text-shadow: 0 0 0 white;
-  width: 185px;
+  margin-top: -11px;
+  width: 247px;
   z-index: 1000;
-  margin-left: 870px;
   border-radius: 4px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
@@ -32,14 +32,14 @@
   color: #111;
   cursor: pointer;
   font-weight: 500;
-  font-size: 13px;
+  font-size: 10px;
   padding: 5px 0 6px 12px;
   text-decoration: none;
 }
  #soulmate .soulmate-suggestion.focus {
   color: white;
   position: inherit;
-  width: 185px;
+  width: 243px;
   text-shadow: 0 1px 1px #32629b;
   z-index: 1000;
   -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
@@ -74,6 +74,7 @@
 #search{
   padding: 5px;
   margin-top: 8px;
+  margin-bottom: 10px;
 }
 
 #soulmate .soulmate-type-suggestions {

@@ -24,6 +24,7 @@ gem "activeadmin", github: "activeadmin"
 gem "active_admin_importable"
 gem "rack-contrib"
 gem "soulmate", :require => "soulmate/server"
+gem "font-awesome-rails"
 
 group :development, :test do
   gem "pry"

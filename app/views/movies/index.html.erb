@@ -1,12 +1,28 @@
 <% content_for :context_menu do %>
   <div class="container">
     <% if @movies.present? %>
-      <div class="wall">
-        <ul class="list-unstyled list-inline">
-          <%= render @movies %>
-        </ul>
+      <div class="new-movie">
+        <div class="text-left text-warning"><h3>>> <%= t ".most_review" %></h3></div>
+        <hr/>
+        <div class="wall">
+          <ul class="list-unstyled list-inline">
+            <%= render @movies %>
+          </ul>
+        </div>
+        <%= render_pagination @movies %>
       </div>
-      <%= render_pagination @movies %>
     <% end %>
+    <hr/>
+    <div class="most-review-movie">
+      <% if @movies.present? %>
+        <div class="text-left text-warning"><h3>>> <%= t ".new_release" %></h3></div>
+          <div class="wall">
+            <ul class="list-unstyled list-inline">
+              <%= render @movies %>
+            </ul>
+          </div>
+        <%= render_pagination @movies %>
+      <% end %>
+    </div>
   </div>
 <% end %>

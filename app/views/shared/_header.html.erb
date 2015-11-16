@@ -2,10 +2,9 @@
   <div class="container">
     <div class="menu-top">
       <ul class="nav nav-tabs">
-        <li class="active"></li>
         <li>
           <%= link_to root_path do %>
-            <%= image_tag "http://c2.staticflickr.com/6/5692/22545411515_fe115e7fe8.jpg",
+            <%= image_tag "logo.png",
               id: "logo-page" %>
           <% end %>
         </li>
@@ -30,7 +29,7 @@
           </ul>
         </li>
         <li><%= link_to t("layouts.request"), new_request_path %></li>
-        <%= render "shared/search" %>
+        <li><%= render "shared/search" %></li>
       </ul>
     </div>
   </div>

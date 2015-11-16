@@ -3,3 +3,6 @@ en:
     popover:
       publish_date: "Publish Date: "
       category: "Category: "
+    index:
+      most_review: "Most review movies"
+      new_release: "New release movies"

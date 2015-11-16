@@ -3,7 +3,8 @@ body {
   background: #222;
   text-align: center;
   color: #aaa;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "MotionPicture_PersonalUseOnly.ttf";
+  src: url("fonts/MotionPicture_PersonalUseOnly.ttf");
   background: radial-gradient(#333, hsl(200,30%,6%));
 
   #wrapper {
@@ -12,13 +13,6 @@ body {
         .logo {
           text-align: center;
         }
-
-        .dynamic_menu {
-        }
-
-        .header_right {
-        }
-
         .link_login {
           float: right;
         }
@@ -27,18 +21,6 @@ body {
 
     #main-nav {
       position: relative;
-
-    }
-
-    #main {
-      #sidebar_right {
-      }
-
-      #content {
-      }
-
-      #sidebar_left {
-      }
     }
   }
 
@@ -59,8 +41,8 @@ body {
   }
 
   #logo-page {
-    height: 35px;
-    width: 150px;
+    height: 20px;
+    width: 130px;
   }
 
   .pagination > li > a, .pagination > li > span {
@@ -121,7 +103,7 @@ body {
   }
 
   .main-preview-player {
-    margin: 80px auto;
+    margin: 129px auto;
     text-align: center;
     max-width: 1920px;
   }

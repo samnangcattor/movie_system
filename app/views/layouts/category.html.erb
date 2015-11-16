@@ -9,8 +9,6 @@
   <body>
 
       <%= render "shared/header" %>
-      <div id="main">
-      </div>
       <%= render "shared/result_search" unless @q.nil? %>
       <%=  yield %>
       <%= render "shared/flooter"%>

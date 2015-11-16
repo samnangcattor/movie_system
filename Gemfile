@@ -25,6 +25,7 @@ gem "active_admin_importable"
 gem "rack-contrib"
 gem "soulmate", :require => "soulmate/server"
 gem "font-awesome-rails"
+gem "htmlcompressor"
 
 group :development, :test do
   gem "pry"

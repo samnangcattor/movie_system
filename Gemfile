@@ -26,6 +26,7 @@ gem "rack-contrib"
 gem "soulmate", :require => "soulmate/server"
 gem "font-awesome-rails"
 gem "htmlcompressor"
+gem "impressionist"
 
 group :development, :test do
   gem "pry"

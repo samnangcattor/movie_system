@@ -27,4 +27,9 @@ module ApplicationHelper
   def render_pagination collection
     paginate collection, theme: "twitter-bootstrap-3", pagination_class: "pagination-sm"
   end
+
+  def get_movie movie
+    movie = Movie.find movie.impressionable_id if movie.try(:title).nil?
+    movie
+  end
 end

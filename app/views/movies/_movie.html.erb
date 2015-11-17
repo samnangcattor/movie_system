@@ -1,4 +1,5 @@
 <li>
+  <% movie = get_movie movie %>
   <%= link_to movie_path(movie) do %>
     <%= image_tag movie.photo, class: "img-thumbnail resize-img-thumbnail",
       data: {title: movie.title, content: "", trigger: "hover", placement: "bottom",

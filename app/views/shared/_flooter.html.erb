@@ -1,16 +1,42 @@
 <footer>
   <div class="container">
     <hr/>
-    <div class="row" id="flooter">
+    <div class="row text-warning" id="flooter">
       <div class="col-sm-4">
-        <%= t "layouts.title" %>
+        <div class="text-left" id="page-facebook-title"><i class="fa fa-home fa-fw"></i> <%= t "layouts.title" %></div>
+        <div class="text-left">
+          <div class="fb-page" data-href="https://www.facebook.com/Moviehd-KH-1620874931515181"
+            data-width="270" data-hide-cover="false" data-show-facepile="true"
+            data-show-posts="false"></div>
+        </div>
       </div>
       <div class="col-sm-4">
-         <%= t "layouts.location" %>
+        <div class="text-left"><i class="fa fa-location-arrow"></i> <%= t "layouts.location" %></div>
+        <div class="text-left"><i class="fa fa-envelope-o fa-fw"></i> <%= t "layouts.email" %></div>
+        <div class="text-left">Find us on:</div>
+        <div class="social-network">
+          <span class="badge logo-social">
+            <%= link_to "#" do %>
+              <%= image_tag "YouTube-logo-full_color.png", id: "youtube-logo" %>
+            <% end %>
+          </span>
+          <span class="badge logo-social">
+            <%= link_to "#" do %>
+              <%= image_tag "gplus.png", id: "youtube-logo" %>
+            <% end %>
+          </span>
+        </div>
       </div>
       <div class="col-sm-4">
-         <%= t "layouts.email" %>
+        <div class="text-left"><span>MoviehdKH</span> Provide the movies hd online and free. you can request the movie from our website.</div>
+        <div class="text-left" id="category-name-footer">
+          <% @categories.each do |category| %>
+            <span class="badge span_category"><%= link_to category.name, category %></span>
+          <% end %>
+        </div>
       </div>
     </div>
+    <hr/>
+    <div class="text-warning"><%= t "layouts.moviehd_kh" %></div>
   </div>
-<footer>
+</footer>

@@ -41,8 +41,8 @@ body {
   }
 
   #logo-page {
-    height: 20px;
-    width: 130px;
+    height: 38px;
+    width: 170px;
   }
 
   .pagination > li > a, .pagination > li > span {
@@ -111,4 +111,37 @@ body {
 
 .facebook {
   color: #7C97E0;
+}
+
+footer {
+  margin-bottom: 5px;
+  #page-facebook-title {
+    margin-bottom: 10px;
+  }
+
+  #category-name-footer {
+    font-size: 25px;
+
+    .span_category {
+      clear: both;
+      margin-right: 10px;
+    }
+    a {
+      color: #000000;
+      font-size: 17px;
+    }
+  }
+  .social-network {
+    float: left;
+    margin-top: 12px;
+
+    #youtube-logo {
+      width: 104px;
+      height: 42px;
+    }
+
+    .logo-social {
+      margin-left: 5px;
+    }
+  }
 }

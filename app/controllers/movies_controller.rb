@@ -9,8 +9,12 @@ class MoviesController < ApplicationController
       @movie_searchs = @q.result(distinct: true).order(created_at: :DESC).page params[:page]
       render layout: "category"
     else
-      @movies = Movie.all.order(created_at: :DESC).page params[:page]
-      @most_reviews = Movie.by_most_review.order(created_at: :ASC).page(params[:page]).per 10
+      @movies = Movie.all.order(created_at: :DESC).page params[:page_1]
+      @most_reviews = Movie.by_most_review.order(created_at: :ASC).page(params[:page_2]).per 10
+      respond_to do |format|
+        format.html
+        format.js
+      end
     end
   end
 

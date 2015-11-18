@@ -1,28 +1,22 @@
 <% content_for :context_menu do %>
   <div class="container">
+    <hr/>
     <% if @movies.present? %>
       <div class="new-movie">
-        <div class="text-left text-warning"><h3>>> <%= t ".new_release" %></h3></div>
-        <hr/>
-        <div class="wall">
-          <ul class="list-unstyled list-inline">
-            <%= render @movies %>
-          </ul>
-        </div>
-        <%= render_pagination @movies %>
+        <%= render "content_new_movie" %>
+      </div>
+      <div class="text-warning" id="paginator-new-movie">
+        <%= render "shared/pagenator", objects: @movies, page: 1 %>
       </div>
     <% end %>
     <hr/>
-    <div class="most-review-movie">
-      <% if @most_reviews.present? %>
-        <div class="text-left text-warning"><h3>>> <%= t ".most_review" %></h3></div>
-          <div class="wall">
-            <ul class="list-unstyled list-inline">
-              <%= render partial: "movie", collection: @most_reviews, as: :movie %>
-            </ul>
-          </div>
-        <%= render_pagination @most_reviews %>
-      <% end %>
-    </div>
+    <% if @most_reviews.present? %>
+      <div class="most-review-movie">
+        <%= render "content_review_movie" %>
+      </div>
+      <div class="text-warning" id="paginator-review-movie">
+        <%= render "shared/pagenator", objects: @most_reviews, page: 2 %>
+      </div>
+    <% end %>
   </div>
 <% end %>

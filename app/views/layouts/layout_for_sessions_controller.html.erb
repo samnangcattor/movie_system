@@ -7,14 +7,6 @@
     <%= csrf_meta_tags %>
   </head>
   <body>
-    <%= render "shared/header" %>
-    <div id="wrapper">
-      <%= render "shared/main_nav" %>
-      <div id="main-movie">
-        <%= yield :context_menu %>
-        <%= yield %>
-      </div>
-    </div>
-     <%= render "shared/flooter"%>
+    <%= yield %>
   </body>
 </html>

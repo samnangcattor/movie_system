@@ -3,7 +3,7 @@ class CreateMovies < ActiveRecord::Migration
     create_table :movies do |t|
       t.string :title, default: "Default Movie"
       t.string :description
-      t.string :link_trailer
+      t.string :link_movie
       t.string :link_cover
       t.references :year, index: true
 

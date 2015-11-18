@@ -1,7 +1,7 @@
 <section class="main-preview-player">
   <div id="instructions">
     <video class="video-js vjs-default-skin" controls preload="auto" width="700" height="400" poster="<%= @movie.photo %>" data-setup="{}">
-      <source src="<%= @movie.link_trailer %>" type="video/mp4">
+      <source src="<%= @movie.link_movie %>" type="video/mp4">
     </video>
     <%= render "shared/facebook" %>
     <%= render "shared/impression" %>

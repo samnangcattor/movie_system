@@ -6,3 +6,5 @@ en:
     index:
       most_review: "Most review movies"
       new_release: "New release movies"
+    show:
+      movie_suggestion: "Movie suggestions"

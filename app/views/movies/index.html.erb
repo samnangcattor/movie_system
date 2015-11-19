@@ -5,7 +5,7 @@
       <div class="new-movie">
         <%= render "content_new_movie" %>
       </div>
-      <div class="text-warning" id="paginator-new-movie">
+      <div id="paginator-new-movie">
         <%= render "shared/pagenator", objects: @movies, page: 1 %>
       </div>
     <% end %>
@@ -14,7 +14,7 @@
       <div class="most-review-movie">
         <%= render "content_review_movie" %>
       </div>
-      <div class="text-warning" id="paginator-review-movie">
+      <div id="paginator-review-movie">
         <%= render "shared/pagenator", objects: @most_reviews, page: 2 %>
       </div>
     <% end %>

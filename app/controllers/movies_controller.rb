@@ -25,7 +25,11 @@ class MoviesController < ApplicationController
     @movie_categories = @movie.categories
     @impressions = @movie.get_impression
     @movie.impressionist_count filter: :all
-    render layout: "movie"
+    @movie_suggestions = Movie.by_suggestion.page(params[:page_3]).per 10
+    respond_to do |format|
+      format.html {render layout: "movie"}
+      format.js
+    end
   end
 
   private

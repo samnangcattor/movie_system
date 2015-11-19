@@ -21,6 +21,8 @@ class Movie < ActiveRecord::Base
 
   scope :by_most_review, ->{Impression.group :impressionable_id}
 
+  scope :by_suggestion, ->{where(suggestion: true).order(updated_at: :DESC)}
+
   def get_impression
     Impression.where impressionable_id: id
   end

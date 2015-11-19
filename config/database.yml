@@ -14,7 +14,7 @@ default: &default
   encoding: utf8
   pool: 5
   username: root
-  password:
+  password: 012240451
   socket: /var/run/mysqld/mysqld.sock
 
 development:
@@ -50,5 +50,5 @@ test:
 production:
   <<: *default
   database: movie_system_production
-  username: movie_system
-  password: <%= ENV['FELS_DATABASE_PASSWORD'] %>
+  username: root
+  password: 012240451

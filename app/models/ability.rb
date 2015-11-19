@@ -5,7 +5,7 @@ class Ability
     user ||= User.new
     if user.admin?
       can :manage, :all
-      can :import, [Movie]
+      can :import, Movie
     else
       can :read, :all
     end

@@ -6,11 +6,4 @@ RailsAdmin.config do |config|
     all
     import
   end
-
-  # Optional:
-  # Configure global RailsAdminImport options
-  config.configure_with(:import) do |config|
-    config.logging = true
-  end
-
 end

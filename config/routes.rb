@@ -4,11 +4,12 @@ Rails.application.routes.draw do
 
   root "movies#index"
 
-  devise_for :users
+  devise_for :users, only: :session
 
-  resources :movies
-  resources :categories
-  resources :requests
+  resources :movies, only: [:index, :show]
+  resources :categories, only: :show
+  resources :requests, only: [:new, :create, :show]
+  resources :years, only: :show
 
   namespace :admin do
     resources :users

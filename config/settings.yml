@@ -10,6 +10,8 @@ movie:
   slide: 10
   description:
     maximum: 300
+  hd: "hd"
+  sd: "sd"
 review:
   review:
     maximum: 200
@@ -27,8 +29,8 @@ images:
     - /app/assets/images/default_movie_2.png
     - /app/assets/images/default_movie_3.png
   stream:
-    hd_1080: //c1.staticflickr.com/1/771/21563498225_3c8b33449e_t.jpg
-    hd_720: //c2.staticflickr.com/6/5702/21552233462_8feca9aea0_t.jpg
+    hd: //c1.staticflickr.com/1/771/21563498225_3c8b33449e_t.jpg
+    sd: //c2.staticflickr.com/6/5814/22779052009_4cf902902f_m.jpg
   status:
     is_main: 1
     not_main: 0

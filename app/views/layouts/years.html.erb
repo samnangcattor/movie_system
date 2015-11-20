@@ -8,8 +8,7 @@
   </head>
   <body>
     <%= render "shared/header" %>
-    <%= render "shared/result_search" unless @q.nil? %>
-    <%=  yield %>
+    <%= yield %>
     <%= render "shared/flooter"%>
   </body>
 </html>

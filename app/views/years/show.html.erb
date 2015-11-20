@@ -1,0 +1,12 @@
+<div class="container">
+  <% if @movies.present? %>
+    <div class="category">
+      <h2 class="text-left" id="category-name"><%= @year.number %></h2>
+      <hr/>
+      <ul class="list-unstyled list-inline">
+        <%= render @movies %>
+      </ul>
+      <%= paginate @movies %>
+    </div>
+  <% end %>
+</div>

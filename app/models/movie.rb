@@ -8,6 +8,8 @@ class Movie < ActiveRecord::Base
 
   belongs_to :year
 
+  enum quality: [:hd, :sd]
+
   has_many :movie_categories
   has_many :categories, through: :movie_categories
 
@@ -25,6 +27,14 @@ class Movie < ActiveRecord::Base
 
   def get_impression
     Impression.where impressionable_id: id
+  end
+
+  def get_quality
+    if quality == Settings.movie.hd
+      Settings.images.stream.hd
+    elsif quality == Settings.movie.sd
+      Settings.images.stream.sd
+    end
   end
 
   private

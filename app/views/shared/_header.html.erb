@@ -25,9 +25,9 @@
             <%= t "layouts.year" %> <b class="caret"></b>
           </a>
           <ul class="dropdown-menu">
-            <% if @categories.present? %>
-              <% @categories.each do |category| %>
-                <li><%= link_to category.name, category_path(category) %></li>
+            <% if @years.present? %>
+              <% @years.each do |year| %>
+                <li><%= link_to year.number, year_path(year) %></li>
               <% end %>
             <% end %>
           </ul>

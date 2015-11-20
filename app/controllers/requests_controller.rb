@@ -24,6 +24,7 @@ class RequestsController < ApplicationController
   end
 
   def header_action
+    @years = Year.all.order number: :ASC
     q = Hash.new
     q[:title_cont] = params[:search]
     @q = Movie.ransack q

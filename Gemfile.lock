@@ -330,7 +330,7 @@ DEPENDENCIES
   jquery-rails
   jquery-turbolinks
   kaminari
-  mysql2
+  mysql2 (~> 0.3.13)
   pg
   pry
   rack-contrib
@@ -349,3 +349,6 @@ DEPENDENCIES
   uglifier (>= 1.3.0)
   unicorn
   web-console (~> 2.0)
+
+BUNDLED WITH
+   1.10.6

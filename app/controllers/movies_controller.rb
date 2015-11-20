@@ -4,7 +4,6 @@ class MoviesController < ApplicationController
   impressionist actions: [:show]
 
   def index
-    @categories = Category.all.order name: :ASC
     if params[:search].present?
       @movie_searchs = @q.result(distinct: true).order(created_at: :DESC).page params[:page]
       render layout: "category"
@@ -19,7 +18,6 @@ class MoviesController < ApplicationController
   end
 
   def show
-    @categories = Category.all.order name: :ASC
     @movie = Movie.find params[:id]
     @movies = Movie.all.order(created_at: :DESC).limit 10
     @movie_categories = @movie.categories
@@ -34,6 +32,8 @@ class MoviesController < ApplicationController
 
   private
   def search_movie
+    @years = Year.all.order number: :ASC
+    @categories = Category.all.order name: :ASC
     q = Hash.new
     q[:title_cont] = params[:search]
     @q = Movie.ransack q

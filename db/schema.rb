@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151119013037) do
+ActiveRecord::Schema.define(version: 20151120141650) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -64,6 +64,7 @@ ActiveRecord::Schema.define(version: 20151119013037) do
     t.datetime "updated_at",                                        null: false
     t.string   "photo",       limit: 255
     t.boolean  "suggestion",              default: false
+    t.integer  "quality",     limit: 4,   default: 0
   end
 
   add_index "movies", ["year_id"], name: "index_movies_on_year_id", using: :btree

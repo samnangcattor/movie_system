@@ -1,13 +1,12 @@
-class CategoriesController < ApplicationController
+class YearsController < ApplicationController
   def show
     q = Hash.new
     q[:title_cont] = params[:search]
     @q = Movie.ransack q
     @movie_searchs = @q.result(distinct: true).order(created_at: :DESC).page params[:page]
-    @category = Category.find params[:id]
+    @year = Year.find params[:id]
     @categories = Category.all.order(name: :ASC)
     @years = Year.all.order(number: :ASC)
-    @movies = @category.movies.order(created_at: :DESC).page params[:page]
-    render layout: "category"
+    @movies = @year.movies.order(created_at: :DESC).page params[:page]
   end
 end

@@ -27,6 +27,7 @@ gem "htmlcompressor"
 gem "impressionist"
 gem "rails_admin"
 gem "rails_admin_import", "~> 1.2"
+gem "unicorn"
 
 group :development, :test do
   gem "pry"
@@ -40,9 +41,3 @@ end
 group :production do
   gem "pg"
 end
-
-gem "capistrano-rails"
-gem "capistrano-bundler"
-gem "capistrano-rvm"
-gem "capistrano3-unicorn"
-gem "unicorn"

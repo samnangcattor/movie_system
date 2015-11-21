@@ -10,6 +10,7 @@ class MoviesController < ApplicationController
     else
       @movies = Movie.all.order(created_at: :DESC).page params[:page_1]
       @most_reviews = Movie.by_most_review.order(created_at: :ASC).page(params[:page_2]).per 10
+      @slideshows = Movie.by_slide
       respond_to do |format|
         format.html
         format.js

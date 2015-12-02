@@ -55,18 +55,18 @@ ActiveRecord::Schema.define(version: 20151202041327) do
   add_index "movie_categories", ["movie_id"], name: "index_movie_categories_on_movie_id", using: :btree
 
   create_table "movies", force: :cascade do |t|
-    t.string   "title",       limit: 255, default: "Default Movie"
-    t.string   "description", limit: 255
-    t.string   "link_movie",  limit: 255
-    t.string   "link_cover",  limit: 255
+    t.string   "title",       limit: 255,   default: "Default Movie"
+    t.text     "description", limit: 65535
+    t.text     "link_movie",  limit: 65535
+    t.text     "link_cover",  limit: 65535
     t.integer  "year_id",     limit: 4
-    t.datetime "created_at",                                        null: false
-    t.datetime "updated_at",                                        null: false
-    t.string   "photo",       limit: 255
-    t.boolean  "suggestion",              default: false
-    t.integer  "quality",     limit: 4,   default: 0
-    t.boolean  "slide",                   default: false
-    t.boolean  "status_link",             default: false
+    t.datetime "created_at",                                          null: false
+    t.datetime "updated_at",                                          null: false
+    t.text     "photo",       limit: 65535
+    t.boolean  "suggestion",                default: false
+    t.integer  "quality",     limit: 4,     default: 0
+    t.boolean  "slide",                     default: false
+    t.boolean  "status_link",               default: false
   end
 
   add_index "movies", ["year_id"], name: "index_movies_on_year_id", using: :btree

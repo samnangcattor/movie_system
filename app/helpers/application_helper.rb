@@ -29,7 +29,10 @@ module ApplicationHelper
   end
 
   def get_movie movie
-    movie = Movie.find movie.impressionable_id if movie.try(:title).nil?
+    if movie.try(:title).nil?
+      movie.impressionable_id = 1 if movie.impressionable_id == 0
+      movie = Movie.find movie.impressionable_id
+    end
     movie
   end
 end

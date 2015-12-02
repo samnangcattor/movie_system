@@ -27,7 +27,7 @@ gem "htmlcompressor"
 gem "impressionist"
 gem "rails_admin"
 gem "rails_admin_import", "~> 1.2"
-gem "unicorn"
+gem "unicorn", "~> 5.0.1"
 
 group :development, :test do
   gem "pry"

@@ -18,6 +18,7 @@
 //= require videojs
 //= require jquery.soulmate
 //= require facebook_page
+//= require fuckadblock
 
 window.fbAsyncInit = function() {
   FB.init({
@@ -54,3 +55,25 @@ var ready = function(){
 $(document).ready(ready);
 
 $(document).on("page:load", ready);
+
+$(document).ready(function() {
+  function adBlockDetected() {
+    alert("AdBlock has been found in your browser, please disable it to watch movie");
+    if($("#instructions").length > 0){
+      $("#instructions").html("Please don't block advertise on moviehdkh");
+    }
+  }
+
+  if(typeof fuckAdBlock === "undefined") {
+      adBlockDetected();
+  } else {
+    fuckAdBlock.on(true, adBlockDetected).onNotDetected(adBlockNotDetected);
+  }
+
+  fuckAdBlock.setOptions("checkOnLoad", false);
+
+  fuckAdBlock.setOptions({
+    checkOnLoad: false,
+    resetOnEnd: false
+  });
+});

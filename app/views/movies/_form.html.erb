@@ -1,8 +1,13 @@
 <section class="main-preview-player">
   <div id="instructions">
-    <video class="video-js vjs-default-skin" controls preload="auto" width="700" height="400" poster="<%= @movie.photo %>" data-setup="{}">
-      <source src="<%= @movie.link_movie %>" type="video/mp4">
-    </video>
+    <% if @movie.status_link? %>
+      <video class="video-js vjs-default-skin" controls preload="auto" width="700" height="400" poster="<%= @movie.photo %>" data-setup="{}">
+        <source src="<%= @movie.link_movie %>" type="video/mp4">
+      </video>
+    <% else %>
+      <%= image_tag "logo.png", id: "player_logo" %>
+      <iframe src="https://drive.google.com/file/d/0B7kOlRv8XBC3QjBDN2dEZmUtd2s/preview" width="700" height="400" allowfullscreen></iframe>
+    <% end %>
     <%= render "shared/facebook" %>
     <%= render "shared/impression" %>
   </div>

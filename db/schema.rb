@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151121055048) do
+ActiveRecord::Schema.define(version: 20151202041327) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -66,6 +66,7 @@ ActiveRecord::Schema.define(version: 20151121055048) do
     t.boolean  "suggestion",              default: false
     t.integer  "quality",     limit: 4,   default: 0
     t.boolean  "slide",                   default: false
+    t.boolean  "status_link",             default: false
   end
 
   add_index "movies", ["year_id"], name: "index_movies_on_year_id", using: :btree

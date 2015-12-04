@@ -2,6 +2,7 @@ class Movie < ActiveRecord::Base
   paginates_per Settings.page.per_page_movie
 
   after_save :load_into_soulmate
+  after_create :create_link
   before_destroy :remove_from_soulmate
 
   is_impressionable
@@ -12,6 +13,7 @@ class Movie < ActiveRecord::Base
 
   has_many :movie_categories
   has_many :categories, through: :movie_categories
+  has_one :link
 
   validates :title, presence: true
   validates :description, presence: true
@@ -47,5 +49,9 @@ class Movie < ActiveRecord::Base
   def remove_from_soulmate
     loader = Soulmate::Loader.new "movies"
     loader.remove("id" => self.id)
+  end
+
+  def create_link
+    Link.create movie_id: id, link_title: title, url: link_movie
   end
 end

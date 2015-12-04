@@ -2,11 +2,11 @@
   <div id="instructions">
     <% if @movie.status_link? %>
       <video class="video-js vjs-default-skin" controls preload="auto" width="700" height="400" poster="<%= @movie.photo %>" data-setup="{}">
-        <source src="<%= @movie.link_movie %>" type="video/mp4">
+        <source src="<%= @movie.link.url %>" type="video/mp4">
       </video>
     <% else %>
       <%= image_tag "logo.png", id: "player_logo" %>
-      <iframe src="<%= @movie.link_movie %>/preview" width="700" height="400" allowfullscreen></iframe>
+      <iframe src="<%= @movie.link.url %>/preview" width="700" height="400" allowfullscreen></iframe>
     <% end %>
     <%= render "shared/facebook" %>
     <%= render "shared/impression" %>

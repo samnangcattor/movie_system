@@ -1,12 +1,13 @@
 <section class="main-preview-player">
   <div id="instructions">
-    <% if @movie.status_link? %>
+    <% if @movie.link.status_link? %>
       <video class="video-js vjs-default-skin" controls preload="auto" width="700" height="400" poster="<%= @movie.photo %>" data-setup="{}">
         <source src="<%= @movie.link.url %>" type="video/mp4">
       </video>
     <% else %>
       <%= image_tag "logo.png", id: "player_logo" %>
       <iframe src="<%= @movie.link.url %>/preview" width="700" height="400" allowfullscreen></iframe>
+       <noembed><%= @movie.title %></noembed>
     <% end %>
     <%= render "shared/facebook" %>
     <%= render "shared/impression" %>
@@ -14,20 +15,21 @@
 </section>
 <div class="container">
   <div class="description_movie">
-    <h3 id="title_movie">
+    <h1 id="title_movie">
       <%= @movie.title %>
-    </h3>
+    </h1>
     <div class="text-left">
       <%= t "movies.popover.category" %>
       <%= render "contain_category" %>
     </div>
     <div class="text-left">
-      <%= t "movies.popover.publish_date" %><%= @movie.year_number %>
+      <%= t "movies.popover.publish_date" %>
+      <h5><%= link_to @movie.year_number, @movie.year %></h5>
     </div>
     <hr>
     <div class="wall">
       <div id="description_movie">
-        <%= @movie.description %>
+        <p><%= @movie.description %></p>
       </div>
     </div>
     <div class="movie-suggestion">

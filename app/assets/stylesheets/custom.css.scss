@@ -6,6 +6,8 @@ body {
   font-family: "MotionPicture_PersonalUseOnly.ttf";
   src: url("fonts/MotionPicture_PersonalUseOnly.ttf");
   background: radial-gradient(#333, hsl(200,30%,6%));
+  font-size: 16px;
+  h1 {line-height: 1.2em}
 
   #wrapper {
     .navbar {
@@ -20,6 +22,7 @@ body {
     }
 
     #main-nav {
+      margin-top: 100px;
       position: relative;
     }
   }
@@ -41,8 +44,8 @@ body {
   }
 
   #logo-page {
-    height: 38px;
-    width: 170px;
+    height: 40px;
+    width: 130px;
   }
 
   .pagination > li > a, .pagination > li > span {
@@ -140,13 +143,10 @@ footer {
     float: left;
     margin-top: 12px;
 
-    #youtube-logo {
-      width: 80px;
+    #youtube-logo, #plus-logo {
+      width: 60px;
       height: 25px;
-    }
-
-    .logo-social {
-      margin-left: 10px;
+      margin-right: 10px;
     }
   }
 }

@@ -4,7 +4,7 @@
     <%= image_tag movie.photo, class: "img-thumbnail resize-img-thumbnail",
       data: {title: movie.title, content: "", trigger: "hover", placement: "bottom",
       description: movie.description, publish_date: movie.year_number,
-      image: movie.get_quality,  movie_id: movie.id, html: true}, rel: "popover" %>
+      image: movie.get_quality,  movie_id: movie.id, html: true}, id: "image_#{movie.id}", rel: "popover", alt: movie.title %>
   <% end %>
   <p class="movie-title text-warning"><%= movie.title %></p>
 </li>

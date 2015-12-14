@@ -1,3 +1,5 @@
+<% meta title: t("app_name"), description: t("description"),
+  keywords: %w(movies khmer moviehd moviehdkh watch) %>
 <% content_for :context_menu do %>
   <div class="container">
     <hr/>
@@ -7,15 +9,6 @@
       </div>
       <div id="paginator-new-movie">
         <%= render "shared/pagenator", objects: @movies, page: 1 %>
-      </div>
-    <% end %>
-    <hr/>
-    <% if @most_reviews.present? %>
-      <div class="most-review-movie">
-        <%= render "content_review_movie" %>
-      </div>
-      <div id="paginator-review-movie">
-        <%= render "shared/pagenator", objects: @most_reviews, page: 2 %>
       </div>
     <% end %>
   </div>

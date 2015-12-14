@@ -1,13 +1,9 @@
 en:
   layouts:
-    login: "Log in"
-    logout: "Log out"
-    profile: "Profile"
-    setting: "Setting"
     logo: "Logo Movie"
     title: "MovieHD KH"
     location: "Phnom Pench, Cambodia"
-    email: "Email: moviehd_kh@gmail.com"
+    email: "Email: moviehdkh2015@gmail.com"
     movie: "Movies"
     animation: "Animation"
     year: "Year"

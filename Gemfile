@@ -2,7 +2,6 @@ source "https://rubygems.org"
 
 gem "rails", "4.2.3"
 gem "bootstrap-sass"
-gem "bootstrap-datepicker-rails"
 gem "mysql2", "~> 0.3.13"
 gem "kaminari"
 gem "bootstrap-kaminari-views"
@@ -28,6 +27,9 @@ gem "impressionist"
 gem "rails_admin"
 gem "rails_admin_import", "~> 1.2"
 gem "unicorn", "~> 5.0.1"
+gem "metamagic"
+gem "sitemap_generator"
+gem "carrierwave"
 
 group :development, :test do
   gem "pry"

@@ -10,7 +10,6 @@ $(function(){
   refresh();
   $refreshButton.click(refresh);
 
-  // Select all the contents when clicked
   $results.click(function(){
     $(this).select();
   });

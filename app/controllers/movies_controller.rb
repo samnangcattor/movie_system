@@ -1,4 +1,6 @@
 class MoviesController < ApplicationController
+  caches_page [:index, :show]
+
   before_action :search_movie
 
   impressionist actions: [:show]
@@ -28,8 +30,12 @@ class MoviesController < ApplicationController
 
   private
   def search_movie
-    @years = Year.all.order number: :ASC
-    @categories = Category.all.order name: :ASC
+    @categories = Rails.cache.fetch("categories") do
+      Category.all.order name: :ASC
+    end
+    @years = Rails.cache.fetch("years") do
+      Year.all.order number: :ASC
+    end
     q = Hash.new
     q[:title_cont] = params[:search]
     @q = Movie.ransack q

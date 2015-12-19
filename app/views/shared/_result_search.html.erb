@@ -1,7 +1,9 @@
 <div class="container">
-  <% if params[:search].present? %>
+  <% if @q.conditions.present? %>
     <div class="result-search">
-      <h3 class="text-left" id="keyword"><%= t "keyword" %><%= params[:search] %></h3>
+      <h3 class="text-left" id="keyword"><%= t "keyword" %>
+        <%= params[:q][:title_cont] %>
+      </h3>
       <hr/>
       <% if @movie_searchs.present? %>
         <ul class="list-unstyled list-inline">

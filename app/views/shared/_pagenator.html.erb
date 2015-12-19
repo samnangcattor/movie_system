@@ -2,6 +2,6 @@
   <%= paginate objects, param_name: "page_1",
     params: {page_1: params[:page_1]} %>
 <% elsif page == 3 %>
-  <%= paginate objects, remote: true, param_name: "page_3",
+  <%= paginate objects, param_name: "page_3",
     params: {page_3: params[:page_3]} %>
 <% end %>

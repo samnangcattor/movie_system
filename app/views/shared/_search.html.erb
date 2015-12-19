@@ -1,5 +1,6 @@
 <%= search_form_for @q do |f| %>
   <div class="form-group">
-    <%= text_field_tag "search", nil, class: "form-control" ,placeholder: "Search", autocomplete: :off %>
+    <%= f.search_field :title_cont, class: "form-control text-right",
+      id: "search-movie", placeholder: "Search", autocomplete: :off %>
   </div>
 <% end %>

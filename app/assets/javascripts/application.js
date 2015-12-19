@@ -16,7 +16,6 @@
 //= require bootstrap-sprockets
 //= require popover
 //= require videojs
-//= require jquery.soulmate
 //= require facebook_page
 //= require fuckadblock
 
@@ -27,34 +26,6 @@ window.fbAsyncInit = function() {
     version    : "v2.5"
   });
 };
-
-var ready = function(){
-  var render, select;
-
-  render = function(term, data, type) {
-    return term;
-  }
-
-  select = function(term, data, type){
-    $("#search").val(term);
-
-    $("ul#soulmate").hide();
-    return window.location.href = data.link;
-  }
-
-  $("#search").soulmate({
-    url: "/autocomplete/search",
-    types: ["movies"],
-    renderCallback : render,
-    selectCallback : select,
-    minQueryLength : 2,
-    maxResults     : 5
-  })
-}
-
-$(document).ready(ready);
-
-$(document).on("page:load", ready);
 
 $(document).ready(function() {
   function adBlockDetected() {

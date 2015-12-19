@@ -6,7 +6,7 @@ class MoviesController < ApplicationController
   impressionist actions: [:show]
 
   def index
-    if params[:search].present?
+    if @q.conditions.present?
       @movie_searchs = @q.result(distinct: true).order(created_at: :DESC).page params[:page]
       render layout: "category"
     else
@@ -22,10 +22,7 @@ class MoviesController < ApplicationController
     @impressions = @movie.get_impression
     @movie.impressionist_count filter: :all
     @movie_suggestions = Movie.by_suggestion.page(params[:page_3]).per 10
-    respond_to do |format|
-      format.html {render layout: "movie"}
-      format.js
-    end
+    render layout: "movie"
   end
 
   private
@@ -36,8 +33,6 @@ class MoviesController < ApplicationController
     @years = Rails.cache.fetch("years") do
       Year.all.order number: :ASC
     end
-    q = Hash.new
-    q[:title_cont] = params[:search]
-    @q = Movie.ransack q
+    @q = Movie.ransack params[:q]
   end
 end

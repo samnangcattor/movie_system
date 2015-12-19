@@ -1,8 +1,6 @@
 class CategoriesController < ApplicationController
   def show
-    q = Hash.new
-    q[:title_cont] = params[:search]
-    @q = Movie.ransack q
+    @q = Movie.ransack params[:q]
     @movie_searchs = @q.result(distinct: true).order(created_at: :DESC).page params[:page]
     @category = Category.find params[:id]
     @categories = Rails.cache.fetch("categories") do

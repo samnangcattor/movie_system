@@ -1,9 +1,7 @@
 class Movie < ActiveRecord::Base
   paginates_per Settings.page.per_page_movie
 
-  after_save :load_into_soulmate
   after_create :create_link
-  before_destroy :remove_from_soulmate
 
   is_impressionable
 
@@ -21,7 +19,6 @@ class Movie < ActiveRecord::Base
 
   delegate :number, to: :year, prefix: true, allow_nil: true
 
-  scope :search_title, ->query{where "title LIKE ?", query}
   scope :by_most_review, ->{Impression.group :impressionable_id}
   scope :by_suggestion, ->{where(suggestion: true).order(updated_at: :DESC)}
   scope :by_slide, ->{where(slide: true).order(updated_at: :DESC).limit(10)}
@@ -39,18 +36,6 @@ class Movie < ActiveRecord::Base
   end
 
   private
-  def load_into_soulmate
-    loader = Soulmate::Loader.new "movies"
-    loader.add("term" => title, "id" => self.id, "data" => {
-      "link" => Rails.application.routes.url_helpers.movie_path(self)
-    })
-  end
-
-  def remove_from_soulmate
-    loader = Soulmate::Loader.new "movies"
-    loader.remove("id" => self.id)
-  end
-
   def create_link
     Link.create movie_id: id, link_title: title, url: link_movie
   end

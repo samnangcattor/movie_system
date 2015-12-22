@@ -35,4 +35,4 @@ images:
     is_main: 1
     not_main: 0
 page:
-  per_page_movie: 20
+  per_page_movie: 10

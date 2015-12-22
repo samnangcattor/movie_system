@@ -1,4 +1,4 @@
-<% meta title: t("app_movie", movie: @movie.title), description: t("description"),
+<% meta title: t("app_movie", movie: @movie.title), description: @movie.description,
   keywords: %w(movies khmer moviehd moviehdkh watch) %>
 <% content_for :context_mid do %>
   <%= render "form" %>

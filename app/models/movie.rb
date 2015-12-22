@@ -1,9 +1,7 @@
 class Movie < ActiveRecord::Base
   paginates_per Settings.page.per_page_movie
 
-  after_save :load_into_soulmate
   after_create :create_link
-  before_destroy :remove_from_soulmate
 
   is_impressionable
 
@@ -24,6 +22,7 @@ class Movie < ActiveRecord::Base
   scope :by_most_review, ->{Impression.group :impressionable_id}
   scope :by_suggestion, ->{where(suggestion: true).order(updated_at: :DESC)}
   scope :by_slide, ->{where(slide: true).order(updated_at: :DESC).limit(10)}
+  scope :by_no_cinema, ->{where(cinema: false).order(created_at: :DESC)}
 
   def get_impression
     Impression.where impressionable_id: id

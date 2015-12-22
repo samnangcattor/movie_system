@@ -1,11 +1,11 @@
 en:
-  app_name: "MovieHdKh | Free watching movie hd online"
+  app_name: "MovieHdKh | watching movie hd online"
   app_category: "MovieHdKh | %{category}"
   app_movie: "MovieHdKh | %{movie}"
   app_year: "MovieHdKh | %{year}"
   app_requests: "MovieHdKh | Request the movie from our website"
   click_required: "click here to require that movie"
-  description: "Free watching moviehd online in Cambodia, you can request new movie from our site."
+  description: "watching moviehd online in Cambodia, you can request new movie from our site."
   keyword: "Keyword: "
   actions:
     send_request: "Send request"

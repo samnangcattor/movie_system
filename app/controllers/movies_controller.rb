@@ -16,6 +16,7 @@ class MoviesController < ApplicationController
   end
 
   def show
+    @transcoded_movie = nil
     @movie = Movie.find params[:id]
     @movies = Movie.all.order(created_at: :DESC).limit 10
     @movie_categories = @movie.categories

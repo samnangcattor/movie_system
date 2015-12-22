@@ -1,9 +1,7 @@
 class Movie < ActiveRecord::Base
   paginates_per Settings.page.per_page_movie
 
-  after_save :load_into_soulmate
   after_create :create_link
-  before_destroy :remove_from_soulmate
 
   is_impressionable
 

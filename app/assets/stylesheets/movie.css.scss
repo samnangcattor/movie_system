@@ -2,11 +2,10 @@
   ul {
     position: static;
     li {
-      margin-top: 20px;
       width: calc(20% - 12px);
-      .resize-img-thumbnail {
-        width: 125px;
-        height: 180px;
+      .resize-thumbnail {
+        width: 207px;
+        height: 302px;
       }
     }
   }

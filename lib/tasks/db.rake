@@ -21,6 +21,15 @@ namespace :db do
       link.save
     end
 
+    puts "Create 10 popular movie"
+    10.times {FactoryGirl.create :po_pular_movie}
+
+    puts "Create 10 popular movie"
+    10.times {FactoryGirl.create :request_movie}
+
+    puts "Create 10 popular movie"
+    10.times {FactoryGirl.create :coming_soon_movie}
+
     puts "Create movie have contain category"
     Movie.all.each do |movie|
       Category.all.each do |category|

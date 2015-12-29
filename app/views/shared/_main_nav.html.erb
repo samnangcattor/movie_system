@@ -11,13 +11,13 @@
       <div class="carousel-inner" role="listbox">
         <div class="item active">
           <%= link_to @slideshows.first do %>
-            <%= image_tag @slideshows.first.link_cover, class: "resize-photo" %>
+            <%= image_tag @slideshows.first.link_cover, class: "resize-photo img-responsive" %>
           <% end %>
         </div>
         <% @slideshows.drop(1).each do |movie| %>
           <div class="item">
             <%= link_to movie do %>
-              <%= image_tag movie.link_cover, class: "resize-photo" %>
+              <%= image_tag movie.link_cover, class: "resize-photo img-responsive" %>
             <% end %>
           </div>
         <% end %>

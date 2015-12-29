@@ -11,12 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151214061747) do
+ActiveRecord::Schema.define(version: 20151229092206) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name",       limit: 255
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+  end
+
+  create_table "coming_soon_movies", force: :cascade do |t|
+    t.text     "photo",      limit: 65535
+    t.text     "link",       limit: 65535
+    t.string   "title",      limit: 255
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
   end
 
   create_table "impressions", force: :cascade do |t|
@@ -77,10 +85,26 @@ ActiveRecord::Schema.define(version: 20151214061747) do
     t.boolean  "suggestion",                default: false
     t.integer  "quality",     limit: 4,     default: 0
     t.boolean  "slide",                     default: false
-    t.boolean  "status_link",               default: false
+    t.boolean  "cinema",                    default: false
   end
 
   add_index "movies", ["year_id"], name: "index_movies_on_year_id", using: :btree
+
+  create_table "po_pular_movies", force: :cascade do |t|
+    t.text     "photo",      limit: 65535
+    t.text     "link",       limit: 65535
+    t.string   "title",      limit: 255
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  create_table "request_movies", force: :cascade do |t|
+    t.text     "photo",      limit: 65535
+    t.text     "link",       limit: 65535
+    t.string   "title",      limit: 255
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
 
   create_table "requests", force: :cascade do |t|
     t.string   "name",        limit: 255

@@ -19,4 +19,6 @@ $(document).ready(function(){
         "<hr>"  + "<strong>" + label_publish_date + "</strong>" + movie_publish_date);
     }
   });
+
+  $("#iplayer").bind("contextmenu",function() {return false;});
 });

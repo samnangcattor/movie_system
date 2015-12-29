@@ -1,19 +1,22 @@
 <section class="main-preview-player">
   <div id="instructions">
     <% if @movie.link.status_link? %>
-      <video class="video-js vjs-default-skin" controls preload="auto" width="700" height="400" poster="<%= @movie.photo %>" data-setup="{}">
-        <source src="<%= @movie.link.url %>" type="video/mp4">
+      <video class="video-js vjs-default-skin" controls preload="auto" width="700" height="400" poster="<%= @movie.photo %>" data-setup='{"techOrder":["flash", "html"]}' id="iplayer">
+        <source src="<%= @movie.link.url %>" type="video/mp4"/>
       </video>
     <% else %>
       <%= image_tag "logo.png", id: "player_logo" %>
-      <iframe src="<%= @movie.link.url %>/preview" width="700" height="400" allowfullscreen></iframe>
+      <% if @movie.cinema? %>
+        <iframe src="<%= @movie.link.url %>" width="700" height="400" allowfullscreen></iframe>
+      <% else %>
+        <iframe src="<%= @movie.link.url %>/preview" width="700" height="400" allowfullscreen></iframe>
+      <% end %>
        <noembed><%= @movie.title %></noembed>
     <% end %>
     <%= render "shared/facebook" %>
     <%= render "shared/impression" %>
   </div>
 </section>
-<script type='text/javascript' src='//eclkmpbn.com/adServe/banners?tid=87702_142417_5'></script>
 <div class="container">
   <div class="description_movie">
     <h1 id="title_movie">

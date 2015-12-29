@@ -6,11 +6,14 @@ class MoviesController < ApplicationController
   impressionist actions: [:show]
 
   def index
+    @coming_soon_movies = ComingSoonMovie.all
+    @po_pular_movies = PoPularMovie.all
+    @request_movies = RequestMovie.all
     if @q.conditions.present?
       @movie_searchs = @q.result(distinct: true).order(created_at: :DESC).page params[:page]
       render layout: "category"
     else
-      @movies = Movie.all.order(created_at: :DESC).page params[:page_1]
+      @movies = Movie.by_no_cinema.page params[:page_1]
       @slideshows = Movie.by_slide
     end
   end

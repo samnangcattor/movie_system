@@ -2,6 +2,20 @@
   keywords: %w(movies khmer moviehd moviehdkh watch) %>
 <% content_for :context_menu do %>
   <div class="container">
+    <h3 class="text-warning text-left">>><%= t "home.coming_soon_movie" %></h3>
+    <ul class="list-unstyled list-inline">
+      <%= render partial: "shared/coming_soon_movie", collection: @coming_soon_movies %>
+    </ul>
+    <hr/>
+    <h3 class="text-warning text-left">>><%= t "home.popular_movie" %></h3>
+    <ul class="list-unstyled list-inline">
+      <%= render partial: "shared/po_pular_movie", collection: @po_pular_movies %>
+    </ul>
+    <hr/>
+    <h3 class="text-warning text-left">>><%= t "home.request_movie" %></h3>
+    <ul class="list-unstyled list-inline">
+      <%= render partial: "shared/request_movie", collection: @request_movies %>
+    </ul>
     <hr/>
     <% if @movies.present? %>
       <div class="new-movie">

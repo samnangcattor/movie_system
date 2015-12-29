@@ -2,7 +2,6 @@
   ul {
     position: static;
     li {
-      margin-top: 20px;
       width: calc(20% - 12px);
       .resize-img-thumbnail {
         width: 125px;
@@ -29,7 +28,7 @@
   }
 
   #category-name {
-    margin-top: 140px;
+    margin-top: 50px;
     color: #a78613;
   }
 }

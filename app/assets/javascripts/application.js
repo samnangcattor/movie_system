@@ -27,27 +27,25 @@ window.fbAsyncInit = function() {
   });
 };
 
-$(document).ready(function() {
-  function adBlockDetected() {
-    alert("AdBlock has been found in your browser, please disable it to watch movie");
-    if($("#instructions").length > 0){
-      $("#instructions").html("Please don't block advertise on moviehdkh");
-    }
+function adBlockDetected() {
+  if($("#instructions").length > 0){
+    $("#instructions").html("Please don't block advertise on moviehdkh");
   }
+}
 
-  if(typeof fuckAdBlock === "undefined") {
-      adBlockDetected();
-  } else {
-    fuckAdBlock.on(true, adBlockDetected).onNotDetected(adBlockNotDetected);
-  }
+if(typeof fuckAdBlock === "undefined") {
+    adBlockDetected();
+} else {
+  fuckAdBlock.on(true, adBlockDetected).onNotDetected(adBlockNotDetected);
+}
 
-  fuckAdBlock.setOptions("checkOnLoad", false);
+fuckAdBlock.setOptions("checkOnLoad", false);
 
-  fuckAdBlock.setOptions({
-    checkOnLoad: false,
-    resetOnEnd: false
-  });
+fuckAdBlock.setOptions({
+  checkOnLoad: false,
+  resetOnEnd: false
 });
+
 
 (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),

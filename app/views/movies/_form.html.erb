@@ -1,8 +1,8 @@
 <section class="main-preview-player">
   <div id="instructions">
     <% if @movie.link.status_link? %>
-      <video class="video-js vjs-default-skin" controls preload="auto" width="700" height="400" poster="<%= @movie.photo %>" data-setup="{}">
-        <source src="<%= @movie.link.url %>" type="video/mp4">
+      <video class="video-js vjs-default-skin" controls preload="auto" width="700" height="400" poster="<%= @movie.photo %>" data-setup='{"techOrder":["flash", "html"]}' id="iplayer">
+        <source src="<%= @movie.link.url %>" type="video/mp4"/>
       </video>
     <% else %>
       <%= image_tag "logo.png", id: "player_logo" %>

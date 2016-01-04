@@ -13,7 +13,6 @@
  *= require_self
  *= require custom
  *= require movie
- *= require videojs
  *= require menu
  *= require search
  *= require category
@@ -21,6 +20,7 @@
  *= require soulmate
  *= require impression
  *= require pagenation
+ *= require videojs-resolution-switcher
  */
 
 @import "bootstrap-sprockets";

@@ -162,3 +162,13 @@ footer {
     width: 207px;
     height: 306px;
 }
+
+.vjs-menu li.vjs-selected, .vjs-menu li.vjs-selected:focus, .vjs-menu li.vjs-selected:hover {
+  background-color: #fff;
+  color: #E60B0B;
+}
+
+.vjs-resolution-button ul.vjs-menu-content {
+  width: 4em !important;
+  margin-top: -55px;
+}

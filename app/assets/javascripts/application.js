@@ -15,9 +15,9 @@
 //= require jquery.turbolinks
 //= require bootstrap-sprockets
 //= require popover
-//= require videojs
 //= require facebook_page
 //= require fuckadblock
+//= require videojs-resolution-switcher
 
 window.fbAsyncInit = function() {
   FB.init({

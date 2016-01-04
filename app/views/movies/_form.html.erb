@@ -1,9 +1,17 @@
 <section class="main-preview-player">
   <div id="instructions">
     <% if @movie.link.status_link? %>
-      <video class="video-js vjs-default-skin" controls autoplay preload="auto" width="700" height="400" poster="<%= @movie.photo %>" data-setup='' id="iplayer">
-        <source src="<%= @movie.link.url_default %>" type="video/mp4"/>
-        <source src="<%= @movie.link.url_hd %>" type="video/mp4"/>
+      <video class="video-js vjs-default-skin" fluid="true" controls autoplay preload="auto" width="700" height="400" poster="<%= @movie.photo %>" data-setup='{}' id="iplayer">
+        <% if @movie.link.url_super_hd.present? %>
+          <source src="<%= @movie.link.url_super_hd %>" type="video/mp4" label="1080"/>
+        <% end %>
+        <% if @movie.link.url_hd.present? %>
+          <source src="<%= @movie.link.url_hd %>" type="video/mp4" label="720"/>
+        <% end %>
+        <source src="<%= @movie.link.url_default %>" type="video/mp4" label="360"/>
+        <script>
+          videojs("iplayer").videoJsResolutionSwitcher()
+        </script>
       </video>
     <% else %>
       <%= image_tag "logo.png", id: "player_logo" %>

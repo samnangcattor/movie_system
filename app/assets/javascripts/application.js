@@ -18,6 +18,8 @@
 //= require facebook_page
 //= require fuckadblock
 //= require videojs-resolution-switcher
+//= require jwplayer
+//= require jwplayer.html5
 
 window.fbAsyncInit = function() {
   FB.init({
@@ -26,3 +28,51 @@ window.fbAsyncInit = function() {
     version    : "v2.5"
   });
 };
+
+$(function(){
+  var data_default = $("#player").data("default");
+  var data_hd = $("#player").data("hd");
+  var data_sub = $("#player").data("sub");
+
+  if (data_hd != "") {
+    jwplayer("player").setup({
+      sources: [{
+        file: data_hd,
+        label: "720p HD",
+        type: "mp4"
+      },{
+        file: data_default,
+        label: "360p SD",
+        "default": "true",
+        type: "mp4"
+      }],
+      width: '100%',
+      aspectratio: '16:9',
+      skin: 'five',
+      tracks: [{
+        file: data_sub,
+        label: "English",
+        kind: "captions",
+        "default": true
+      }]
+    });
+  }else {
+    jwplayer("player").setup({
+      sources: [{
+        file: data_default,
+        label: "360p SD",
+        "default": "true",
+        type: "mp4"
+      }],
+      width: '100%',
+      aspectratio: '16:9',
+      skin: 'five',
+      tracks: [{
+        file: data_sub,
+        label: "English",
+        kind: "captions",
+        "default": true
+      }]
+    });
+  }
+});

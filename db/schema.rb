@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160104140253) do
+ActiveRecord::Schema.define(version: 20160108085102) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(version: 20160104140253) do
     t.boolean  "status_link",                default: false
     t.text     "url_hd",       limit: 65535
     t.text     "url_super_hd", limit: 65535
+    t.text     "subtitle",     limit: 65535
   end
 
   add_index "links", ["movie_id"], name: "index_links_on_movie_id", using: :btree

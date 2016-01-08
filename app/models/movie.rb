@@ -38,6 +38,6 @@ class Movie < ActiveRecord::Base
 
   private
   def create_link
-    Link.create movie_id: id, link_title: title, url: link_movie
+    Link.create movie_id: id, link_title: title, url_default: link_movie, status_link: true
   end
 end

@@ -19,7 +19,11 @@
 //= require fuckadblock
 //= require videojs-resolution-switcher
 //= require jwplayer
-//= require jwplayer.html5
+//= require polyfills.base64
+//= require polyfills.promise
+//= require provider.cast
+//= require provider.shaka
+//= require provider.youtube
 
 window.fbAsyncInit = function() {
   FB.init({
@@ -48,7 +52,6 @@ $(function(){
       }],
       width: '100%',
       aspectratio: '16:9',
-      skin: 'five',
       tracks: [{
         file: data_sub,
         label: "English",
@@ -66,7 +69,6 @@ $(function(){
       }],
       width: '100%',
       aspectratio: '16:9',
-      skin: 'five',
       tracks: [{
         file: data_sub,
         label: "English",

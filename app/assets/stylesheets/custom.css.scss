@@ -172,3 +172,33 @@ footer {
   width: 4em !important;
   margin-top: -55px;
 }
+
+#___gcse_0 {
+  width: 300px;
+}
+
+input.gsc-search-button-v2 {
+  width: 5px !important;
+  height: 13px !important;
+  padding: 11px 27px !important;
+  margin-top: 4px !important;
+}
+
+.gsc-input {
+  width: 100%;
+  padding: 0px;
+  border: none;
+  margin: 0px;
+  height: auto;
+  outline: none;
+  background: url(http://www.google.com/cse/static/en/google_custom_search_watermark.gif) 0% 50% no-repeat rgb(255, 255, 255);
+  margin-top: -5px !important;
+}
+
+input.gsc-search-button, input.gsc-search-button:hover, input.gsc-search-button:focus {
+    border-color: #666666;
+    background-color: #CECECE;
+    background-image: none;
+    filter: none;
+    background: url(http://www.fancyicons.com/free-icons/103/mimi-deep-colour/png/24/search_24.png)  0% 0% no-repeat rgb(255, 255, 255)!important;
+}

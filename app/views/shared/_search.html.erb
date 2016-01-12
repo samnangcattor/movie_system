@@ -1,6 +1,13 @@
-<%= search_form_for @q do |f| %>
-  <div class="form-group">
-    <%= f.search_field :title_cont, class: "text-left",
-      id: "search-movie", placeholder: "Search", autocomplete: :off %>
-  </div>
-<% end %>
+<script>
+  (function() {
+    var cx = '015386488364220438710:rpmolbbroqg';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>

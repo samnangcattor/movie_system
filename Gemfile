@@ -28,6 +28,7 @@ gem "metamagic"
 gem "sitemap_generator"
 gem "carrierwave"
 gem "actionpack-page_caching"
+gem "carrierwave"
 
 group :development, :test do
   gem "pry"

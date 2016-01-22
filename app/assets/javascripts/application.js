@@ -14,16 +14,10 @@
 //= require jquery_ujs
 //= require jquery.turbolinks
 //= require bootstrap-sprockets
-//= require popover
 //= require facebook_page
 //= require fuckadblock
-//= require videojs-resolution-switcher
 //= require jwplayer
-//= require polyfills.base64
-//= require polyfills.promise
-//= require provider.cast
-//= require provider.shaka
-//= require provider.youtube
+//= require jwplayer.html5
 
 window.fbAsyncInit = function() {
   FB.init({

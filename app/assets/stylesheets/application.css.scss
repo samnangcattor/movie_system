@@ -12,8 +12,10 @@
  *
  *= require_self
  *= require_tree
+ *= require hover
  */
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import "font-awesome";
+@import 'hover';

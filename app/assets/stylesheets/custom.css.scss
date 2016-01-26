@@ -191,14 +191,39 @@ input.gsc-search-button-v2 {
   margin: 0px;
   height: auto;
   outline: none;
-  background: url(http://www.google.com/cse/static/en/google_custom_search_watermark.gif) 0% 50% no-repeat rgb(255, 255, 255);
+  background: none;
   margin-top: -5px !important;
 }
 
 input.gsc-search-button, input.gsc-search-button:hover, input.gsc-search-button:focus {
     border-color: #666666;
     background-color: #CECECE;
-    background-image: none;
+    background-image: none !important;
     filter: none;
     background: url(http://www.fancyicons.com/free-icons/103/mimi-deep-colour/png/24/search_24.png)  0% 0% no-repeat rgb(255, 255, 255)!important;
+}
+
+.gsc-control-cse {
+  font-family: Arial, sans-serif !important;
+  border-color: #080808 !important;
+  background-color: #131212 !important;
+}
+
+.navbar-default {
+  background-color: #131212;
+  border-color: #e7e7e7;
+}
+
+.navbar-fixed-top {
+    top: 0;
+    border-width: 0 0 0px;
+}
+
+.navbar-default .navbar-nav>li>a {
+  color: #FFD800;
+  font-weight: bold;
+}
+
+.text-warning {
+  color: #FFD800 !important;
 }

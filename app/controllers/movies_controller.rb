@@ -25,10 +25,6 @@ class MoviesController < ApplicationController
     @impressions = @movie.get_impression
     @movie.impressionist_count filter: :all
     @movie_suggestions = Movie.by_suggestion.page(params[:page_3]).per 10
-    @movie_360 = nil
-    @movie_720 = nil
-    @movie_360 = Movie.get_link_video @movie.link.url_default
-    @movie_720 = Movie.get_link_video @movie_720.link.url_hd if @movie.link.url_hd.present?
     render layout: "movie"
   end
 

@@ -20,7 +20,7 @@
           <ul class="dropdown-menu">
             <% if @categories.present? %>
               <% @categories.each do |category| %>
-                <li><%= link_to category.name, category_path(category) %></li>
+                <li class="hvr-grow-shadow"><%= link_to category.name, category_path(category) %></li>
               <% end %>
             <% end %>
           </ul>
@@ -32,7 +32,7 @@
           <ul class="dropdown-menu">
             <% if @years.present? %>
               <% @years.each do |year| %>
-                <li><%= link_to year.number, year_path(year) %></li>
+                <li class="hvr-grow-shadow"><%= link_to year.number, year_path(year) %></li>
               <% end %>
             <% end %>
           </ul>

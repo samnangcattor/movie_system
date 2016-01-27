@@ -94,6 +94,8 @@ GEM
       activesupport (>= 4.1.0)
     haml (4.0.7)
       tilt
+    hover-rails (2.0.2)
+      railties (>= 3.2)
     htmlcompressor (0.3.0)
     httpclient (2.7.0.1)
     i18n (0.7.0)
@@ -284,6 +286,7 @@ DEPENDENCIES
   factory_girl_rails
   faker
   font-awesome-rails
+  hover-rails
   htmlcompressor
   impressionist
   jbuilder (~> 2.0)

@@ -28,7 +28,7 @@ gem "metamagic"
 gem "sitemap_generator"
 gem "carrierwave"
 gem "actionpack-page_caching"
-gem "carrierwave"
+gem "hover-rails"
 
 group :development, :test do
   gem "pry"

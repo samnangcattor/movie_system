@@ -1,7 +1,7 @@
 <section class="main-preview-player">
   <div id="instructions" rel="noindex, nofollow">
     <% if @movie.link.status_link? %>
-      <div id="player" data-default="<%= @movie.link.url_default %>" data-hd="<%= @movie.link.url_hd %>" data-sub="<%= @movie.link.subtitle %>"></div>
+      <div id="player" data-default="<%= @movie_360 %>" data-hd="<%= @movie_720 %>" data-sub="<%= @movie.link.subtitle %>"></div>
     <% else %>
       <%= image_tag "logo.png", id: "player_logo" %>
       <% if @movie.cinema? %>
@@ -14,9 +14,6 @@
     <%= render "shared/facebook" %>
     <%= render "shared/impression" %>
   </div>
-  <iframe src="http://yx-ads6.com/banner_show.php?section=General&amp;pub=715115&amp;format=300x250&amp;ga=g" frameborder="0" scrolling="no" width="300" height="250" marginwidth="0" marginheight="0"></iframe>
-<script type="text/javascript" src="http://yx-ads6.com/layer.php?section=General&pub=715115&ga=g&show=1&fp"></script>
-<iframe src="http://yx-ads6.com/banner_show.php?section=General&amp;pub=715115&amp;format=300x50&amp;ga=g" frameborder="0" scrolling="no" width="300" height="50" marginwidth="0" marginheight="0"></iframe>
 </section>
 <div class="container">
   <div class="description_movie">

@@ -29,6 +29,7 @@ gem "sitemap_generator"
 gem "carrierwave"
 gem "actionpack-page_caching"
 gem "hover-rails"
+gem "nokogiri"
 
 group :development, :test do
   gem "pry"

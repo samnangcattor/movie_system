@@ -36,6 +36,14 @@ class Movie < ActiveRecord::Base
     end
   end
 
+  def self.get_link_video url
+    uri = URI url
+    body = Net::HTTP.get uri
+    doc = Nokogiri::HTML body
+    link_video = doc.css("a[href]").map(&:attributes).map{|i| i["href"]}.map(&:value)[0]
+    link_video
+  end
+
   private
   def create_link
     Link.create movie_id: id, link_title: title, url_default: link_movie, status_link: true

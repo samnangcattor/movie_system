@@ -35,4 +35,15 @@ module ApplicationHelper
     end
     movie
   end
+
+  def get_link_video url
+    link_video = nil
+    if url.present?
+      uri = URI url
+      body = Net::HTTP.get uri
+      doc = Nokogiri::HTML body
+      link_video = doc.css("a[href]").map(&:attributes).map{|i| i["href"]}.map(&:value)[0]
+    end
+    link_video
+  end
 end

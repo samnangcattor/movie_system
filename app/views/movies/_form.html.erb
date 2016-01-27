@@ -1,7 +1,7 @@
 <section class="main-preview-player">
   <div id="instructions" rel="noindex, nofollow">
     <% if @movie.link.status_link? %>
-      <div id="player" data-default="<%= get_link_video @movie.link.url_default %>" data-hd="<%= get_link_video @movie.link.url_hd %>" data-sub="<%= @movie.link.subtitle %>"></div>
+      <div id="player" data-default="<%= @movie.link.url_default %>" data-hd="<%= @movie.link.url_hd %>" data-sub="<%= @movie.link.subtitle %>"></div>
     <% else %>
       <%= image_tag "logo.png", id: "player_logo" %>
       <% if @movie.cinema? %>

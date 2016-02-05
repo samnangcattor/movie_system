@@ -102,11 +102,9 @@ ActiveRecord::Schema.define(version: 20160201091332) do
     t.integer  "quality",     limit: 4,     default: 0
     t.boolean  "slide",                     default: false
     t.boolean  "cinema",                    default: false
-    t.string   "permalink",   limit: 255
     t.string   "slug",        limit: 255
   end
 
-  add_index "movies", ["permalink"], name: "index_movies_on_permalink", using: :btree
   add_index "movies", ["slug"], name: "index_movies_on_slug", using: :btree
   add_index "movies", ["year_id"], name: "index_movies_on_year_id", using: :btree
 

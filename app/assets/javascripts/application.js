@@ -19,7 +19,6 @@
 //= require jwplayer
 //= require jwplayer.html5
 //= require jquery.browser
-//= require custom
 
 window.fbAsyncInit = function() {
   FB.init({

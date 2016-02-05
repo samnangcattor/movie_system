@@ -30,6 +30,7 @@ gem "carrierwave"
 gem "actionpack-page_caching"
 gem "hover-rails"
 gem "friendly_id", "~> 5.1.0"
+gem "faraday"
 
 group :development, :test do
   gem "pry"

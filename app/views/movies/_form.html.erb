@@ -1,7 +1,7 @@
 <section class="main-preview-player">
   <div id="instructions" rel="noindex, nofollow">
     <% if @movie.link.status_link? %>
-      <div id="player" data-default="<%= @url_default %>" data-hd="<%= @url_hd %>" data-sub="<%= @movie.link.subtitle %>"></div>
+      <div id="player" data-default="<%= @movie.link.url_default %>" data-hd="<%= @movie.link.url_hd %>" data-sub="<%= @movie.link.subtitle %>"></div>
     <% else %>
       <%= image_tag "logo.png", id: "player_logo" %>
       <% if @movie.cinema? %>
@@ -14,6 +14,9 @@
     <%= render "shared/facebook" %>
     <%= render "shared/impression" %>
   </div>
+  <div id="SC_TBlock_108990" class="SC_TBlock">loading...</div>
+  <script type="text/javascript">var SC_CId = "108990",SC_Domain="n.ads3-adnow.com";SC_Start_108990=(new Date).getTime();</script>
+  <script type="text/javascript" src="http://st.n.ads3-adnow.com/js/adv_out.js"></script>
 </section>
 <div class="container">
   <div class="description_movie">

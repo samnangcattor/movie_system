@@ -40,17 +40,6 @@ class Movie < ActiveRecord::Base
     end
   end
 
-  def request_boot url
-    conn = Faraday.new url: url do |builder|
-      builder.request  :multipart
-      builder.request  :url_encoded
-
-      builder.adapter  :net_http
-    end
-    new_url  = conn.get
-    new_url.headers["location"].to_s
-  end
-
   private
   def create_link
     Link.create movie_id: id, link_title: title, url_default: link_movie, status_link: true

@@ -19,6 +19,7 @@
 //= require jwplayer
 //= require jwplayer.html5
 //= require jquery.browser
+//= require custom
 
 window.fbAsyncInit = function() {
   FB.init({
@@ -47,6 +48,7 @@ $(function(){
       }],
       width: '100%',
       aspectratio: '16:9',
+      primary: "flash",
       tracks: [{
         file: data_sub,
         label: "English",
@@ -64,6 +66,7 @@ $(function(){
       }],
       width: '100%',
       aspectratio: '16:9',
+      primary: "flash",
       tracks: [{
         file: data_sub,
         label: "English",

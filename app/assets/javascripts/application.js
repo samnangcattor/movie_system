@@ -48,7 +48,6 @@ $(function(){
       }],
       width: '100%',
       aspectratio: '16:9',
-      primary: "flash",
       tracks: [{
         file: data_sub,
         label: "English",
@@ -66,7 +65,6 @@ $(function(){
       }],
       width: '100%',
       aspectratio: '16:9',
-      primary: "flash",
       tracks: [{
         file: data_sub,
         label: "English",

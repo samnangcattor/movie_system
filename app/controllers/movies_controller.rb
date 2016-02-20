@@ -19,11 +19,11 @@ class MoviesController < ApplicationController
   end
 
   def show
-    @movie = Movie.friendly.find params[:id]
-    @movies = Movie.all.order(created_at: :DESC).limit 10
+    @movie = Movie.find params[:id]
+    @movies = Movie.all.order(created_at: :DESC).limit 20
     @movie_categories = @movie.categories
     @impressions = @movie.get_impression
-    impressionist @movie
+    @movie.impressionist_count filter: :all
     @movie_suggestions = Movie.by_suggestion.page(params[:page_3]).per 10
     render layout: "movie"
   end

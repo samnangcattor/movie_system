@@ -6,9 +6,15 @@ class MoviesController < ApplicationController
   impressionist actions: [:show]
 
   def index
-    @coming_soon_movies = ComingSoonMovie.all
-    @po_pular_movies = PoPularMovie.all
-    @request_movies = RequestMovie.all
+    @coming_soon_movies = Rails.cache.fetch("coming_soon_movies") do
+      ComingSoonMovie.all
+    end
+    @po_pular_movies = Rails.cache.fetch("po_pular_movies") do
+      PoPularMovie.all
+    end
+    @request_movies = Rails.cache.fetch("request_movies") do
+      RequestMovie.all
+    end
     if @q.conditions.present?
       @movie_searchs = @q.result(distinct: true).order(created_at: :DESC).page params[:page]
       render layout: "category"
@@ -19,9 +25,12 @@ class MoviesController < ApplicationController
   end
 
   def show
-    @movie = Movie.find params[:id]
-    @movies = Movie.all.order(created_at: :DESC).limit 20
-    @movie_categories = @movie.categories
+    @movie = Rails.cache.fetch("movie_#{params[:id]}") do
+      Movie.find params[:id]
+    end
+    @movie_categories = Rails.cache.fetch("movie_categories") do
+      @movie.categories
+    end
     @impressions = @movie.get_impression
     @movie.impressionist_count filter: :all
     @movie_suggestions = Movie.by_suggestion.page(params[:page_3]).per 10

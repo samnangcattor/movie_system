@@ -1,8 +1,4 @@
 class Movie < ActiveRecord::Base
-  extend FriendlyId
-
-  friendly_id :title, use: :slugged
-
   paginates_per Settings.page.per_page_movie
 
   after_create :create_link

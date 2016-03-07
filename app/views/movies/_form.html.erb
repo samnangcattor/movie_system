@@ -1,18 +1,7 @@
 <section class="main-preview-player">
   <div id="instructions" rel="noindex, nofollow">
-    <% if @movie.link.status_link? %>
-      <div id="player" data-default="<%= @movie.link.url_default %>" data-hd="<%= @movie.link.url_hd %>" data-sub="<%= @movie.link.subtitle %>"></div>
-    <% else %>
-      <%= image_tag "logo.png", id: "player_logo" %>
-      <% if @movie.cinema? %>
-        <iframe src="<%= @movie.link.url_default %>" width="700" height="400" allowfullscreen></iframe>
-      <% else %>
-        Sorry This movie is processing with new media player if you need to watch movie later please contact to: https://www.facebook.com/moviehdkh/
-      <% end %>
-       <noembed><%= @movie.title %></noembed>
-    <% end %>
+    <%= render "shared/media_player" %>
     <%= render "shared/facebook" %>
-    <%= render "shared/impression" %>
   </div>
 </section>
 <div class="container">

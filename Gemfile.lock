@@ -90,8 +90,6 @@ GEM
       i18n (~> 0.5)
     font-awesome-rails (4.4.0.0)
       railties (>= 3.2, < 5.0)
-    friendly_id (5.1.0)
-      activerecord (>= 4.0.0)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
     haml (4.0.7)
@@ -99,11 +97,7 @@ GEM
     hover-rails (2.0.2)
       railties (>= 3.2)
     htmlcompressor (0.3.0)
-    httpclient (2.7.0.1)
     i18n (0.7.0)
-    impressionist (1.5.1)
-      httpclient (~> 2.2)
-      nokogiri (~> 1.5)
     jbuilder (2.3.1)
       activesupport (>= 3.0.0, < 5)
       multi_json (~> 1.2)
@@ -288,10 +282,8 @@ DEPENDENCIES
   factory_girl_rails
   faker
   font-awesome-rails
-  friendly_id (~> 5.1.0)
   hover-rails
   htmlcompressor
-  impressionist
   jbuilder (~> 2.0)
   jquery-rails
   jquery-turbolinks

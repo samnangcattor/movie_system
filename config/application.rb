@@ -22,10 +22,9 @@ module MovieSystem
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
-    config.action_mailer.default_url_options = {host: "smtp.gmail.com", port: 587}
     config.action_controller.page_cache_directory = "#{Rails.root.to_s}/public/deploy"
     config.to_prepare do
-        Devise::SessionsController.layout "layout_for_sessions_controller"
+      Devise::SessionsController.layout "layout_for_sessions_controller"
     end
   end
 end

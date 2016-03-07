@@ -15,12 +15,6 @@ namespace :db do
     puts "Create 10 categoreis"
     10.times {FactoryGirl.create :category}
 
-    puts "Set link is true"
-    Link.all.each do |link|
-      link.status_link = true
-      link.save
-    end
-
     puts "Create 10 popular movie"
     10.times {FactoryGirl.create :po_pular_movie}
 

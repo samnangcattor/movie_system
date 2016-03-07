@@ -3,8 +3,6 @@ class MoviesController < ApplicationController
 
   before_action :search_movie
 
-  impressionist actions: [:show]
-
   def index
     @coming_soon_movies = Rails.cache.fetch("coming_soon_movies") do
       ComingSoonMovie.all
@@ -31,8 +29,6 @@ class MoviesController < ApplicationController
     @movie_categories = Rails.cache.fetch("movie_categories") do
       @movie.categories
     end
-    @impressions = @movie.get_impression
-    @movie.impressionist_count filter: :all
     @movie_suggestions = Movie.by_suggestion.page(params[:page_3]).per 10
     render layout: "movie"
   end

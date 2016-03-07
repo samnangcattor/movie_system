@@ -4,6 +4,6 @@
   <div id="player" data-default="<%= @movie.link.url_default %>" data-hd="<%= @movie.link.url_hd %>" data-sub="<%= @movie.link.subtitle %>"></div>
 <% else %>
   <%= image_tag "logo.png", id: "player_logo" %>
-    <iframe src="<%= @movie.link.url_default %>" width="700" height="400" allowfullscreen></iframe>
+    <iframe src="<%= @movie.link.youtube_embed_link %>" width="700" height="400" allowfullscreen></iframe>
    <noembed><%= @movie.title %></noembed>
 <% end %>

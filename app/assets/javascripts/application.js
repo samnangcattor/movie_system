@@ -19,6 +19,7 @@
 //= require jwplayer
 //= require jwplayer.html5
 //= require jquery.browser
+//= require custom
 
 window.fbAsyncInit = function() {
   FB.init({
@@ -32,32 +33,54 @@ $(function(){
   var data_default = $("#player").data("default");
   var data_hd = $("#player").data("hd");
   var data_sub = $("#player").data("sub");
+  var data_url = $("#player").data("url");
 
-  if (data_hd != "") {
+  if (data_url == undefined){
+    if (data_hd != "") {
+      jwplayer("player").setup({
+        sources: [{
+          file: data_hd,
+          label: "720p HD",
+          type: "mp4"
+        },{
+          file: data_default,
+          label: "360p SD",
+          "default": "true",
+          type: "mp4"
+        }],
+        width: '100%',
+        aspectratio: '16:9',
+        tracks: [{
+          file: data_sub,
+          label: "English",
+          kind: "captions",
+          "default": true
+        }]
+      });
+    }else {
+      jwplayer("player").setup({
+        sources: [{
+          file: data_default,
+          label: "360p SD",
+          "default": "true",
+          type: "mp4"
+        }],
+        width: '100%',
+        aspectratio: '16:9',
+        tracks: [{
+          file: data_sub,
+          label: "English",
+          kind: "captions",
+          "default": true
+        }]
+      });
+    }
+  }
+  else
+  {
     jwplayer("player").setup({
       sources: [{
-        file: data_hd,
-        label: "720p HD",
-        type: "mp4"
-      },{
-        file: data_default,
-        label: "360p SD",
-        "default": "true",
-        type: "mp4"
-      }],
-      width: '100%',
-      aspectratio: '16:9',
-      tracks: [{
-        file: data_sub,
-        label: "English",
-        kind: "captions",
-        "default": true
-      }]
-    });
-  }else {
-    jwplayer("player").setup({
-      sources: [{
-        file: data_default,
+        file: data_url,
         label: "360p SD",
         "default": "true",
         type: "mp4"

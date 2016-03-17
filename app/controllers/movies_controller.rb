@@ -30,6 +30,8 @@ class MoviesController < ApplicationController
       @movie.categories
     end
     @movie_suggestions = Movie.by_suggestion.page(params[:page_3]).per 10
+    @link_default = @movie.get_link_video @movie.link.url_default
+    @link_hd = @movie.get_link_video @movie.link.url_hd if @movie.link.url_hd.present?
     render layout: "movie"
   end
 

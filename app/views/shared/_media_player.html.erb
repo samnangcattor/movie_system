@@ -1,7 +1,7 @@
 <% if @movie.link.sky_drive? %>
   <iframe style="width: 700px; height: 552px; border: 0px;" scrolling="no" src="https://onedrive.live.com/prev?cid=<%= @movie.link.cid %>&amp;id=<%= @movie.link.sky_id %>&amp;authkey=!<%= @movie.link.authkey %>&amp;parId=root&amp;view=video&amp;mode=interactiveEmbed" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe>
 <% elsif @movie.link.google_plus? %>
-  <div id="player" data-default="<%= @movie.link.url_default %>" data-hd="<%= @movie.link.url_hd %>" data-sub="<%= @movie.link.subtitle %>"></div>
+  <div id="player" data-default="<%= @link_default %>" data-hd="<%= @link_hd %>" data-sub="<%= @movie.link.subtitle %>"></div>
 <% elsif @movie.link.amazon? %>
   <div id="player" data-url="<%= @movie.link.amazon_url %>" ></div>
 <% else %>

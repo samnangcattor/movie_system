@@ -69,6 +69,7 @@ GEM
     config (1.0.0)
       activesupport (>= 3.0)
       deep_merge (~> 1.0.0)
+    curb (0.9.1)
     debug_inspector (0.0.2)
     deep_merge (1.0.1)
     devise (3.5.1)
@@ -278,6 +279,7 @@ DEPENDENCIES
   carrierwave
   coffee-rails (~> 4.1.0)
   config
+  curb
   devise
   factory_girl_rails
   faker

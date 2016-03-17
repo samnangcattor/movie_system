@@ -21,6 +21,15 @@ class Movie < ActiveRecord::Base
   scope :by_slide, ->{where(slide: true).order(updated_at: :DESC).limit(10)}
   scope :by_no_cinema, ->{where(cinema: false).order(updated_at: :DESC)}
 
+  def get_link_video url
+    c = Curl::Easy.new url do |curl|
+      curl.follow_location = true
+      curl.head = true
+    end
+    c.perform
+    c.last_effective_url.to_s
+  end
+
   def get_quality
     if quality == Settings.movie.hd
       Settings.images.stream.hd

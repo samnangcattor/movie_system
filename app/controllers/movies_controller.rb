@@ -1,18 +1,10 @@
 class MoviesController < ApplicationController
-  caches_page [:index, :show]
-
   before_action :search_movie
 
   def index
-    @coming_soon_movies = Rails.cache.fetch("coming_soon_movies") do
-      ComingSoonMovie.all
-    end
-    @po_pular_movies = Rails.cache.fetch("po_pular_movies") do
-      PoPularMovie.all
-    end
-    @request_movies = Rails.cache.fetch("request_movies") do
-      RequestMovie.all
-    end
+    @coming_soon_movies = ComingSoonMovie.all
+    @po_pular_movies = PoPularMovie.all
+    @request_movies = RequestMovie.all
     if @q.conditions.present?
       @movie_searchs = @q.result(distinct: true).order(created_at: :DESC).page params[:page]
       render layout: "category"
@@ -23,26 +15,31 @@ class MoviesController < ApplicationController
   end
 
   def show
-    @movie = Rails.cache.fetch("movie_#{params[:id]}") do
-      Movie.find params[:id]
-    end
-    @movie_categories = Rails.cache.fetch("movie_categories") do
-      @movie.categories
-    end
+    @movie = Movie.find params[:id]
+    @movie_categories = @movie.categories
     @movie_suggestions = Movie.by_suggestion.page(params[:page_3]).per 10
-    @link_default = @movie.get_link_video @movie.link.url_default
-    @link_hd = @movie.get_link_video @movie.link.url_hd if @movie.link.url_hd.present?
+    if @movie.link.google_plus?
+        @link_default = @movie.get_link_video @movie.link.url_default
+        @link_hd = @movie.get_link_video @movie.link.url_hd if @movie.link.url_hd.present?
+        if @movie.link.redirect?
+          @link_default = @movie.link.url_default
+          @link_hd = @movie.link.url_hd
+        end
+    elsif @movie.link.drive?
+      link_videos = @movie.collect_movie_from_url @movie.link.drive_url
+      @link_default = link_videos[0]
+      if link_videos == 2
+        @link_hd = link_videos[0]
+        @link_default = link_videos[1]
+      end
+    end
     render layout: "movie"
   end
 
   private
   def search_movie
-    @categories = Rails.cache.fetch("categories") do
-      Category.all.order name: :ASC
-    end
-    @years = Rails.cache.fetch("years") do
-      Year.all.order number: :ASC
-    end
+    @categories = Category.all.order name: :ASC
+    @years = Year.all.order number: :ASC
     @q = Movie.ransack params[:q]
   end
 end

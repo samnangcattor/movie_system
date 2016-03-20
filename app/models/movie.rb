@@ -22,12 +22,13 @@ class Movie < ActiveRecord::Base
   scope :by_no_cinema, ->{where(cinema: false).order(updated_at: :DESC)}
 
   def get_link_video url
-    c = Curl::Easy.new url do |curl|
-      curl.follow_location = true
-      curl.head = true
+    begin
+      uri = URI url
+      reponse= Net::HTTP.get_response uri
+      reponse["location"].to_s
+    rescue
+     "unknow"
     end
-    c.perform
-    c.last_effective_url.to_s
   end
 
   def get_quality
@@ -36,6 +37,43 @@ class Movie < ActiveRecord::Base
     elsif quality == Settings.movie.sd
       Settings.images.stream.sd
     end
+  end
+
+  def get_pool_video url
+    uri = URI url
+    res = Net::HTTP.get_response uri
+    body = res.body
+    data = body.split '"fmt_stream_map","'
+    data2 = data[1].split "]"
+    data3 = data2[0].split '"'
+    data4 = data3[0].split ","
+    data4
+  end
+
+  def get_quality_video url
+    scope_video = url.split "|"
+    [scope_video[0], scope_video[1]]
+  end
+
+  def get_link_movie url
+    url_convert = url.gsub "\\u003d", "="
+    url_result = URI.unescape url_convert
+    last_result = url_result.gsub "\\u0026", "&"
+    last_result.to_s
+  end
+
+  def collect_movie_from_url url
+    link_result = []
+    pool_videos = get_pool_video url
+    pool_videos.each do |pool_video|
+      pvideo = get_quality_video pool_video
+      if pvideo[0] == "18"
+        link_result << get_link_movie(pvideo[1])
+      elsif pvideo[0] == "22"
+        link_result << get_link_movie(pvideo[1])
+      end
+    end
+    link_result
   end
 
   private

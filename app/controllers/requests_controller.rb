@@ -26,11 +26,7 @@ class RequestsController < ApplicationController
   def header_action
     @q = Movie.ransack params[:q]
     @movie_searchs = @q.result(distinct: true).order(created_at: :DESC).page params[:page]
-    @categories = Rails.cache.fetch("categories") do
-      Category.all.order name: :ASC
-    end
-    @years = Rails.cache.fetch("years") do
-      Year.all.order number: :ASC
-    end
+    @categories = Category.all.order name: :ASC
+    @years = Year.all.order number: :ASC
   end
 end

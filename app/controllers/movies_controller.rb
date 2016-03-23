@@ -21,7 +21,7 @@ class MoviesController < ApplicationController
     if @movie.link.google_plus?
         @link_default = @movie.get_link_video @movie.link.url_default
         @link_hd = @movie.get_link_video @movie.link.url_hd if @movie.link.url_hd.present?
-        if @movie.link.redirect?
+        if @movie.link.redirect_url?
           @link_default = @movie.link.url_default
           @link_hd = @movie.link.url_hd
         end

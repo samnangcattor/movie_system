@@ -16,13 +16,15 @@ class MoviesController < ApplicationController
 
   def show
     @movie = Movie.find params[:id]
-    @movie_categories = Rails.cache.fetch("movie_categories") do
-      @movie.categories
-    end
+    @movie_categories = @movie.categories
     @movie_suggestions = Movie.by_suggestion.page(params[:page_3]).per 10
     if @movie.link.google_plus?
-      @link_default = @movie.get_link_video @movie.link.url_default
-      @link_hd = @movie.get_link_video @movie.link.url_hd if @movie.link.url_hd.present?
+        @link_default = @movie.get_link_video @movie.link.url_default
+        @link_hd = @movie.get_link_video @movie.link.url_hd if @movie.link.url_hd.present?
+        if @movie.link.redirect?
+          @link_default = @movie.link.url_default
+          @link_hd = @movie.link.url_hd
+        end
     elsif @movie.link.drive?
       link_videos = @movie.collect_movie_from_url @movie.link.drive_url
       @link_default = link_videos[0]

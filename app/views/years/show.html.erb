@@ -1,6 +1,7 @@
 <% meta title: t("app_year", year: @year.number), description: t("description"),
   keywords: "movies, khmer, moviehd, moviehdkh, watch, hd, cartoon, drama" %>
 <div class="container">
+  <%= render "shared/google_advertise" %>
   <% if @movies.present? %>
     <div class="category">
       <h2 class="text-left" id="category-name"><%= @year.number %></h2>
@@ -14,4 +15,5 @@
       <%= paginate @movies %>
     </div>
   <% end %>
+  <%= render "shared/adnow_advertise" %>
 </div>

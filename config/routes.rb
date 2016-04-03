@@ -13,4 +13,6 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :users
   end
+
+  get "article_banner_v2" => "movies#new_article_banner"
 end

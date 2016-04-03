@@ -1,8 +1,8 @@
 <% meta title: t("app_name"), description: t("description"),
   keywords: %w(movies khmer moviehd moviehdkh watch) %>
 <% content_for :context_menu do %>
-  <%= render "shared/google_advertise" %>
   <div class="container">
+    <%= render "shared/google_advertise" %>
     <% if @movies.present? %>
       <div class="new-movie">
         <%= render "content_new_movie" %>

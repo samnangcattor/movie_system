@@ -36,6 +36,10 @@ class MoviesController < ApplicationController
     render layout: "movie"
   end
 
+  def new_article_banner
+    render layout: false
+  end
+
   private
   def search_movie
     @categories = Category.all.order name: :ASC

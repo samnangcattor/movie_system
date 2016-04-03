@@ -37,7 +37,6 @@ class MoviesController < ApplicationController
   end
 
   def new_article_banner
-    render layout: false
   end
 
   private

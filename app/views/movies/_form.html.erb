@@ -1,9 +1,9 @@
 <section class="main-preview-player">
+  <%= render "shared/announced" %>
   <div id="instructions" rel="noindex, nofollow">
     <%= render "shared/media_player" %>
     <%= render "shared/facebook" %>
   </div>
-  <%= render "shared/announced" %>
   <%= render "shared/google_advertise" %>
 </section>
 <div class="container">
@@ -32,5 +32,4 @@
       <%= render "shared/pagenator", objects: @movie_suggestions, page: 3 %>
     </div>
   </div>
-  <%= render "shared/adnow_advertise" %>
 </div>

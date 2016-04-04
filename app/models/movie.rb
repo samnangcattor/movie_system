@@ -1,4 +1,7 @@
 class Movie < ActiveRecord::Base
+  EMAIL = "damsamnang@gmail.com"
+  PASSWORD = "MV@pherom11@KH"
+
   paginates_per Settings.page.per_page_movie
 
   after_create :create_link
@@ -41,8 +44,7 @@ class Movie < ActiveRecord::Base
 
   def get_pool_video url
     uri = URI url
-    res = Net::HTTP.get_response uri
-    body = res.body
+    body = get_login_google uri
     data = body.split '"fmt_stream_map","'
     data2 = data[1].split "]"
     data3 = data2[0].split '"'
@@ -67,10 +69,11 @@ class Movie < ActiveRecord::Base
     pool_videos = get_pool_video url
     pool_videos.each do |pool_video|
       pvideo = get_quality_video pool_video
+      link = get_link_redirect_google get_link_movie(pvideo[1])
       if pvideo[0] == "18"
-        link_result << get_link_movie(pvideo[1])
+        link_result << link
       elsif pvideo[0] == "22"
-        link_result << get_link_movie(pvideo[1])
+        link_result << link
       end
     end
     link_result
@@ -79,5 +82,23 @@ class Movie < ActiveRecord::Base
   private
   def create_link
     Link.create movie_id: id, link_title: title, url_default: link_movie
+  end
+
+  def get_login_google url
+    agent = Mechanize.new
+    page_email = agent.get url
+    form_email = page_email.forms[0]
+    form_email.field_with(name: "Email").value = EMAIL
+    page_password = agent.submit form_email
+    form_password = page_password.forms[0]
+    form_password.field_with(name: "Passwd").value = PASSWORD
+    page_view = agent.submit form_password
+    page_view.body
+  end
+
+  def get_link_redirect_google url
+    result = url.split "docs.google.com"
+    new_url = "https://redirector.googlevideo.com" + result[1]
+    new_url
   end
 end

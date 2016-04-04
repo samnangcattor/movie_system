@@ -28,6 +28,7 @@ gem "carrierwave"
 gem "actionpack-page_caching"
 gem "hover-rails"
 gem "curb"
+gem "mechanize"
 
 group :development, :test do
   gem "pry"

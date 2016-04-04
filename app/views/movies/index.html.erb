@@ -12,6 +12,7 @@
       </div>
     <% end %>
     <hr/>
+    <%= render "shared/mdgid_advertise" %>
     <h3 class="text-warning text-left">>><%= t "home.popular_movie" %></h3>
     <ul class="list-unstyled list-inline">
       <%= render partial: "shared/po_pular_movie", collection: @po_pular_movies %>

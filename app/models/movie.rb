@@ -1,6 +1,6 @@
 class Movie < ActiveRecord::Base
   EMAIL = "damsamnang@gmail.com"
-  PASSWORD = "MV@pherom11@KH"
+  PASSWORD = "MV#pherom11#me"
 
   paginates_per Settings.page.per_page_movie
 

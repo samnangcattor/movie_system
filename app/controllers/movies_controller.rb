@@ -28,7 +28,7 @@ class MoviesController < ApplicationController
     elsif @movie.link.drive?
       link_videos = @movie.collect_movie_from_url @movie.link.drive_url
       @link_default = link_videos[0]
-      if link_videos == 2
+      if link_videos.size == 2
         @link_hd = link_videos[0]
         @link_default = link_videos[1]
       end

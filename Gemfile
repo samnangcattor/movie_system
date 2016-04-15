@@ -11,7 +11,7 @@ gem "coffee-rails", "~> 4.1.0"
 gem "jquery-rails"
 gem "turbolinks"
 gem "jbuilder", "~> 2.0"
-gem "rails_config"
+gem "config"
 gem "sdoc", "~> 0.4.0", group: :doc
 gem "jquery-turbolinks"
 gem "devise"
@@ -29,6 +29,8 @@ gem "actionpack-page_caching"
 gem "hover-rails"
 gem "curb"
 gem "mechanize"
+gem "selenium-webdriver"
+gem "headless"
 
 group :development, :test do
   gem "pry"

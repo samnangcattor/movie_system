@@ -50,6 +50,8 @@ class Movie < ActiveRecord::Base
     data3 = data2[0].split '"'
     data4 = data3[0].split ","
     data4
+  rescue
+    ""
   end
 
   def get_quality_video url
@@ -97,8 +99,15 @@ class Movie < ActiveRecord::Base
   end
 
   def get_link_redirect_google url
-    result = url.split "docs.google.com"
-    new_url = "https://redirector.googlevideo.com" + result[1]
+    result = url.split "docs.google.com/videoplayback?"
+    arr_params = result[1].split "&"
+    new_url = "https://redirector.googlevideo.com/videoplayback?" + arr_params[3] +
+      "&" + arr_params[7] + "&" + arr_params[1] + "&" + arr_params[10] + "&" +
+      arr_params[11] + "&" + arr_params[8] + "&" + arr_params[9] + "&" +
+      arr_params[2] + "&" + arr_params[13] + "&" + arr_params[6] + "&" +
+      arr_params[0] + "&" + arr_params[16] + "&" + arr_params[12] + "&" +
+      arr_params[15] + "&" + arr_params[17] + "&" + arr_params[4] + "&" +
+      arr_params[5] + "&" + "filename=video.mp4"
     new_url
   end
 end

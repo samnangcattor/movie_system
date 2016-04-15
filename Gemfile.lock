@@ -199,8 +199,6 @@ GEM
       rails_admin (>= 0.6.6)
       rchardet (~> 1.6)
       simple_xlsx_reader (~> 1.0)
-    rails_config (0.4.2)
-      activesupport (>= 3.0)
     railties (4.2.3)
       actionpack (= 4.2.3)
       activesupport (= 4.2.3)
@@ -316,7 +314,6 @@ DEPENDENCIES
   rails (= 4.2.3)
   rails_admin
   rails_admin_import (~> 1.2)
-  rails_config
   ransack
   rspec-rails
   sass-rails (~> 5.0)

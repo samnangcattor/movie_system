@@ -29,6 +29,8 @@ gem "actionpack-page_caching"
 gem "hover-rails"
 gem "curb"
 gem "mechanize"
+gem "selenium-webdriver"
+gem "headless"
 
 group :development, :test do
   gem "pry"

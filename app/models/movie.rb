@@ -96,11 +96,7 @@ class Movie < ActiveRecord::Base
       feed_url = action_get_link_feed driver
       agent = authenthicate_mechanize
       link_videos = action_get_link_video_from_feed agent, feed_url[0]
-      driver.quit
-      binding.pry
       link_videos
-    rescue
-      driver.quit
     end
 
     def action_log_in_google_plus driver
@@ -124,13 +120,13 @@ class Movie < ActiveRecord::Base
     def action_search_google_drive driver, title
       driver.find_element(:xpath, "//input[@class = 'a-pb-N-z b-hb']").send_keys title
       driver.find_element(:xpath, "//div[@class = 'd-k-l b-c b-c-U']").click
-      sleep 10
+      sleep 7
       driver.find_elements(:xpath, "//td[@class = 'a-Hb-e-kb-xd a-Hb-e-xd']").last.click
       driver.find_elements(:xpath, "//td[@class = 'a-Hb-e-kb-xd a-Hb-e-xd']").last.click
       driver.find_elements(:xpath, "//td[@class = 'a-Hb-e-kb-xd a-Hb-e-xd']").last.click
       sleep 5
       driver.find_element(:xpath, "//div[@id = 'picker:ap:4']").click
-      sleep 10
+      sleep 7
       driver.find_element(:xpath, "//div[@id = 'picker:ap:6']").click
     end
 
@@ -176,11 +172,15 @@ class Movie < ActiveRecord::Base
       link_videos
     end
 
-    def action_close_browser driver, link_post
-      driver.navigate.to link_post
-      driver.find_elements(:xpath, "//div[@class='d-k-l']").last.click
-      driver.find_element(:name, "yes").click
-      sleep 2
+    def action_close_browser driver
+      driver.find_element(:xpath, "//div[@class= 'ys']").click
+      sleep 1
+      driver.find_element(:xpath, "//span[@class= 'd-s xw if']").click
+      sleep 20
+      driver.find_elements(:class, "d-A-B")[5].click
+      driver.find_element(:xpath, "//button[@name= 'yes']").click
+      sleep 1
+      driver.quit
     end
   end
 

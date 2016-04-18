@@ -33,6 +33,7 @@ gem "selenium-webdriver"
 gem "headless"
 gem "resque", require: "resque/server"
 gem "resque-pool"
+gem "google-api-client"
 
 group :development, :test do
   gem "pry"

@@ -3,7 +3,8 @@
   <div id="instructions" rel="noindex, nofollow">
     <% if @progress_status.present? %>
       <% if @progress_status.status_progress == Settings.status_progress.start %>
-        <%= image_tag "loader.gif", height: 400, width: 500 %>
+        <%= image_tag "loader.gif", id: "loader", height: 300, width: 300 %>
+        Please wait for <span id="duration">50s</span> for movie come
       <% end %>
     <% else %>
       <%= render "shared/media_player" %>

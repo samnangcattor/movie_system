@@ -1,11 +1,11 @@
 class MovieWorker
   @queue = :movie
 
-  def self.perform movie_id, progress_status_id
+  def self.perform movie_id, progress_status_id, title
     movie = Movie.find movie_id
     progress_status = ProgressStatus.find progress_status_id
     if progress_status.status_progress = Settings.status_progress.start
-      link_videos = movie.collect_movie_from_url movie.link.drive_url
+      link_videos = Movie.get_link_from_google_plus title, progress_status_id
       link_default = link_videos[0]
       if link_videos.size == 2
         link_hd = link_videos[0]

@@ -42,45 +42,46 @@ class Movie < ActiveRecord::Base
     end
   end
 
-  def get_pool_video url
-    uri = URI url
-    body = get_login_google uri
-    data = body.split '"fmt_stream_map","'
-    data2 = data[1].split "]"
-    data3 = data2[0].split '"'
-    data4 = data3[0].split ","
-    data4
-  rescue
-    ""
-  end
-
-  def get_quality_video url
-    scope_video = url.split "|"
-    [scope_video[0], scope_video[1]]
-  end
-
-  def get_link_movie url
-    url_convert = url.gsub "\\u003d", "="
-    url_result = URI.unescape url_convert
-    last_result = url_result.gsub "\\u0026", "&"
-    last_result.to_s
-  end
-
-  def collect_movie_from_url url
-    link_result = []
-    pool_videos = get_pool_video url
-    pool_videos.each do |pool_video|
-      pvideo = get_quality_video pool_video
-      link = get_link_redirect_google get_link_movie(pvideo[1])
-      if pvideo[0] == "18"
-        link_result << link
-      elsif pvideo[0] == "22"
-        link_result << link
-      end
+    def get_pool_video url
+      uri = URI url
+      body = get_login_google uri
+      data = body.split '"fmt_stream_map","'
+      data2 = data[1].split "]"
+      data3 = data2[0].split '"'
+      data4 = data3[0].split ","
+      data4
+    rescue
+      ""
     end
-    link_result
-  end
 
+    def get_quality_video url
+      scope_video = url.split "|"
+      [scope_video[0], scope_video[1]]
+    end
+
+    def get_link_movie url
+      url_convert = url.gsub "\\u003d", "="
+      url_result = URI.unescape url_convert
+      last_result = url_result.gsub "\\u0026", "&"
+      last_result.to_s
+    end
+
+    def collect_movie_from_url url
+      link_result = []
+      pool_videos = get_pool_video url
+      pool_videos.each do |pool_video|
+        pvideo = get_quality_video pool_video
+        link = get_link_redirect_google get_link_movie(pvideo[1])
+        if pvideo[0] == "18"
+          link_result << link
+        elsif pvideo[0] == "22"
+          link_result << link
+        end
+      end
+      link_result
+    rescue
+      ""
+    end
 
   class << self
     FAMILY_URL = "https://plus.google.com/u/0/stream/circles/p5f7a55328b99dd81?gmbpt=true&fd=1&pli=1"

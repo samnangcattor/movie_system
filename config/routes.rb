@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   resources :requests, only: [:new, :create, :show]
   resources :years, only: :show
 
+ mount Resque::Server, at: "/resque"
+
   namespace :admin do
     resources :users
   end

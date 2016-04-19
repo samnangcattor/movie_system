@@ -31,6 +31,8 @@ gem "curb"
 gem "mechanize"
 gem "selenium-webdriver"
 gem "headless"
+gem "resque", require: "resque/server"
+gem "resque-pool"
 
 group :development, :test do
   gem "pry"

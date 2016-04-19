@@ -18,20 +18,14 @@ class MoviesController < ApplicationController
     @movie = Movie.find params[:id]
     @movie_categories = @movie.categories
     @movie_suggestions = Movie.by_suggestion.page(params[:page_3]).per 10
-    if @movie.link.google_plus?
-        @link_default = @movie.get_link_video @movie.link.url_default
-        @link_hd = @movie.get_link_video @movie.link.url_hd if @movie.link.url_hd.present?
-        if @movie.link.redirect_url?
-          @link_default = @movie.link.url_default
-          @link_hd = @movie.link.url_hd
-        end
-    elsif @movie.link.drive?
-      link_videos = @movie.collect_movie_from_url @movie.link.drive_url
-      @link_default = link_videos[0]
-      if link_videos.size == 2
-        @link_hd = link_videos[0]
-        @link_default = link_videos[1]
-      end
+
+    uri = URI @movie.link.url_default
+    response = Net::HTTP.get_response uri
+    if response.code == "302"
+      @link_default = @movie.link.url_default
+      @link_hd = @movie.link.url_hd
+    else
+      Resque.enqueue MovieWorker, @movie.id
     end
     render layout: "movie"
   end

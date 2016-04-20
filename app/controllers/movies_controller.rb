@@ -19,6 +19,9 @@ class MoviesController < ApplicationController
     @movie_categories = @movie.categories
     @movie_suggestions = Movie.by_suggestion.page(params[:page_3]).per 10
 
+  if @movie.link.drive?
+    Resque.enqueue MovieWorker, @movie.id
+  else
     uri = URI @movie.link.url_default
     response = Net::HTTP.get_response uri
     if response.code == "302"
@@ -27,6 +30,7 @@ class MoviesController < ApplicationController
     else
       Resque.enqueue MovieWorker, @movie.id
     end
+  end
     render layout: "movie"
   end
 

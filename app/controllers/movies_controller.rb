@@ -18,19 +18,20 @@ class MoviesController < ApplicationController
     @movie = Movie.find params[:id]
     @movie_categories = @movie.categories
     @movie_suggestions = Movie.by_suggestion.page(params[:page_3]).per 10
-
-  if @movie.link.drive?
-    Resque.enqueue MovieWorker, @movie.id
-  else
-    uri = URI @movie.link.url_default
-    response = Net::HTTP.get_response uri
-    if response.code == "302"
-      @link_default = @movie.link.url_default
-      @link_hd = @movie.link.url_hd
+    @progress_status = nil
+    if @movie.link.drive?
+      Resque.enqueue MovieWorker, @movie.id, @progress_status.id
     else
-      Resque.enqueue MovieWorker, @movie.id
+      uri = URI @movie.link.url_default
+      response = Net::HTTP.get_response uri
+      if response.code == "302"
+        @link_default = @movie.link.url_default
+        @link_hd = @movie.link.url_hd
+      else
+        @progress_status = get_progress_status_id @movie.id
+        Resque.enqueue MovieWorker, @movie.id, @progress_status.id
+      end
     end
-  end
     render layout: "movie"
   end
 
@@ -42,5 +43,18 @@ class MoviesController < ApplicationController
     @categories = Category.all.order name: :ASC
     @years = Year.all.order number: :ASC
     @q = Movie.ransack params[:q]
+  end
+
+  def get_progress_status_id movie_id
+    progress_status = nil
+    if ProgressStatus.all.map(&:progress_name).include? movie_id
+      progress_status = ProgressStatus.find_by progress_name: movie_id
+      if progress_status.status_progress == Settings.status_progress.finished
+        ProgressStatus.update progress_status.id, status_progress: Settings.status_progress.start, start_time: Time.now
+      end
+    else
+      progress_status = ProgressStatus.create progress_name: movie_id, status_progress: Settings.status_progress.start, start_time: Time.now
+    end
+    progress_status
   end
 end

@@ -1,15 +1,13 @@
 <% if @movie.link.sky_drive? %>
   <iframe style="width: 700px; height: 552px; border: 0px;" scrolling="no" src="https://onedrive.live.com/prev?cid=<%= @movie.link.cid %>&amp;id=<%= @movie.link.sky_id %>&amp;authkey=!<%= @movie.link.authkey %>&amp;parId=root&amp;view=video&amp;mode=interactiveEmbed" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe>
 <% elsif @movie.link.google_plus? || @movie.link.drive? %>
-  <div class="mediaplyer">
-    <iframe class="lockframe" src="/links/<%= @movie.id %>" width="700" height="400" scrolling="no" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen ></iframe>
-  </div>
+  <div id="player" data-default="<%= @link_default %>" data-hd="<%= @link_hd %>" data-sub="<%= @movie.link.subtitle %>"></div>
   <noembed><%= @movie.title %></noembed>
 </video>
 <% elsif @movie.link.amazon? %>
   <div id="player" data-url="<%= @movie.link.amazon_url %>" ></div>
 <% else %>
   <%= image_tag "logo.png", id: "player_logo" %>
-    <iframe src="<%= @movie.link.youtube_embed_link %>" width="700" height="400" allowfullscreen></iframe>
+    <iframe src="<%= @movie.link.youtube_embed_link %>" width ="700" height="400" allowfullscreen></iframe>
    <noembed><%= @movie.title %></noembed>
 <% end %>

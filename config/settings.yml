@@ -36,3 +36,10 @@ images:
     not_main: 0
 page:
   per_page_movie: 20
+status_progress:
+  start: 0
+  doing: 1
+  failed: 2
+  finished: 3
+remaining_time:
+  fnished: 0

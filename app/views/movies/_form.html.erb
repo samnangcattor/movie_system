@@ -1,10 +1,15 @@
 <section class="main-preview-player">
   <%= render "shared/announced" %>
   <div id="instructions" rel="noindex, nofollow">
-    <%= render "shared/media_player" %>
+    <% if @progress_status.present? %>
+      <% if @progress_status.status_progress == Settings.status_progress.start %>
+        <%= image_tag "loader.gif", height: 400, width: 500 %>
+      <% end %>
+    <% else %>
+      <%= render "shared/media_player" %>
+    <% end %>
     <%= render "shared/facebook" %>
   </div>
-  <%= render "shared/google_advertise" %>
   <%= render "shared/mdgid_advertise" %>
 </section>
 <div class="container">

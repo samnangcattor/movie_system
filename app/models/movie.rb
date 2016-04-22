@@ -99,49 +99,50 @@ class Movie < ActiveRecord::Base
       feed_url = action_get_link_feed driver
       agent = authenthicate_mechanize
       link_videos = action_get_link_video_from_feed agent, feed_url[0]
+      driver.quit
       link_videos
     end
 
     def action_log_in_google_plus driver
       driver.find_element(:id, "Email").send_keys EMAIL
       driver.find_element(:id, "next").click
-      sleep 2
+      sleep 0.5
       driver.find_element(:id, "Passwd").send_keys PASSWORD
       driver.find_element(:id, "signIn").click
-      sleep 5
+      sleep 3
     end
 
     def action_choose_google_drive driver
       driver.find_elements(:xpath, "//div[@class = 'dv']")[1].click
-      sleep 5
+      sleep 3
       driver.find_element(:xpath, "//div[@class = 'HY fya']").click
-      sleep 5
+      sleep 3
       driver.find_elements(:xpath, "//div[@class = 'd-xc']")[1].click
-      sleep 5
+      sleep 3
     end
 
     def action_search_google_drive driver, title
       driver.find_element(:xpath, "//input[@class = 'a-pb-N-z b-hb']").send_keys title
       driver.find_element(:xpath, "//div[@class = 'd-k-l b-c b-c-U']").click
-      sleep 7
+      sleep 3
       driver.find_elements(:xpath, "//td[@class = 'a-Hb-e-kb-xd a-Hb-e-xd']").last.click
       driver.find_elements(:xpath, "//td[@class = 'a-Hb-e-kb-xd a-Hb-e-xd']").last.click
       driver.find_elements(:xpath, "//td[@class = 'a-Hb-e-kb-xd a-Hb-e-xd']").last.click
-      sleep 5
+      sleep 3
       driver.find_element(:xpath, "//div[@id = 'picker:ap:4']").click
-      sleep 7
+      sleep 3
       driver.find_element(:xpath, "//div[@id = 'picker:ap:6']").click
     end
 
     def action_click_share_video driver
       driver.find_element(:xpath, "//html").send_keys [:control, '-']
-      sleep 1
+      sleep 0.5
       driver.find_element(:xpath, "//html").send_keys [:control, '-']
-      sleep 1
+      sleep 0.5
       driver.find_element(:xpath, "//html").send_keys [:control, '-']
-      sleep 1
+      sleep 0.5
       driver.find_element(:xpath, "//div[@class = 'd-k-l b-c b-c-Ba qy jt']").click
-      sleep 2
+      sleep 1
     end
 
     def action_get_link_feed driver
@@ -177,12 +178,12 @@ class Movie < ActiveRecord::Base
 
     def action_close_browser driver
       driver.find_element(:xpath, "//div[@class= 'ys']").click
-      sleep 1
+      sleep 0.5
       driver.find_element(:xpath, "//span[@class= 'd-s xw if']").click
       sleep 20
       driver.find_elements(:class, "d-A-B")[5].click
       driver.find_element(:xpath, "//button[@name= 'yes']").click
-      sleep 1
+      sleep 0.5
       driver.quit
     end
   end

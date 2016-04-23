@@ -37,38 +37,62 @@ $(function(){
   var data_sub = $("#player").data("sub");
   var data_url = $("#player").data("url");
 
-  if (data_url == undefined){
-    if (data_hd != "") {
+  if ($("#player").length > 0){
+    if (data_url == undefined){
+      if (data_hd != "") {
+        jwplayer("player").setup({
+          sources: [{
+            file: data_hd,
+            label: "720p HD",
+            type: "mp4"
+          },{
+            file: data_default,
+            label: "360p SD",
+            "default": "true",
+            type: "mp4"
+          }],
+          width: '100%',
+          aspectratio: '16:9',
+          skin: "bekle",
+          tracks: [{
+            file: data_sub,
+            label: "English",
+            kind: "captions",
+            "default": true
+          }]
+        });
+      }else {
+        jwplayer("player").setup({
+          sources: [{
+            file: data_default,
+            label: "360p SD",
+            "default": "true",
+            type: "mp4"
+          }],
+          width: '100%',
+          aspectratio: '16:9',
+          skin: "bekle",
+          tracks: [{
+            file: data_sub,
+            label: "English",
+            kind: "captions",
+            "default": true
+          }]
+        });
+      }
+    }
+    else
+    {
       jwplayer("player").setup({
         sources: [{
-          file: data_hd,
-          label: "720p HD",
-          type: "mp4"
-        },{
-          file: data_default,
+          file: data_url,
           label: "360p SD",
           "default": "true",
           type: "mp4"
         }],
         width: '100%',
         aspectratio: '16:9',
-        tracks: [{
-          file: data_sub,
-          label: "English",
-          kind: "captions",
-          "default": true
-        }]
-      });
-    }else {
-      jwplayer("player").setup({
-        sources: [{
-          file: data_default,
-          label: "360p SD",
-          "default": "true",
-          type: "mp4"
-        }],
-        width: '100%',
-        aspectratio: '16:9',
+        skin: "bekle",
         tracks: [{
           file: data_sub,
           label: "English",
@@ -77,45 +101,42 @@ $(function(){
         }]
       });
     }
-  }
-  else
-  {
-    jwplayer("player").setup({
-      sources: [{
-        file: data_url,
-        label: "360p SD",
-        "default": "true",
-        type: "mp4"
-      }],
-      width: '100%',
-      aspectratio: '16:9',
-      tracks: [{
-        file: data_sub,
-        label: "English",
-        kind: "captions",
-        "default": true
-      }]
-    });
   }
 });
 
 $(document).ready(function() {
-  function adBlockDetected() {
-    if($("#instructions").length > 0){
-      $("#instructions").html("Please don't block advertise on moviehdkh");
-    }
-  }
+  // function adBlockDetected() {
+  //   if($("#instructions").length > 0){
+  //     $("#instructions").html("Please don't block advertise on moviehdkh");
+  //   }
+  // }
 
-  if(typeof fuckAdBlock === "undefined") {
-      adBlockDetected();
-  } else {
-    fuckAdBlock.on(true, adBlockDetected).onNotDetected(adBlockNotDetected);
-  }
+  // if(typeof fuckAdBlock === "undefined") {
+  //     adBlockDetected();
+  // } else {
+  //   fuckAdBlock.on(true, adBlockDetected).onNotDetected(adBlockNotDetected);
+  // }
 
-  fuckAdBlock.setOptions("checkOnLoad", false);
+  // fuckAdBlock.setOptions("checkOnLoad", false);
 
-  fuckAdBlock.setOptions({
-    checkOnLoad: false,
-    resetOnEnd: false
-  });
+  // fuckAdBlock.setOptions({
+  //   checkOnLoad: false,
+  //   resetOnEnd: false
+  // });
 });
+
+$(function(){
+  var loader = $("#loader");
+  var duration = $("#duration");
+  var sec = 50;
+  if (loader.length >0){
+    timer = setInterval(function(){
+      duration.html(--sec+"s");
+      if (sec == 0) {
+        clearInterval(timer);
+        location.reload();
+      }
+    }, 1000);
+  }
+});
+

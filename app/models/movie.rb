@@ -87,7 +87,7 @@ class Movie < ActiveRecord::Base
     FAMILY_URL = "https://plus.google.com/u/0/stream/circles/p5f7a55328b99dd81?gmbpt=true&fd=1&pli=1"
     DRIVE_URL = "https://drive.google.com/drive/my-drive"
 
-    def get_link_from_google_plus title
+    def get_link_from_google_plus title, progress_status_id
       Headless.new(display: 100, reuse: true, destroy_at_exit: false).start
       driver = Selenium::WebDriver.for :firefox
       driver.navigate.to FAMILY_URL
@@ -101,6 +101,10 @@ class Movie < ActiveRecord::Base
       link_videos = action_get_link_video_from_feed agent, feed_url[0]
       driver.quit
       link_videos
+    rescue
+      ProgressStatus.update progress_status_id, status_progress: Settings.status_progress.finished,
+        end_time: Time.now, remaining_time: Settings.remaining_time.fnished
+      driver.quit
     end
 
     def action_log_in_google_plus driver
@@ -128,19 +132,19 @@ class Movie < ActiveRecord::Base
       driver.find_elements(:xpath, "//td[@class = 'a-Hb-e-kb-xd a-Hb-e-xd']").last.click
       driver.find_elements(:xpath, "//td[@class = 'a-Hb-e-kb-xd a-Hb-e-xd']").last.click
       driver.find_elements(:xpath, "//td[@class = 'a-Hb-e-kb-xd a-Hb-e-xd']").last.click
-      sleep 3
+      sleep 5
       driver.find_element(:xpath, "//div[@id = 'picker:ap:4']").click
-      sleep 3
+      sleep 5
       driver.find_element(:xpath, "//div[@id = 'picker:ap:6']").click
     end
 
     def action_click_share_video driver
       driver.find_element(:xpath, "//html").send_keys [:control, '-']
-      sleep 0.5
+      sleep 1
       driver.find_element(:xpath, "//html").send_keys [:control, '-']
-      sleep 0.5
+      sleep 1
       driver.find_element(:xpath, "//html").send_keys [:control, '-']
-      sleep 0.5
+      sleep 1
       driver.find_element(:xpath, "//div[@class = 'd-k-l b-c b-c-Ba qy jt']").click
       sleep 1
     end

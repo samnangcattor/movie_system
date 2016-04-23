@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get "/oauth2callback", to: "movies#update"
   mount RailsAdmin::Engine => "/adminmviehdkh", as: "rails_admin"
 
   root "movies#index"

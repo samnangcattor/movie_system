@@ -1,6 +1,9 @@
 require File.expand_path("../boot", __FILE__)
 
 require "rails/all"
+require "google/apis/drive_v2"
+require "googleauth"
+require "googleauth/stores/file_token_store"
 
 # Require the gems listed in Gemfile, including any gems
 # you"ve limited to :test, :development, or :production.

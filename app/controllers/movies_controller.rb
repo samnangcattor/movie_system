@@ -36,13 +36,24 @@ class MoviesController < ApplicationController
     @movie_categories = @movie.categories
     @movie_suggestions = Movie.by_suggestion.page(params[:page_3]).per 10
     @progress_status = nil
-    uri = URI @movie.link.url_default
-    response = Net::HTTP.get_response uri
-    if response.code == "302"
+
+    if @movie.link.robot?
+      begin
+        uri = URI @movie.link.url_default
+        response = Net::HTTP.get_response uri
+        code = response.code
+      rescue
+        code = "404"
+      end
+      if code == "302"
+        @link_default = @movie.link.url_default
+        @link_hd = @movie.link.url_hd
+      else
+        @progress_status = get_progress_status_id @movie.id, @movie.link if @movie.link.robot?
+      end
+    else
       @link_default = @movie.link.url_default
       @link_hd = @movie.link.url_hd
-    else
-      @progress_status = get_progress_status_id @movie.id, @movie.link if @movie.link.robot?
     end
     render layout: "movie"
   end
@@ -65,12 +76,12 @@ class MoviesController < ApplicationController
       if progress_status.status_progress == Settings.status_progress.finished
         title = google_login movie_link
         ProgressStatus.update progress_status.id, status_progress: Settings.status_progress.start, start_time: Time.now
-        Resque.enqueue MovieWorker, movie_id, progress_status.id, title
+        MovieWorker.perform_async movie_id, progress_status.id, title
       end
     else
       title = google_login movie_link
       progress_status = ProgressStatus.create progress_name: movie_id, status_progress: Settings.status_progress.start, start_time: Time.now
-      Resque.enqueue MovieWorker, movie_id, progress_status.id, title
+      MovieWorker.perform_async movie_id, progress_status.id, title
     end
     progress_status
   end

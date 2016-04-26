@@ -16,7 +16,6 @@ gem "sdoc", "~> 0.4.0", group: :doc
 gem "jquery-turbolinks"
 gem "devise"
 gem "cancancan"
-gem "config"
 gem "ransack"
 gem "font-awesome-rails"
 gem "rails_admin"
@@ -31,9 +30,9 @@ gem "curb"
 gem "mechanize"
 gem "selenium-webdriver"
 gem "headless"
-gem "resque", require: "resque/server"
-gem "resque-pool"
+gem "sidekiq"
 gem "google-api-client"
+gem "sinatra", require: false
 
 group :development, :test do
   gem "pry"

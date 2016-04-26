@@ -1,3 +1,4 @@
+require "sidekiq/web"
 Rails.application.routes.draw do
   get "/oauth2callback", to: "movies#update"
   mount RailsAdmin::Engine => "/adminmviehdkh", as: "rails_admin"
@@ -12,9 +13,8 @@ Rails.application.routes.draw do
   resources :years, only: :show
   resources :links, only: :show
 
-  mount Resque::Server, at: "/resque"
-
   namespace :admin do
     resources :users
   end
+  mount Sidekiq::Web, at: "/sidekiq"
 end

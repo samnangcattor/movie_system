@@ -128,7 +128,7 @@ $(document).ready(function() {
 $(function(){
   var loader = $("#loader");
   var duration = $("#duration");
-  var sec = 50;
+  var sec = 75;
   if (loader.length >0){
     timer = setInterval(function(){
       duration.html(--sec+"s");

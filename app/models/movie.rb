@@ -118,17 +118,17 @@ class Movie < ActiveRecord::Base
 
     def action_choose_google_drive driver
       driver.find_elements(:xpath, "//div[@class = 'dv']")[1].click
-      sleep 3
+      sleep 5
       driver.find_element(:xpath, "//div[@class = 'HY fya']").click
-      sleep 3
+      sleep 5
       driver.find_elements(:xpath, "//div[@class = 'd-xc']")[1].click
-      sleep 3
+      sleep 5
     end
 
     def action_search_google_drive driver, title
       driver.find_element(:xpath, "//input[@class = 'a-pb-N-z b-hb']").send_keys title
       driver.find_element(:xpath, "//div[@class = 'd-k-l b-c b-c-U']").click
-      sleep 3
+      sleep 5
       driver.find_elements(:xpath, "//td[@class = 'a-Hb-e-kb-xd a-Hb-e-xd']").last.click
       driver.find_elements(:xpath, "//td[@class = 'a-Hb-e-kb-xd a-Hb-e-xd']").last.click
       driver.find_elements(:xpath, "//td[@class = 'a-Hb-e-kb-xd a-Hb-e-xd']").last.click

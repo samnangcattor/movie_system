@@ -1,9 +1,27 @@
+<%
+  access_token = @service.request_options.authorization.access_token
+  file = @service.get_file @movie.link.file_id
+  download_url = file.download_url
+  link_video = download_url + "&access_token=" + access_token
+%>
 <% if @movie.link.sky_drive? %>
   <iframe style="width: 700px; height: 552px; border: 0px;" scrolling="no" src="https://onedrive.live.com/prev?cid=<%= @movie.link.cid %>&amp;id=<%= @movie.link.sky_id %>&amp;authkey=!<%= @movie.link.authkey %>&amp;parId=root&amp;view=video&amp;mode=interactiveEmbed" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe>
 <% elsif @movie.link.google_plus? || @movie.link.drive? %>
-  <div id="player" data-default="<%= @link_default %>" data-hd="<%= @link_hd %>" data-sub="<%= @movie.link.subtitle %>"></div>
-  <noembed><%= @movie.title %></noembed>
-</video>
+  <% if @movie.link.robot? %>
+    <video id="really-cool-video" class="video-js vjs-default-skin" controls
+     preload="auto" width="700" height="400"
+     data-setup='{}'>
+      <source src="<%= link_video %>" type="video/mp4">
+      <p class="vjs-no-js">
+        To view this video please enable JavaScript, and consider upgrading to a web browser
+        that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+      </p>
+    </video>
+    <noembed><%= @movie.title %></noembed>
+  <% else %>
+    <div id="player" data-default="<%= @link_default %>" data-hd="<%= @link_hd %>" data-sub="<%= @movie.link.subtitle %>"></div>
+    <noembed><%= @movie.title %></noembed>
+  <% end %>
 <% elsif @movie.link.amazon? %>
   <div id="player" data-url="<%= @movie.link.amazon_url %>" ></div>
 <% else %>

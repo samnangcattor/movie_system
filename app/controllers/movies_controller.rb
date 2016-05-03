@@ -35,22 +35,11 @@ class MoviesController < ApplicationController
     @movie = Movie.find params[:id]
     @movie_categories = @movie.categories
     @movie_suggestions = Movie.by_suggestion.page(params[:page_3]).per 10
-    @progress_status = nil
-
+    @service = nil
     if @movie.link.robot?
-      begin
-        uri = URI @movie.link.url_default
-        response = Net::HTTP.get_response uri
-        code = response.code
-      rescue
-        code = "404"
-      end
-      if code == "302"
-        @link_default = @movie.link.url_default
-        @link_hd = @movie.link.url_hd
-      else
-        @progress_status = get_progress_status_id @movie.id, @movie.link if @movie.link.robot?
-      end
+      @service = Google::Apis::DriveV2::DriveService.new
+      @service.client_options.application_name = APPLICATION_NAME
+      @service.authorization = authorize
     else
       @link_default = @movie.link.url_default
       @link_hd = @movie.link.url_hd

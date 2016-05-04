@@ -104,27 +104,6 @@ $(function(){
   }
 });
 
-$(document).ready(function() {
-  // function adBlockDetected() {
-  //   if($("#instructions").length > 0){
-  //     $("#instructions").html("Please don't block advertise on moviehdkh");
-  //   }
-  // }
-
-  // if(typeof fuckAdBlock === "undefined") {
-  //     adBlockDetected();
-  // } else {
-  //   fuckAdBlock.on(true, adBlockDetected).onNotDetected(adBlockNotDetected);
-  // }
-
-  // fuckAdBlock.setOptions("checkOnLoad", false);
-
-  // fuckAdBlock.setOptions({
-  //   checkOnLoad: false,
-  //   resetOnEnd: false
-  // });
-});
-
 $(function(){
   var loader = $("#loader");
   var duration = $("#duration");
@@ -140,3 +119,23 @@ $(function(){
   }
 });
 
+$(document).ready(function() {
+  function adBlockDetected() {
+    if($("#instructions").length > 0){
+      $("#instructions").html("Please don't block advertise on moviehdkh");
+    }
+  }
+
+  if(typeof fuckAdBlock === "undefined") {
+      adBlockDetected();
+  } else {
+    fuckAdBlock.on(true, adBlockDetected).onNotDetected(adBlockNotDetected);
+  }
+
+  fuckAdBlock.setOptions("checkOnLoad", false);
+
+  fuckAdBlock.setOptions({
+    checkOnLoad: false,
+    resetOnEnd: false
+  });
+});

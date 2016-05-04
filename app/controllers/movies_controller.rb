@@ -37,9 +37,18 @@ class MoviesController < ApplicationController
     @movie_suggestions = Movie.by_suggestion.page(params[:page_3]).per 10
     @service = nil
     if @movie.link.robot?
-      @service = Google::Apis::DriveV2::DriveService.new
-      @service.client_options.application_name = APPLICATION_NAME
-      @service.authorization = authorize
+      url = "https://drive.google.com/file/d/" + @movie.link.file_id + "/view"
+      link_videos = @movie.collect_movie_from_url url
+      begin
+        @link_default = link_videos[0]
+        if link_videos.size == 2
+          @link_hd = link_videos[1]
+          @link_default = link_videos[0]
+        end
+      rescue
+        @link_default = ""
+        @link_hd = ""
+      end
     else
       @link_default = @movie.link.url_default
       @link_hd = @movie.link.url_hd

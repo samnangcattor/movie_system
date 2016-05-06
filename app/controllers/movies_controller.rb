@@ -1,7 +1,7 @@
 class MoviesController < ApplicationController
   before_action :search_movie
 
-  OOB_URI = "http://www.moviehdkh.com/oauth2callback"
+  OOB_URI = "http://moviehdkh.com/oauth2callback"
   APPLICATION_NAME = "Movidhdkh"
   CLIENT_SECRETS_PATH = "lib/google_drive/client_secret.json"
   CREDENTIALS_PATH = File.join "lib/google_drive/", ".credentials", "moviehdkh.yaml"
@@ -35,20 +35,27 @@ class MoviesController < ApplicationController
     @movie = Movie.find params[:id]
     @movie_categories = @movie.categories
     @movie_suggestions = Movie.by_suggestion.page(params[:page_3]).per 10
-    @service = nil
+    @link_video = nil
     if @movie.link.robot?
-      url = "https://drive.google.com/file/d/" + @movie.link.file_id + "/view"
-      link_videos = @movie.collect_movie_from_url url
-      begin
-        @link_default = link_videos[0]
-        if link_videos.size == 2
-          @link_hd = link_videos[1]
-          @link_default = link_videos[0]
-        end
-      rescue
-        @link_default = ""
-        @link_hd = ""
-      end
+      # url = "https://drive.google.com/file/d/" + @movie.link.file_id + "/view"
+      # link_videos = @movie.collect_movie_from_url url
+      # begin
+      #   @link_default = link_videos[0]
+      #   if link_videos.size == 2
+      #     @link_hd = link_videos[1]
+      #     @link_default = link_videos[0]
+      #   end
+      # rescue
+      #   @link_default = ""
+      #   @link_hd = ""
+      # end
+      service = Google::Apis::DriveV2::DriveService.new
+      service.client_options.application_name = APPLICATION_NAME
+      service.authorization = authorize
+      access_token = service.request_options.authorization.access_token
+      file = service.get_file @movie.link.file_id
+      download_url = file.download_url
+      @link_video = download_url + "&access_token=" + access_token
     else
       @link_default = @movie.link.url_default
       @link_hd = @movie.link.url_hd

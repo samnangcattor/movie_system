@@ -31,43 +31,26 @@ class MoviesController < ApplicationController
     redirect_to movies_path
   end
 
-  def show
+ def show
     @movie = Movie.find params[:id]
     @movie_categories = @movie.categories
     @movie_suggestions = Movie.by_suggestion.page(params[:page_3]).per 10
-    # @link_video = nil
+    @link_video = nil
+    @progress_status = nil
     if @movie.link.robot?
-      # url = "https://drive.google.com/file/d/" + @movie.link.file_id + "/view"
-      # link_videos = @movie.collect_movie_from_url url
-      # begin
-      #   @link_default = link_videos[0]
-      #   if link_videos.size == 2
-      #     @link_hd = link_videos[1]
-      #     @link_default = link_videos[0]
-      #   end
-      # rescue
-      #   @link_default = ""
-      #   @link_hd = ""
-      # end
-      # service = Google::Apis::DriveV2::DriveService.new
-      # service.client_options.application_name = APPLICATION_NAME
-      # service.authorization = authorize
-      # access_token = service.request_options.authorization.access_token
-      # file = service.get_file @movie.link.file_id
-      # download_url = file.download_url
-      # @link_video = download_url + "&access_token=" + access_token
-      url = "https://drive.google.com/file/d/" + @movie.link.file_id + "/view"
-      begin
-        link_videos = @movie.collect_movie_from_url url
-        @link_default = link_videos[0]
-        if link_videos.size == 2
-          @link_hd = link_videos[0]
-          @link_default = link_videos[1]
-        end
-      rescue
-        @link_default = ""
-        @link_hd = ""
-      end
+  begin
+     uri = URI @movie.link.url_default
+     response = Net::HTTP.get_response uri
+     code = response.code.to_s
+  rescue
+   code = "404"
+  end
+  if code == "302"
+    @link_default = @movie.link.url_default
+    @link_hd = @movie.link.url_hd
+  else
+   @progress_status = get_progress_status_id @movie.id, @movie.link if @movie.link.robot?
+  end
     else
       @link_default = @movie.link.url_default
       @link_hd = @movie.link.url_hd

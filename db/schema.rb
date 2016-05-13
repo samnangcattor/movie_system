@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160423100005) do
+ActiveRecord::Schema.define(version: 20160513081833) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 20160423100005) do
     t.integer  "movie_id",           limit: 4
     t.string   "link_title",         limit: 255
     t.text     "url_default",        limit: 65535
+    t.text     "drive_url",          limit: 65535
     t.datetime "created_at",                                   null: false
     t.datetime "updated_at",                                   null: false
     t.text     "url_hd",             limit: 65535
@@ -41,11 +42,11 @@ ActiveRecord::Schema.define(version: 20160423100005) do
     t.string   "authkey",            limit: 255
     t.text     "youtube_embed_link", limit: 65535
     t.text     "amazon_url",         limit: 65535
-    t.text     "drive_url",          limit: 65535
     t.boolean  "redirect_url"
     t.string   "file_id",            limit: 255
     t.string   "folder",             limit: 255
     t.boolean  "robot"
+    t.text     "ulr_super_hd",       limit: 65535
   end
 
   add_index "links", ["movie_id"], name: "index_links_on_movie_id", using: :btree

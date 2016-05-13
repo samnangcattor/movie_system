@@ -38,22 +38,24 @@ class MoviesController < ApplicationController
     @link_video = nil
     @progress_status = nil
     if @movie.link.robot?
-  begin
-     uri = URI @movie.link.url_default
-     response = Net::HTTP.get_response uri
-     code = response.code.to_s
-  rescue
-   code = "404"
-  end
-  if code == "302"
-    @link_default = @movie.link.url_default
-    @link_hd = @movie.link.url_hd
-  else
-   @progress_status = get_progress_status_id @movie.id, @movie.link if @movie.link.robot?
-  end
+      begin
+        uri = URI @movie.link.url_default
+        response = Net::HTTP.get_response uri
+        code = response.code.to_s
+      rescue
+        code = "404"
+      end
+      if code == "302"
+        @link_default = @movie.link.url_default
+        @link_hd = @movie.link.url_hd
+      else
+       @progress_status = get_progress_status_id @movie.id, @movie.link if @movie.link.robot?
+      end
     else
-      @link_default = @movie.link.url_default
-      @link_hd = @movie.link.url_hd
+      movie_link = @movie.link
+      @link_default = movie_link.url_default
+      @link_hd = movie_link.url_hd
+      @link_super_hd = movie_link.ulr_super_hd
     end
     render layout: "movie"
   end
@@ -91,20 +93,17 @@ class MoviesController < ApplicationController
     service.client_options.application_name = APPLICATION_NAME
     service.authorization = authorize
     file = service.get_file movie_link.file_id
-    title_new = file.title.delete(".#{file.file_extension}") +"_.#{file.file_extension}"
-    file.title = title_new
-    service.update_file file.id, file
-    parent_folder_id = (file.parents)[0].id
-    new_parent_folder_id = if parent_folder_id == "0B7KgDDTcGh7lT0lQMXpfNGp0dVk"
+    old_folder_id = file.parents[0].id
+    new_folder_id = if old_folder_id == "0B7KgDDTcGh7lT0lQMXpfNGp0dVk"
       "0B7KgDDTcGh7leDQwcHVUZ2VLQUU"
     else
       "0B7KgDDTcGh7lT0lQMXpfNGp0dVk"
     end
-    file = service.get_file file.id
-
-    service.insert_child new_parent_folder_id, file
-    service.delete_parent file.id, (file.parents)[0].id
-    Link.update movie_link.id, folder: new_parent_folder_id
+    title_new = "#{file.original_filename}-#{new_folder_id}"
+    metadata = {title: title_new}
+    options = {add_parents: new_folder_id, remove_parents: old_folder_id}
+    service.patch_file file.id, metadata, options
+    Link.update movie_link.id, folder: new_folder_id
     title_new
   end
 

@@ -11,10 +11,9 @@ Rails.application.routes.draw do
   resources :categories, only: :show
   resources :requests, only: [:new, :create, :show]
   resources :years, only: :show
-  resources :links, only: :show
 
   namespace :admin do
     resources :users
   end
-  mount Sidekiq::Web, at: "/sidekiq"
+  mount Sidekiq::Web, at: "/moviehdkh@sidekiq"
 end

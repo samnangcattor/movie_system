@@ -46,3 +46,8 @@ remaining_time:
 folders:
   first: "0B7KgDDTcGh7lT0lQMXpfNGp0dVk"
   second: "0B7KgDDTcGh7leDQwcHVUZ2VLQUU"
+google_drive:
+  user_id: "default"
+  client_secret: "google_drive/.credentials/moviehdkh.yaml"
+  base_url: "http://localhost:3000/oauth2callback"
+  callback: "http://moviehdkh.com/oauth2callback"

@@ -28,11 +28,11 @@ gem "actionpack-page_caching"
 gem "hover-rails"
 gem "curb"
 gem "mechanize"
-gem "selenium-webdriver"
-gem "headless"
 gem "sidekiq"
 gem "google-api-client"
 gem "sinatra", require: false
+gem "capybara-webkit"
+gem "capybara"
 
 group :development, :test do
   gem "pry"

@@ -91,6 +91,7 @@ class Movie < ActiveRecord::Base
     def get_link_from_google_plus title
       Headless.new(display: 100, reuse: true, destroy_at_exit: false).start
       driver = Selenium::WebDriver.for :firefox
+      agent = authenthicate_mechanize
       begin
         driver.navigate.to FAMILY_URL
         driver.manage.window.maximize
@@ -100,7 +101,6 @@ class Movie < ActiveRecord::Base
         action_search_google_drive driver, title
         action_click_share_video driver
         feed_url = action_get_link_feed driver
-        agent = authenthicate_mechanize
         link_videos = action_get_link_video_from_feed agent, feed_url[0]
         driver.quit
         link_videos

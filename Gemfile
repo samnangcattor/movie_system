@@ -33,6 +33,8 @@ gem "google-api-client"
 gem "sinatra", require: false
 gem "capybara-webkit"
 gem "capybara"
+gem "selenium-webdriver"
+gem "headless"
 
 group :development, :test do
   gem "pry"

@@ -86,72 +86,77 @@ class Movie < ActiveRecord::Base
   class << self
     FAMILY_URL = "https://plus.google.com/u/0/stream/circles/p5f7a55328b99dd81?gmbpt=true&fd=1&pli=1"
     DRIVE_URL = "https://drive.google.com/drive/my-drive"
+    COMMUNITY = "https://plus.google.com/u/0/communities/106443094303154072116"
 
-    def get_link_from_google_plus title, progress_status_id
+    def get_link_from_google_plus title
       Headless.new(display: 100, reuse: true, destroy_at_exit: false).start
       driver = Selenium::WebDriver.for :firefox
-      driver.navigate.to FAMILY_URL
-      driver.manage.window.maximize
-      action_log_in_google_plus driver
-      action_choose_google_drive driver
-      action_search_google_drive driver, title
-      action_click_share_video driver
-      feed_url = action_get_link_feed driver
-      agent = authenthicate_mechanize
-      link_videos = action_get_link_video_from_feed agent, feed_url[0]
-      driver.quit
-      link_videos
-    rescue
-      ProgressStatus.update progress_status_id, status_progress: Settings.status_progress.finished,
-        end_time: Time.now, remaining_time: Settings.remaining_time.fnished
-      driver.quit
+      begin
+        driver.navigate.to FAMILY_URL
+        driver.manage.window.maximize
+        action_log_in_google_plus driver
+        driver.navigate.to COMMUNITY
+        action_choose_google_drive driver
+        action_search_google_drive driver, title
+        action_click_share_video driver
+        feed_url = action_get_link_feed driver
+        agent = authenthicate_mechanize
+        link_videos = action_get_link_video_from_feed agent, feed_url[0]
+        driver.quit
+        link_videos
+      rescue
+        driver.quit
+      end
     end
 
     def action_log_in_google_plus driver
-      driver.find_element(:id, "Email").send_keys EMAIL
-      driver.find_element(:id, "next").click
-      sleep 0.5
-      driver.find_element(:id, "Passwd").send_keys PASSWORD
-      driver.find_element(:id, "signIn").click
-      sleep 3
+      wait = Selenium::WebDriver::Wait.new(:timeout => 10)
+      wait.until{driver.find_element(:id, "Email").send_keys EMAIL}
+      wait.until{driver.find_element(:id, "next").click}
+      wait.until{driver.find_element(:id, "Passwd").send_keys PASSWORD}
+      wait.until{driver.find_element(:id, "signIn").click}
     end
 
     def action_choose_google_drive driver
+      wait = Selenium::WebDriver::Wait.new(timeout: 10)
+      wait.until{driver.find_elements(:xpath, "//div[@class = 'dv']")[1]}
       driver.find_elements(:xpath, "//div[@class = 'dv']")[1].click
-      sleep 5
+      wait.until{driver.find_element(:xpath, "//div[@class = 'HY fya']")}
       driver.find_element(:xpath, "//div[@class = 'HY fya']").click
-      sleep 5
+      wait.until{driver.find_elements(:xpath, "//div[@class = 'd-xc']")[1]}
       driver.find_elements(:xpath, "//div[@class = 'd-xc']")[1].click
-      sleep 5
     end
 
     def action_search_google_drive driver, title
+      wait = Selenium::WebDriver::Wait.new(timeout: 10)
+      wait.until{driver.find_element(:xpath, "//input[@class = 'a-pb-N-z b-hb']")}
       driver.find_element(:xpath, "//input[@class = 'a-pb-N-z b-hb']").send_keys title
+      wait.until{driver.find_element(:xpath, "//div[@class = 'd-k-l b-c b-c-U']")}
       driver.find_element(:xpath, "//div[@class = 'd-k-l b-c b-c-U']").click
+      # with_retry(10){driver.find_elements(:xpath, "//td[@class = 'a-Hb-e-kb-xd.a-Hb-e-xd']").last.click}
       sleep 5
       driver.find_elements(:xpath, "//td[@class = 'a-Hb-e-kb-xd a-Hb-e-xd']").last.click
       driver.find_elements(:xpath, "//td[@class = 'a-Hb-e-kb-xd a-Hb-e-xd']").last.click
       driver.find_elements(:xpath, "//td[@class = 'a-Hb-e-kb-xd a-Hb-e-xd']").last.click
-      sleep 5
+      sleep 7
       driver.find_element(:xpath, "//div[@id = 'picker:ap:4']").click
-      sleep 5
+      sleep 7
       driver.find_element(:xpath, "//div[@id = 'picker:ap:6']").click
     end
 
     def action_click_share_video driver
-      driver.find_element(:xpath, "//html").send_keys [:control, '-']
-      sleep 1
-      driver.find_element(:xpath, "//html").send_keys [:control, '-']
-      sleep 1
-      driver.find_element(:xpath, "//html").send_keys [:control, '-']
-      sleep 1
+      wait = Selenium::WebDriver::Wait.new(timeout: 10)
+      wait.until{driver.find_element(:xpath, "//html").send_keys [:control, '-']}
+      wait.until{driver.find_element(:xpath, "//html").send_keys [:control, '-']}
+      wait.until{driver.find_element(:xpath, "//html").send_keys [:control, '-']}
+      wait.until{driver.find_element(:xpath, "//div[@class = 'd-k-l b-c b-c-Ba qy jt']")}
       driver.find_element(:xpath, "//div[@class = 'd-k-l b-c b-c-Ba qy jt']").click
-      sleep 1
     end
 
     def action_get_link_feed driver
-      sleep 3
-      link_post = driver.find_element(:xpath, "//a[@class= 'd-s ob Ks']").attribute "href"
+      wait = Selenium::WebDriver::Wait.new(timeout: 10)
+      link_post = ""
+      wait.until{link_post = driver.find_element(:xpath, "//a[@class= 'd-s ob Ks']").attribute("href")}
       array_id = link_post.split "/"
       feed_url = "https://picasaweb.google.com/data/feed/api/user/" +
         array_id[6] + "/albumid/" + array_id[8] + "/photoid/" + array_id[9] + "?prettyprint=true"
@@ -181,13 +186,15 @@ class Movie < ActiveRecord::Base
     end
 
     def action_close_browser driver
+      wait = Selenium::WebDriver::Wait.new(timeout: 10)
+      wait.until{driver.find_element(:xpath, "//div[@class= 'ys']")}
       driver.find_element(:xpath, "//div[@class= 'ys']").click
-      sleep 0.5
+      wait.until{driver.find_element(:xpath, "//span[@class= 'd-s xw if']")}
       driver.find_element(:xpath, "//span[@class= 'd-s xw if']").click
-      sleep 20
+      wait.until{driver.find_elements(:class, "d-A-B")[5]}
       driver.find_elements(:class, "d-A-B")[5].click
+      wait.until{driver.find_element(:xpath, "//button[@name= 'yes']")}
       driver.find_element(:xpath, "//button[@name= 'yes']").click
-      sleep 0.5
       driver.quit
     end
   end
@@ -220,5 +227,17 @@ class Movie < ActiveRecord::Base
       arr_params[15] + "&" + arr_params[17] + "&" + arr_params[4] + "&" +
       arr_params[5] + "&" + "filename=video.mp4"
     new_url
+  end
+
+  def with_retry(tries)
+    yield
+  rescue
+    tries -= 1
+    if tries > 1
+      sleep(1)
+      retry
+    else
+      raise $!
+    end
   end
 end

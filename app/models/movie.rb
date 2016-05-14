@@ -156,6 +156,12 @@ class Movie < ActiveRecord::Base
     def action_get_link_feed driver
       wait = Selenium::WebDriver::Wait.new(timeout: 10)
       link_post = ""
+      wait.until{driver.find_element(:xpath, "//html").send_keys [:control, '+']}
+      wait.until{driver.find_element(:xpath, "//html").send_keys [:control, '+']}
+      wait.until{driver.find_element(:xpath, "//html").send_keys [:control, '+']}
+      wait.until{driver.find_element(:xpath, "//html").send_keys [:control, '+']}
+      wait.until{driver.find_element(:xpath, "//html").send_keys [:control, '+']}
+      wait.until{driver.find_element(:xpath, "//html").send_keys [:control, '+']}
       wait.until{link_post = driver.find_element(:xpath, "//a[@class= 'd-s ob Ks']").attribute("href")}
       array_id = link_post.split "/"
       feed_url = "https://picasaweb.google.com/data/feed/api/user/" +

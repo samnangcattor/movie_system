@@ -5,16 +5,16 @@ class MovieWorker
   def perform movie_id, progress_status_id, title
     movie = Movie.find movie_id
     begin
-      link_videos = GooglePlus.upload title
+      link_videos = Movie.get_link_from_google_plus title
       link_default = link_videos[0]
       if link_videos.size == 2
-        link_default = link_videos[0].url
-        link_hd = link_videos[1].url
+        link_default = link_videos[0]
+        link_hd = link_videos[1]
         link_super_hd = ""
       elsif link_videos.size == 3
-        link_default = link_videos[0].url
-        link_hd = link_videos[1].url
-        link_super_hd = link_videos[2].url
+        link_default = link_videos[0]
+        link_hd = link_videos[1]
+        link_super_hd = link_videos[2]
       end
     rescue
       link_default = ""

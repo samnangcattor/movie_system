@@ -30,7 +30,7 @@ window.fbAsyncInit = function() {
 $(function(){
   var loader = $("#loader");
   var duration = $("#duration");
-  var sec = 37;
+  var sec = 75;
   if (loader.length >0){
     timer = setInterval(function(){
       duration.html(--sec+"s");
@@ -90,7 +90,7 @@ $(function(){
       }],
       primary: primaryCookie
     });
-  }else if (data_hd != null){
+  }else if (data_hd != ""){
     jwplayer("extensive").setup({
       sources: [{
         file: data_hd,
@@ -99,7 +99,7 @@ $(function(){
       },{
         file: data_default,
         label: "360p SD",
-        "default": true,
+        "default": "true",
         type: "mp4"
       }],
       width: "100%",
@@ -109,7 +109,7 @@ $(function(){
         file: data_sub,
         label: "English",
         kind: "captions",
-        "default": true
+        "default": "true"
       }],
       primary: primaryCookie
     });
@@ -118,7 +118,7 @@ $(function(){
       sources: [{
         file: data_default,
         label: "360p SD",
-        "default": true,
+        "default": "true",
         type: "mp4"
       }],
       width: "100%",

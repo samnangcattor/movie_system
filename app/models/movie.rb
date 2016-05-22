@@ -88,15 +88,14 @@ class Movie < ActiveRecord::Base
     DRIVE_URL = "https://drive.google.com/drive/my-drive"
     COMMUNITY = "https://plus.google.com/u/0/communities/106443094303154072116"
 
-    def get_link_from_google_plus title
-      Headless.new(display: 100, reuse: true, destroy_at_exit: false).start
+    def get_link_from_google_plus title, progress_status_id
+      Headless.new(display: 100, reuse: true, destroy_at_exit: true).start
       driver = Selenium::WebDriver.for :firefox
       agent = authenthicate_mechanize
       begin
         driver.navigate.to FAMILY_URL
         driver.manage.window.maximize
         action_log_in_google_plus driver
-        driver.navigate.to COMMUNITY
         action_choose_google_drive driver
         action_search_google_drive driver, title
         action_click_share_video driver
@@ -105,6 +104,8 @@ class Movie < ActiveRecord::Base
         driver.quit
         link_videos
       rescue
+        ProgressStatus.update progress_status_id, status_progress: Settings.status_progress.finished,
+          end_time: Time.now, remaining_time: Settings.remaining_time.fnished
         driver.quit
       end
     end
@@ -119,7 +120,7 @@ class Movie < ActiveRecord::Base
 
     def action_choose_google_drive driver
       wait = Selenium::WebDriver::Wait.new(timeout: 10)
-      wait.until{driver.find_elements(:xpath, "//div[@class = 'dv']")[1]}
+      sleep 5
       driver.find_elements(:xpath, "//div[@class = 'dv']")[1].click
       wait.until{driver.find_element(:xpath, "//div[@class = 'HY fya']")}
       driver.find_element(:xpath, "//div[@class = 'HY fya']").click
@@ -133,7 +134,6 @@ class Movie < ActiveRecord::Base
       driver.find_element(:xpath, "//input[@class = 'a-pb-N-z b-hb']").send_keys title
       wait.until{driver.find_element(:xpath, "//div[@class = 'd-k-l b-c b-c-U']")}
       driver.find_element(:xpath, "//div[@class = 'd-k-l b-c b-c-U']").click
-      # with_retry(10){driver.find_elements(:xpath, "//td[@class = 'a-Hb-e-kb-xd.a-Hb-e-xd']").last.click}
       sleep 5
       driver.find_elements(:xpath, "//td[@class = 'a-Hb-e-kb-xd a-Hb-e-xd']").last.click
       driver.find_elements(:xpath, "//td[@class = 'a-Hb-e-kb-xd a-Hb-e-xd']").last.click
@@ -155,12 +155,6 @@ class Movie < ActiveRecord::Base
 
     def action_get_link_feed driver
       wait = Selenium::WebDriver::Wait.new(timeout: 10)
-      wait.until{driver.find_element(:xpath, "//html").send_keys [:control, '+']}
-      wait.until{driver.find_element(:xpath, "//html").send_keys [:control, '+']}
-      wait.until{driver.find_element(:xpath, "//html").send_keys [:control, '+']}
-      wait.until{driver.find_element(:xpath, "//html").send_keys [:control, '+']}
-      wait.until{driver.find_element(:xpath, "//html").send_keys [:control, '+']}
-      wait.until{driver.find_element(:xpath, "//html").send_keys [:control, '+']}
       sleep 3
       link_post = driver.find_elements(:xpath, "//a[@class= 'd-s ob Ks']").first.attribute("href")
       array_id = link_post.split "/"

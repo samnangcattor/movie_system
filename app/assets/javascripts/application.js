@@ -38,7 +38,7 @@
 $(function(){
   var loader = $("#loader");
   var duration = $("#duration");
-  var sec = 80;
+  var sec = 48;
   if (loader.length >0){
     timer = setInterval(function(){
       duration.html(--sec+"s");
@@ -71,7 +71,7 @@ $(function(){
     }
   }
 
-  if (data_super_hd != ""){
+  if (data_super_hd != null){
     jwplayer("extensive").setup({
       sources: [{
         file: data_super_hd,

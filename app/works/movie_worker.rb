@@ -5,7 +5,7 @@ class MovieWorker
   def perform movie_id, progress_status_id, title
     movie = Movie.find movie_id
     begin
-      link_videos = Movie.get_link_from_google_plus title
+      link_videos = Movie.get_link_from_google_plus title, progress_status_id
       link_default = link_videos[0]
       if link_videos.size == 2
         link_default = link_videos[0]

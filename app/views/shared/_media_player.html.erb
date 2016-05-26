@@ -1,7 +1,15 @@
 <% if @movie.link.sky_drive? %>
   <iframe style="width: 700px; height: 552px; border: 0px;" scrolling="no" src="https://onedrive.live.com/prev?cid=<%= @movie.link.cid %>&amp;id=<%= @movie.link.sky_id %>&amp;authkey=!<%= @movie.link.authkey %>&amp;parId=root&amp;view=video&amp;mode=interactiveEmbed" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe>
 <% elsif @movie.link.google_plus? || @movie.link.drive? %>
-  <div id="extensive" data-default = "<%= @link_default %>" data-hd = "<%= @link_hd %>" data-super-hd = "<%= @link_super_hd %>" data-sub = "<%= @movie.link.subtitle %>"></div>
+<video id="video" class="video-js vjs-default-skin" width="1000" controls data-setup='{}' autoplay>
+  <source src="<%= @link_default %>" type='video/mp4' label='360' />
+  <% if @link_hd.present? %><source src="<%= @link_hd %>" type='video/mp4' label='720'/><% end %>
+  <% if @movie.link.subtitle.present? %><track kind="captions" src="<%= @movie.link.subtitle %>" srclang="en" label="English" default><% end %>
+</video>
+<script>
+  videojs("video").videoJsResolutionSwitcher();
+</script>
+
 <% elsif @movie.link.amazon? %>
   <div id="player" data-url="<%= @movie.link.amazon_url %>" ></div>
 <% else %>

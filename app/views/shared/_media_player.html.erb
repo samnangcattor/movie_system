@@ -1,7 +1,23 @@
 <% if @movie.link.sky_drive? %>
   <iframe style="width: 700px; height: 552px; border: 0px;" scrolling="no" src="https://onedrive.live.com/prev?cid=<%= @movie.link.cid %>&amp;id=<%= @movie.link.sky_id %>&amp;authkey=!<%= @movie.link.authkey %>&amp;parId=root&amp;view=video&amp;mode=interactiveEmbed" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe>
 <% elsif @movie.link.google_plus? || @movie.link.drive? %>
-  <div id="extensive" data-default = "<%= @link_default %>" data-hd = "<%= @link_hd %>" data-super-hd = "<%= @link_super_hd %>" data-sub = "<%= @movie.link.subtitle %>"></div>
+<video id="player" class="video-js vjs-default-skin vjs-big-play-centered"></video>
+<script type="text/javascript">
+  var player = videojs('player', {
+    controls: true,
+    preload: 'auto',
+    autoplay: false,
+    plugins: {
+      videoJsResolutionSwitcher: {
+        default: 'high',
+        dynamicLabel: true
+      }
+    },
+    nativeControlsForTouch: false
+  }, function() {
+    this.updateSrc(JSON.parse('<%= @link_default.html_safe %>'));
+  });
+</script>
 <% elsif @movie.link.amazon? %>
   <div id="player" data-url="<%= @movie.link.amazon_url %>" ></div>
 <% else %>

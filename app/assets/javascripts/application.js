@@ -16,7 +16,7 @@
 //= require bootstrap-sprockets
 //= require facebook_page
 //= require fuckadblock
-//= require video-js-resolutions
+//= require selector
 
   window.fbAsyncInit = function() {
     FB.init({

@@ -18,7 +18,6 @@
 //= require fuckadblock
 //= require video.dev
 //= require video-js-resolutions
-//= require lte-ie7
 
   window.fbAsyncInit = function() {
     FB.init({

@@ -18,7 +18,6 @@
 //= require fuckadblock
 //= require jwplayer
 //= require jwplayer.html5
-//= require video
 //= require selector
 
   window.fbAsyncInit = function() {

@@ -4,9 +4,10 @@ class GooglePlus
   SECRET_PATH = Rails.root.join('lib', 'google_drive/g_plus_secret.json')
 
   class << self
-    def upload(file_name)
+    def upload file_name, progress_status_id
+      Headless.new(display: 100, reuse: true, destroy_at_exit: true).start
       @instance ||= new
-      @instance.upload(file_name)
+      @instance.upload(file_name, progress_status_id)
     end
   end
 
@@ -16,11 +17,13 @@ class GooglePlus
     page.driver.browser.allow_url('*')
   end
 
-  def upload file_name
+  def upload file_name, progress_status_id
     login_to_google_account
     switch_to_google_plus
     upload_from_google_drive(file_name)
   ensure
+    ProgressStatus.update progress_status_id, status_progress: Settings.status_progress.finished,
+      end_time: Time.now, remaining_time: Settings.remaining_time.fnished
     page.driver.browser.clear_cookies
     page.driver.browser.reset!
   end
@@ -36,7 +39,7 @@ class GooglePlus
   end
 
   def switch_to_google_plus
-    with_retry(3) { find('a.gb_Qb').click }
+    with_retry(3) { find('a.gb_b.gb_Rb').click }
     find('ul.gb_ja.gb_ca li#ogbkddg\:9').click
   end
 

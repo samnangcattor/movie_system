@@ -39,7 +39,7 @@
 $(function(){
   var loader = $("#loader");
   var duration = $("#duration");
-  var sec = 75;
+  var sec = 35;
   if (loader.length >0){
     timer = setInterval(function(){
       duration.html(--sec+"s");

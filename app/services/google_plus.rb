@@ -57,6 +57,7 @@ class GooglePlus
     with_retry(10) { find('div.d-k-l.b-c.b-c-U.a-Qb-e-D6').click }
     with_retry(10) { find('div.d-k-l.b-c.b-c-U.a-Qb-e-D6').click }
     with_retry(10) { find('div.d-k-l.b-c.b-c-Ba.qy.jt').click }
+    sleep 3
     post_url = with_retry(10) { all('a.d-s.ob.Ks').first[:href] }
     get_videos(post_url)
   end

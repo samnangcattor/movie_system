@@ -99,12 +99,12 @@ class MoviesController < ApplicationController
     else
       "0B7KgDDTcGh7lT0lQMXpfNGp0dVk"
     end
-    title_new = "#{file.original_filename}-#{new_folder_id}"
+    title_new = "#{file.original_filename}-#{file.id}-#{new_folder_id}"
     metadata = {title: title_new}
     options = {add_parents: new_folder_id, remove_parents: old_folder_id}
     service.patch_file file.id, metadata, options
     Link.update movie_link.id, folder: new_folder_id
-    file.original_filename
+    file.original_filename + "-" + file.id
   end
 
   def authorize

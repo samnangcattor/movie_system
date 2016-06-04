@@ -35,6 +35,9 @@ gem "capybara-webkit"
 gem "capybara"
 gem "selenium-webdriver"
 gem "headless"
+gem "sinatra", require: false
+gem "resque-pool"
+gem "resque", require: "resque/server"
 
 group :development, :test do
   gem "pry"

@@ -78,12 +78,12 @@ class MoviesController < ApplicationController
       if progress_status.status_progress == Settings.status_progress.finished
         title = google_login movie_link
         ProgressStatus.update progress_status.id, status_progress: Settings.status_progress.start, start_time: Time.now
-        MovieWorker.perform_async movie_id, progress_status.id, title
+        Resque.enqueue MovieWorker, movie_id, progress_status.id, title
       end
     else
       title = google_login movie_link
       progress_status = ProgressStatus.create progress_name: movie_id, status_progress: Settings.status_progress.start, start_time: Time.now
-      MovieWorker.perform_async movie_id, progress_status.id, title
+      Resque.enqueue MovieWorker, movie_id, progress_status.id, title
     end
     progress_status
   end
@@ -104,7 +104,7 @@ class MoviesController < ApplicationController
     options = {add_parents: new_folder_id, remove_parents: old_folder_id}
     service.patch_file file.id, metadata, options
     Link.update movie_link.id, folder: new_folder_id
-    title_new
+    file.original_filename
   end
 
   def authorize

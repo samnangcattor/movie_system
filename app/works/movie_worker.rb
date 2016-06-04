@@ -1,8 +1,7 @@
 class MovieWorker
-  include Sidekiq::Worker
-  sidekiq_options retry: false
+  @queue = :movie
 
-  def perform movie_id, progress_status_id, title
+  def self.perform movie_id, progress_status_id, title
     movie = Movie.find movie_id
     begin
       link_videos = GooglePlus.upload title, progress_status_id

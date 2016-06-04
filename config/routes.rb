@@ -1,5 +1,6 @@
 require "sidekiq/web"
 Rails.application.routes.draw do
+  mount Resque::Server, :at => "/resque"
   get "/oauth2callback", to: "movies#update"
   mount RailsAdmin::Engine => "/adminmviehdkh", as: "rails_admin"
 
@@ -15,5 +16,4 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :users
   end
-  mount Sidekiq::Web, at: "/moviehdkh@sidekiq"
 end

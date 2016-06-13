@@ -206,13 +206,14 @@ class Movie < ActiveRecord::Base
 
   def get_login_google url
     agent = Mechanize.new
-    page_email = agent.get url
+    page_email = agent.get "https://accounts.google.com/"
     form_email = page_email.forms[0]
     form_email.field_with(name: "Email").value = EMAIL
     page_password = agent.submit form_email
     form_password = page_password.forms[0]
     form_password.field_with(name: "Passwd").value = PASSWORD
-    page_view = agent.submit form_password
+    agent.submit form_password
+    page_view = agent.get url
     page_view.body
   end
 

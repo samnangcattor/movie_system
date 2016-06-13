@@ -35,21 +35,28 @@ class MoviesController < ApplicationController
     @movie = Movie.find params[:id]
     @movie_categories = @movie.categories
     @movie_suggestions = Movie.by_suggestion.page(params[:page_3]).per 10
-    @link_video = nil
     @progress_status = nil
     if @movie.link.robot?
-      begin
-        uri = URI @movie.link.url_default
-        response = Net::HTTP.get_response uri
-        code = response.code.to_s
-      rescue
-        code = "404"
-      end
-      if code == "302"
-        @link_default = @movie.link.url_default
-        @link_hd = @movie.link.url_hd
+      # begin
+      #   uri = URI @movie.link.url_default
+      #   response = Net::HTTP.get_response uri
+      #   code = response.code.to_s
+      # rescue
+      #   code = "404"
+      # end
+      # if code == "302"
+      #   @link_default = @movie.link.url_default
+      #   @link_hd = @movie.link.url_hd
+      # else
+      #  @progress_status = get_progress_status_id @movie.id, @movie.link if @movie.link.robot?
+      # end
+      url = "https://drive.google.com/file/d/" + @movie.link.file_id + "/view"
+      link_video = @movie.collect_movie_from_url url
+      if link_video.size == 2
+        @link_default = link_video[1]
+        @link_hd = link_video[0]
       else
-       @progress_status = get_progress_status_id @movie.id, @movie.link if @movie.link.robot?
+        @link_default = link_video[0]
       end
     else
       movie_link = @movie.link

@@ -16,7 +16,6 @@
 //= require bootstrap-sprockets
 //= require facebook_page
 //= require fuckadblock
-//= require selector
 //= require jwplayer
 //= require jwplayer.html5
 

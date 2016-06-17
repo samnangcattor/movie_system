@@ -228,7 +228,9 @@ class Movie < ActiveRecord::Base
     #   arr_params[15] + "&" + arr_params[17] + "&" + arr_params[4] + "&" +
     #   arr_params[5] + "&" + "filename=video.mp4"
     result[1].gsub! "texmex", "explorer"
+    result[1].gsub! "mv=m", "mv=u"
     new_url = "https://redirector.googlevideo.com/videoplayback?" + result[1]
+    movie_url =
     new_url
   end
 

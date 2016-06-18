@@ -18,6 +18,7 @@ class MoviesController < ApplicationController
       @movies = Movie.by_no_cinema.page params[:page_1]
       @slideshows = Movie.by_slide
     end
+    render layout: "application"
   end
 
   def update
@@ -36,6 +37,7 @@ class MoviesController < ApplicationController
     @movie_categories = @movie.categories
     @movie_suggestions = Movie.by_suggestion.page(params[:page_3]).per 10
     @progress_status = nil
+    filter_quality = params[:filter_quality]
     if @movie.link.robot?
       # begin
       #   uri = URI @movie.link.url_default
@@ -64,7 +66,18 @@ class MoviesController < ApplicationController
       @link_hd = movie_link.url_hd
       @link_super_hd = movie_link.ulr_super_hd
     end
-    render layout: "movie"
+
+    case filter_quality.to_i
+    when Settings.qualities.medium then
+      @link_movie = @link_medium
+    when Settings.qualities.hight then
+      @link_movie = @link_hd
+    else
+      @link_movie = @link_default
+    end
+    if filter_quality.present?
+      respond_to :js
+    end
   end
 
   def new_article_banner

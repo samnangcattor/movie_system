@@ -8,3 +8,4 @@ en:
       new_release: "New release movies"
     show:
       movie_suggestion: "Movie suggestions"
+    quality: "Select quality:"

@@ -7,10 +7,17 @@
         Please wait for <span id="duration">50s</span> for movie come
       <% end %>
     <% else %>
+    <div class="media-player">
       <%= render "shared/media_player" %>
+    </div>
     <% end %>
     <%= render "shared/facebook" %>
-    <p>If the player does not work, <%= link_to "Clik Here", @link_default %> to use your device's player</p>
+    <div>
+      <%= render "form_filter" %>
+    </div>
+    <div>
+    <h3>If the player does not work, <%= link_to "Clik Here", @link_default %> to use your device's player/try to disable IPv6</h3>
+    </div>
   </div>
   <%= render "shared/mdgid_advertise" %>
 </section>

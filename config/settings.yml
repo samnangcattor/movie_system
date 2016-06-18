@@ -51,3 +51,7 @@ google_drive:
   client_secret: "google_drive/.credentials/moviehdkh.yaml"
   base_url: "http://localhost:3000/oauth2callback"
   callback: "http://moviehdkh.com/oauth2callback"
+qualities:
+  low: 360
+  medium: 480
+  hight: 720

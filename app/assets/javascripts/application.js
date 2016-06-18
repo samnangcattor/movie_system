@@ -18,6 +18,7 @@
 //= require fuckadblock
 //= require jwplayer
 //= require jwplayer.html5
+//= require filter_select
 
   window.fbAsyncInit = function() {
     FB.init({

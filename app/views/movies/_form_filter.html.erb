@@ -3,7 +3,7 @@
     <%= label_tag "quality",t("movies.quality") %>
     <select  class="filter-quality" id="<%= @movie.id %>">
       <option value="low" selected>360</option>
-      <% if @link_default.present? %>
+      <% if @link_medium.present? %>
         <option value="medium">480</option>
       <% end %>
       <% if @link_hd.present? %>

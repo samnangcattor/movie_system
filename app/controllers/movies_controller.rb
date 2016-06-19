@@ -54,9 +54,13 @@ class MoviesController < ApplicationController
       # end
       url = "https://drive.google.com/file/d/" + @movie.link.file_id + "/view"
       link_video = @movie.collect_movie_from_url url
-      if link_video.size == 2
-        @link_default = link_video[1]
+      if link_video.size == 3
+        @link_default = link_video[2]
+        @link_medium = link_video[1]
         @link_hd = link_video[0]
+      elsif link_video.size == 2
+        @link_default = link_video[1]
+        @link_medium = link_video[0]
       else
         @link_default = link_video[0]
       end

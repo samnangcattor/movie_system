@@ -1,7 +1,14 @@
 <div id="filter-select">
   <%= form_tag movies_path, method: :get, remote: true do %>
     <%= label_tag "quality",t("movies.quality") %>
-    <%= select_tag "quality", options_from_collection_for_select(Settings.qualities, "first", "last"),
-      class: "filter-quality", id: @movie.id %>
+    <select  class="filter-quality" id="<%= @movie.id %>">
+      <option value="low" selected>360</option>
+      <% if @link_default.present? %>
+        <option value="medium">480</option>
+      <% end %>
+      <% if @link_hd.present? %>
+        <option value="higth">720</option>
+      <% end %>
+    </select>
   <% end %>
 </div>

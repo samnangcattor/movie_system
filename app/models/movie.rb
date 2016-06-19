@@ -74,6 +74,8 @@ class Movie < ActiveRecord::Base
         link = get_link_redirect_google get_link_movie(pvideo[1])
         if pvideo[0] == "18"
           link_result << link
+        elsif pvideo[0]== "59"
+          link_result << link
         elsif pvideo[0] == "22"
           link_result << link
         end

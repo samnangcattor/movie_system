@@ -17,8 +17,11 @@
 //= require facebook_page
 //= require fuckadblock
 //= require jwplayer
-//= require jwplayer.html5
-//= require filter_select
+//= require polyfills.base64
+//= require polyfills.promise
+//= require provider.cast
+//= require provider.shaka
+//= require provider.youtube
 
   window.fbAsyncInit = function() {
     FB.init({
@@ -53,10 +56,10 @@ $(function(){
 
 $(function(){
    var primaryCookie = "html5";
-   var skinURL = "/skins/yellow.xml";
+   var skinURL = "flat";
    var data_default = $("#extensive").data("default");
    var data_hd = $("#extensive").data("hd");
-   var data_super_hd = $("#extensive").data("super_hd");
+   var data_medium = $("#extensive").data("medium");
    var data_sub = $("#extensive").data("sub");
 
    var cookies = document.cookie.split(";");
@@ -71,19 +74,19 @@ $(function(){
      }
   }
 
-   if (data_super_hd != null){
+   if (data_hd != ""){
      jwplayer("extensive").setup({
        sources: [{
-         file: data_super_hd,
-         label: "1080 HD",
+         file: data_hd,
+         label: "720",
          type: "mp4"
        },{
-         file: data_hd,
-         label: "720p HD",
+         file: data_medium,
+         label: "480",
          type: "mp4"
        },{
          file: data_default,
-         label: "360p SD",
+         label: "360",
          "default": true,
          type: "mp4"
        }],
@@ -98,16 +101,20 @@ $(function(){
        }],
        primary: primaryCookie
      });
-   }else if (data_hd != ""){
+   }else if (data_medium != ""){
      jwplayer("extensive").setup({
        sources: [{
-         file: data_hd,
-         label: "720p HD",
+         file: data_medium,
+         label: "480",
          type: "mp4"
        },{
          file: data_default,
-         label: "360p SD",
-         "default": "true",
+         label: "360",
+         type: "mp4"
+       },{
+         file: data_default,
+         label: "Default",
+         "default": true,
          type: "mp4"
        }],
        width: "100%",
@@ -125,7 +132,7 @@ $(function(){
     jwplayer("extensive").setup({
        sources: [{
         file: data_default,
-        label: "360p SD",
+        label: "360p",
          "default": "true",
          type: "mp4"
        }],

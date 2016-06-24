@@ -1,12 +1,7 @@
-<link href="//vjs.zencdn.net/4.12.14/video-js.css" rel="stylesheet" />
-<script src="//vjs.zencdn.net/4.12.14/video.js"></script>
 <% if @movie.link.sky_drive? %>
   <iframe style="width: 700px; height: 552px; border: 0px;" scrolling="no" src="https://onedrive.live.com/prev?cid=<%= @movie.link.cid %>&amp;id=<%= @movie.link.sky_id %>&amp;authkey=!<%= @movie.link.authkey %>&amp;parId=root&amp;view=video&amp;mode=interactiveEmbed" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe>
 <% elsif @movie.link.google_plus? || @movie.link.drive? %>
-<video id="video" class="video-js vjs-default-skin" width ="700"  height="400" controls data-setup='{}' autoplay preload="auto">
-  <source src="<%= @link_movie %>" type='video/mp4' label='360' />
-  <% if @movie.link.subtitle.present? %><track kind="captions" src="<%= @movie.link.subtitle %>" srclang="en" label="English" default><% end %>
-</video>
+<div id="extensive" data-default = "<%= @link_default %>" data-hd = "<%= @link_hd %>" data-medium = "<%= @link_medium %>" data-sub = "<%= @movie.link.subtitle %>"></div>
 <% elsif @movie.link.amazon? %>
   <div id="player" data-url="<%= @movie.link.amazon_url %>" ></div>
 <% else %>

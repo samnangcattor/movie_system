@@ -71,17 +71,17 @@ class MoviesController < ApplicationController
       @link_super_hd = movie_link.ulr_super_hd
     end
 
-    case filter_quality.to_i
-    when Settings.qualities.medium then
-      @link_movie = @link_medium
-    when Settings.qualities.hight then
-      @link_movie = @link_hd
-    else
-      @link_movie = @link_default
-    end
-    if filter_quality.present?
-      respond_to :js
-    end
+    # case filter_quality.to_i
+    # when Settings.qualities.medium then
+    #   @link_movie = @link_medium
+    # when Settings.qualities.hight then
+    #   @link_movie = @link_hd
+    # else
+    #   @link_movie = @link_default
+    # end
+    # if filter_quality.present?
+    #   respond_to :js
+    # end
   end
 
   def new_article_banner

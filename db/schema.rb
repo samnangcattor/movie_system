@@ -41,7 +41,6 @@ ActiveRecord::Schema.define(version: 20160513081833) do
     t.string   "authkey",            limit: 255
     t.text     "youtube_embed_link", limit: 65535
     t.text     "amazon_url",         limit: 65535
-    t.text     "drive_url",          limit: 65535
     t.boolean  "redirect_url"
     t.string   "file_id",            limit: 255
     t.string   "folder",             limit: 255

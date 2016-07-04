@@ -37,9 +37,6 @@
         <p><%= @movie.description %></p>
       </div>
     </div>
-    <div class="movie-suggestion">
-      <%= render "suggestion_movie" %>
-    </div>
     <div id="paginator-suggest-movie">
       <%= render "shared/pagenator", objects: @movie_suggestions, page: 3 %>
     </div>

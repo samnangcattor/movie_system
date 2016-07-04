@@ -8,9 +8,6 @@ class MoviesController < ApplicationController
   SCOPE = "https://www.googleapis.com/auth/drive"
 
   def index
-    @coming_soon_movies = ComingSoonMovie.all
-    @po_pular_movies = PoPularMovie.all
-    @request_movies = RequestMovie.all
     if @q.conditions.present?
       @movie_searchs = @q.result(distinct: true).order(created_at: :DESC).page params[:page]
       render layout: "category"
@@ -35,7 +32,6 @@ class MoviesController < ApplicationController
  def show
     @movie = Movie.find params[:id]
     @movie_categories = @movie.categories
-    @movie_suggestions = Movie.by_suggestion.page(params[:page_3]).per 10
     @progress_status = nil
     filter_quality = params[:filter_quality]
     if @movie.link.robot?

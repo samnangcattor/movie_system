@@ -12,7 +12,7 @@ class Movie < ActiveRecord::Base
 
   has_many :movie_categories
   has_many :categories, through: :movie_categories
-  has_one :link
+  has_one :link, dependent: :destroy
 
   validates :title, presence: true
   validates :description, presence: true
@@ -203,7 +203,7 @@ class Movie < ActiveRecord::Base
 
   private
   def create_link
-    Link.create movie_id: id, link_title: title, url_default: link_movie
+    Link.create movie_id: id, link_title: title, file_id: link_movie, robot: true, redirect_url: true
   end
 
   def get_login_google url

@@ -135,6 +135,7 @@ GEM
     headless (2.2.3)
     hover-rails (2.0.2)
       railties (>= 3.2)
+    htmlcompressor (0.3.0)
     http-cookie (1.0.2)
       domain_name (~> 0.5)
     httpclient (2.7.1)
@@ -393,6 +394,7 @@ DEPENDENCIES
   google-api-client
   headless
   hover-rails
+  htmlcompressor
   jbuilder (~> 2.0)
   jquery-rails
   jquery-turbolinks

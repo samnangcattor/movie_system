@@ -30,6 +30,7 @@ class MoviesController < ApplicationController
   end
 
  def show
+    @ipv4_address = request.remote_ip
     @movie = Movie.find params[:id]
     @movie_categories = @movie.categories
     @progress_status = nil

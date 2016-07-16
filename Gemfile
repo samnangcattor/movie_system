@@ -38,7 +38,6 @@ gem "headless"
 gem "sinatra", require: false
 gem "resque-pool"
 gem "resque", require: "resque/server"
-gem "htmlcompressor"
 
 group :development, :test do
   gem "pry"

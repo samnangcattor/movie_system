@@ -25,7 +25,6 @@ class MoviesController < ApplicationController
   end
 
  def show
-    @ipv4_address = Net::HTTP.get(URI("https://api.ipify.org"))
     @movie = Movie.find params[:id]
     @movie_categories = @movie.categories
     @progress_status = nil

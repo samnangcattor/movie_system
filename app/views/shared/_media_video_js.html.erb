@@ -1,7 +1,9 @@
 <video id="video" class="video-js vjs-default-skin" controls
- preload="auto" width="700" height="400" data-setup='{}'>
-  <% @link_video.each do |link_video| %>
-    <source src="<%= link_video.link %>" type="video/mp4" label="<%= link_video.quality %>" res="<%= link_video.quality %>">
+ preload="auto" width="700" height="400" autoplay data-setup='{}'>
+  <% if @link_video.present? %>
+    <% @link_video.each do |link_video| %>
+      <source src="<%= link_video.link %>" type="video/mp4" label="<%= link_video.quality %>" data-res="<%= link_video.quality %>">
+    <% end %>
   <% end %>
   <% if @movie.link.subtitle.present? %>
     <track label="English" kind="subtitles" srclang="en" src="<%= @movie.link.subtitle %>" default>
@@ -11,14 +13,8 @@
     that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
   </p>
 </video>
-<script>
-  videojs("video", {
-    controls: true,
-    plugins: {
-      videoJsResolutionSwitcher: {
-        default: "low",
-        dynamicLabel: true
-      }
-    }
-  })
+<script type="text/javascript">
+  videojs( '#video', { plugins : { resolutionSelector : {
+    default_res : "360"
+} } } );
 </script>

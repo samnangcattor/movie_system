@@ -22,8 +22,7 @@
 //= require provider.cast
 //= require provider.shaka
 //= require provider.youtube
-//= require video.min
-//= require videojs-resolution-switcher
+//= require video-quality-selector
 
   window.fbAsyncInit = function() {
     FB.init({

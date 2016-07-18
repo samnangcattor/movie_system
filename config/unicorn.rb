@@ -20,7 +20,7 @@ listen "/tmp/unicorn.movie_system.sock"
 
 # Number of processes
 # worker_processes 4
-worker_processes 4
+worker_processes 6
 
 # Time-out
 timeout 30

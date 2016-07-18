@@ -8,13 +8,8 @@ class MoviesController < ApplicationController
   SCOPE = "https://www.googleapis.com/auth/drive"
 
   def index
-    if @q.conditions.present?
-      @movie_searchs = @q.result(distinct: true).order(created_at: :DESC).page params[:page]
-      render layout: "category"
-    else
-      @movies = Movie.by_no_cinema.page params[:page_1]
-      @slideshows = Movie.by_slide
-    end
+    @movies = Movie.by_no_cinema.page params[:page_1]
+    @slideshows = Movie.by_slide
     render layout: "application"
   end
 
@@ -30,55 +25,15 @@ class MoviesController < ApplicationController
   end
 
  def show
-    @ipv4_address = request.remote_ip
+    @ipv4_address = Net::HTTP.get(URI("https://api.ipify.org"))
     @movie = Movie.find params[:id]
     @movie_categories = @movie.categories
     @progress_status = nil
     filter_quality = params[:filter_quality]
     if @movie.link.robot?
-      # begin
-      #   uri = URI @movie.link.url_default
-      #   response = Net::HTTP.get_response uri
-      #   code = response.code.to_s
-      # rescue
-      #   code = "404"
-      # end
-      # if code == "302"
-      #   @link_default = @movie.link.url_default
-      #   @link_hd = @movie.link.url_hd
-      # else
-      #  @progress_status = get_progress_status_id @movie.id, @movie.link if @movie.link.robot?
-      # end
       url = "https://drive.google.com/file/d/" + @movie.link.file_id + "/view"
-      link_video = @movie.collect_movie_from_url url
-      if link_video.size == 3
-        @link_default = link_video[2]
-        @link_medium = link_video[1]
-        @link_hd = link_video[0]
-      elsif link_video.size == 2
-        @link_default = link_video[1]
-        @link_medium = link_video[0]
-      else
-        @link_default = link_video[0]
-      end
-    else
-      movie_link = @movie.link
-      @link_default = movie_link.url_default
-      @link_hd = movie_link.url_hd
-      @link_super_hd = movie_link.ulr_super_hd
+      @link_video = @movie.collect_movie_from_url url
     end
-
-    # case filter_quality.to_i
-    # when Settings.qualities.medium then
-    #   @link_movie = @link_medium
-    # when Settings.qualities.hight then
-    #   @link_movie = @link_hd
-    # else
-    #   @link_movie = @link_default
-    # end
-    # if filter_quality.present?
-    #   respond_to :js
-    # end
   end
 
   def new_article_banner
@@ -88,7 +43,6 @@ class MoviesController < ApplicationController
   def search_movie
     @categories = Category.all.order name: :ASC
     @years = Year.all.order number: :ASC
-    @q = Movie.ransack params[:q]
   end
 
   def get_progress_status_id movie_id, movie_link

@@ -73,11 +73,11 @@ class Movie < ActiveRecord::Base
         pvideo = get_quality_video pool_video
         link = get_link_redirect_google get_link_movie(pvideo[1])
         if pvideo[0] == "18"
-          link_result << link
+          link_result << get_quality_movie("360", link)
         elsif pvideo[0]== "59"
-          link_result << link
+          link_result << get_quality_movie("480", link)
         elsif pvideo[0] == "22"
-          link_result << link
+          link_result << get_quality_movie("720", link)
         end
       end
       link_result
@@ -202,6 +202,13 @@ class Movie < ActiveRecord::Base
   end
 
   private
+  def get_quality_movie quality, link
+    video = OpenStruct.new
+    video.quality = quality
+    video.link = link
+    video
+  end
+
   def create_link
     Link.create movie_id: id, link_title: title, file_id: link_movie, robot: true, redirect_url: true
   end

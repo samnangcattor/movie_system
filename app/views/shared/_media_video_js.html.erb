@@ -1,0 +1,24 @@
+<video id="video" class="video-js vjs-default-skin" controls
+ preload="auto" width="700" height="400" data-setup='{}'>
+  <% @link_video.each do |link_video| %>
+    <source src="<%= link_video.link %>" type="video/mp4" label="<%= link_video.quality %>" res="<%= link_video.quality %>">
+  <% end %>
+  <% if @movie.link.subtitle.present? %>
+    <track label="English" kind="subtitles" srclang="en" src="<%= @movie.link.subtitle %>" default>
+  <% end %>
+  <p class="vjs-no-js">
+    To view this video please enable JavaScript, and consider upgrading to a web browser
+    that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+  </p>
+</video>
+<script>
+  videojs("video", {
+    controls: true,
+    plugins: {
+      videoJsResolutionSwitcher: {
+        default: "low",
+        dynamicLabel: true
+      }
+    }
+  })
+</script>

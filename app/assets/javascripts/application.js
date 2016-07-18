@@ -22,6 +22,7 @@
 //= require provider.cast
 //= require provider.shaka
 //= require provider.youtube
+//= require videojs-resolution-switcher
 
   window.fbAsyncInit = function() {
     FB.init({
@@ -55,98 +56,101 @@ $(function(){
 });
 
 $(function(){
-   var primaryCookie = "html5";
-   var skinURL = "flat";
-   var data_default = $("#extensive").data("default");
-   var data_hd = $("#extensive").data("hd");
-   var data_medium = $("#extensive").data("medium");
-   var data_sub = $("#extensive").data("sub");
+  var primaryCookie = "html5";
+  var skinURL = "flat";
+  var data_default = $("#extensive").data("default");
+  var data_hd = $("#extensive").data("hd");
+  var data_medium = $("#extensive").data("medium");
+  var data_sub = $("#extensive").data("sub");
+  var extensive_player = $("#extensive");
 
-   var cookies = document.cookie.split(";");
-   for (i=0; i < cookies.length; i++) {
-     var x = cookies[i].substr(0, cookies[i].indexOf("="));
-     var y = cookies[i].substr(cookies[i].indexOf("=") + 1);
-     x = x.replace(/^\s+|\s+$/g,"");
-     if (x == "primaryCookie") {
-         primaryCookie = y;
-     } else if (x == "skinURL") {
-         skinURL = y;
-     }
-  }
+    if (extensive_player.length > 0){
+     var cookies = document.cookie.split(";");
+     for (i=0; i < cookies.length; i++) {
+       var x = cookies[i].substr(0, cookies[i].indexOf("="));
+       var y = cookies[i].substr(cookies[i].indexOf("=") + 1);
+       x = x.replace(/^\s+|\s+$/g,"");
+       if (x == "primaryCookie") {
+           primaryCookie = y;
+       } else if (x == "skinURL") {
+           skinURL = y;
+       }
+    }
 
-   if (data_hd != ""){
-     jwplayer("extensive").setup({
-       sources: [{
-         file: data_hd,
-         label: "720",
-         type: "mp4"
-       },{
-         file: data_medium,
-         label: "480",
-         type: "mp4"
-       },{
-         file: data_default,
-         label: "360",
-         "default": true,
-         type: "mp4"
-       }],
-       width: "100%",
-       aspectratio: "16:9",
-       skin: skinURL,
-       tracks: [{
-         file: data_sub,
-         label: "English",
-         kind: "captions",
-         "default": true
-       }],
-       primary: primaryCookie
-     });
-   }else if (data_medium != ""){
-     jwplayer("extensive").setup({
-       sources: [{
-         file: data_medium,
-         label: "480",
-         type: "mp4"
-       },{
-         file: data_default,
-         label: "360",
-         type: "mp4"
-       },{
-         file: data_default,
-         label: "Default",
-         "default": true,
-         type: "mp4"
-       }],
-       width: "100%",
-       aspectratio: "16:9",
-       skin: skinURL,
-       tracks: [{
-         file: data_sub,
-         label: "English",
-         kind: "captions",
-         "default": "true"
-       }],
-       primary: primaryCookie
-     });
-   }else {
-    jwplayer("extensive").setup({
-       sources: [{
-        file: data_default,
-        label: "360p",
-         "default": "true",
-         type: "mp4"
-       }],
-      width: "100%",
-      aspectratio: "16:9",
-      skin: skinURL,
-      tracks: [{
-        file: data_sub,
-        label: "English",
-        kind: "captions",
-        "default": true
-      }],
-      primary: primaryCookie
-    });
+     if (data_hd != ""){
+       jwplayer("extensive").setup({
+         sources: [{
+           file: data_hd,
+           label: "720",
+           type: "mp4"
+         },{
+           file: data_medium,
+           label: "480",
+           type: "mp4"
+         },{
+           file: data_default,
+           label: "360",
+           "default": true,
+           type: "mp4"
+         }],
+         width: "100%",
+         aspectratio: "16:9",
+         skin: skinURL,
+         tracks: [{
+           file: data_sub,
+           label: "English",
+           kind: "captions",
+           "default": true
+         }],
+         primary: primaryCookie
+       });
+     }else if (data_medium != ""){
+       jwplayer("extensive").setup({
+         sources: [{
+           file: data_medium,
+           label: "480",
+           type: "mp4"
+         },{
+           file: data_default,
+           label: "360",
+           type: "mp4"
+         },{
+           file: data_default,
+           label: "Default",
+           "default": true,
+           type: "mp4"
+         }],
+         width: "100%",
+         aspectratio: "16:9",
+         skin: skinURL,
+         tracks: [{
+           file: data_sub,
+           label: "English",
+           kind: "captions",
+           "default": "true"
+         }],
+         primary: primaryCookie
+       });
+     }else {
+      jwplayer("extensive").setup({
+         sources: [{
+          file: data_default,
+          label: "360p",
+           "default": "true",
+           type: "mp4"
+         }],
+        width: "100%",
+        aspectratio: "16:9",
+        skin: skinURL,
+        tracks: [{
+          file: data_sub,
+          label: "English",
+          kind: "captions",
+          "default": true
+        }],
+        primary: primaryCookie
+      });
+    }
   }
  });
 
@@ -158,7 +162,7 @@ $(function(){
   }
 
   if(typeof fuckAdBlock === "undefined") {
-      adBlockDetected();
+    adBlockDetected();
   } else {
     fuckAdBlock.on(true, adBlockDetected).onNotDetected();
   }

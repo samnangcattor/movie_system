@@ -1,5 +1,6 @@
 <section class="main-preview-player">
   <%= render "shared/announced" %>
+  <span>This is your ipv4: <%= @ipv4_address %></span>
   <div id="instructions" rel="noindex, nofollow">
     <% if @progress_status.present? %>
       <% if @progress_status.status_progress == Settings.status_progress.start %>
@@ -8,7 +9,7 @@
       <% end %>
     <% else %>
     <div class="media-player">
-      <%= render "shared/media_player" %>
+      <%= render "shared/media_video_js" %>
     </div>
     <% end %>
     <%= render "shared/facebook" %>

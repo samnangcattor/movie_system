@@ -17,7 +17,7 @@
 //= require facebook_page
 //= require fuckadblock
 //= require video-quality-selector
-//= require jquery.lazyload.min
+//= require blazy.min
 
   window.fbAsyncInit = function() {
     FB.init({
@@ -36,13 +36,22 @@
    }(document, 'script', 'facebook-jssdk'));
 
 $(function() {
-  $("img.lazy").lazyload({
-    event : "sporty"
-  });
+    var bLazy = new Blazy({
+        breakpoints: [{
+      width: 420 // Max-width
+          , src: 'data-src-small'
+  }]
+      , success: function(element){
+      setTimeout(function(){
+    // We want to remove the loader gif now.
+    // First we find the parent container
+    // then we remove the "loading" class which holds the loader image
+    var parent = element.parentNode;
+    parent.className = parent.className.replace(/\bloading\b/,'');
+      }, 200);
+        }
+   });
 
-  $("div.lazy").lazyload({
-    event : "sporty"
-  });
 });
 
 $(window).bind("load", function() {

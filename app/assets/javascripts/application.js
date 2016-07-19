@@ -16,13 +16,8 @@
 //= require bootstrap-sprockets
 //= require facebook_page
 //= require fuckadblock
-//= require jwplayer
-//= require polyfills.base64
-//= require polyfills.promise
-//= require provider.cast
-//= require provider.shaka
-//= require provider.youtube
 //= require video-quality-selector
+//= require jquery.lazyload.min
 
   window.fbAsyncInit = function() {
     FB.init({
@@ -40,19 +35,20 @@
      fjs.parentNode.insertBefore(js, fjs);
    }(document, 'script', 'facebook-jssdk'));
 
-$(function(){
-  var loader = $("#loader");
-  var duration = $("#duration");
-  var sec = 55;
-  if (loader.length >0){
-    timer = setInterval(function(){
-      duration.html(--sec+"s");
-      if (sec == 0) {
-        clearInterval(timer);
-        location.reload();
-      }
-    }, 1000);
-  }
+$(function() {
+  $("img.lazy").lazyload({
+    event : "sporty"
+  });
+
+  $("div.lazy").lazyload({
+    event : "sporty"
+  });
+});
+
+$(window).bind("load", function() {
+    var timeout = setTimeout(function() {
+        $("img.lazy").trigger("sporty")
+    }, 5000);
 });
 
 $(function(){

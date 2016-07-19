@@ -11,7 +11,13 @@
  * file per style scope.
  *
  *= require_self
- *= require_tree
+ *= require category
+ *= require custom
+ *= require menu
+ *= require movie
+ *= require pagenation
+ *= require request
+ *= require video-quality-selector
  *= require hover
  */
 

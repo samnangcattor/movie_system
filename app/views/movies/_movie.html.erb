@@ -1,10 +1,10 @@
 <li class="hvr-bounce-in">
   <% movie = get_movie movie %>
   <%= link_to movie_path(movie) do %>
-    <%= image_tag "loader.gif", class: "b-lazy img-thumbnail resize-photo-movie",
+    <%= image_tag movie.photo, class: "img-thumbnail resize-photo-movie",
       data: {title: movie.title, content: "", trigger: "hover", placement: "bottom",
       description: movie.description, publish_date: movie.year_number,
-      image: movie.get_quality,  movie_id: movie.id, html: true, src: movie.photo},
+      image: movie.get_quality,  movie_id: movie.id, html: true},
       id: "image_#{movie.id}", rel: "popover", alt: movie.title %>
   <% end %>
   <p class="movie-title text-warning"><%= movie.title %></p>

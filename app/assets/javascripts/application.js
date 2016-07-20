@@ -17,6 +17,8 @@
 //= require facebook_page
 //= require fuckadblock
 //= require video
+//= require video.novtt.dev
+//= require video.novtt
 //= require video-quality-selector
 //= require blazy.min
 

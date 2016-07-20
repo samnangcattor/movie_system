@@ -16,6 +16,7 @@
 //= require bootstrap-sprockets
 //= require facebook_page
 //= require fuckadblock
+//= require video
 //= require video-quality-selector
 //= require blazy.min
 

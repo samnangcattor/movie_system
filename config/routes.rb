@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   resources :categories, only: :show
   resources :requests, only: [:new, :create, :show]
   resources :years, only: :show
+  resources :advertises, only: :index
 
   namespace :admin do
     resources :users

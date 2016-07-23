@@ -1,10 +1,10 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
   <head>
     <%= metamagic %>
     <%= favicon_link_tag "cover1.ico" %>
-    <%= javascript_include_tag "application", "data-turbolinks-track": true %>
     <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track": true %>
+    <%= javascript_include_tag "application", "data-turbolinks-track": true %>
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -16,16 +16,16 @@
 
     </script>
     <%= csrf_meta_tags %>
-    <script>jwplayer.key="h31CinEzg5cZLvU1zo0J6Qltnx7IxONCefo6Sw==";</script>
   </head>
   <body>
-
-      <%= render "shared/header" %>
-      <div id="main">
-        <%= yield :context_mid %>
-        <%= yield %>
+    <%= render "shared/header" %>
+      <div id="wrapper">
+        <%= render "shared/main_nav" %>
+        <div id="main-movie">
+          <%= yield :context_menu %>
+          <%= yield %>
+        </div>
       </div>
-      <%= render "shared/flooter"%>
-      <%= render "shared/revenuehits_advertise" %>
+    <%= render "shared/flooter"%>
   </body>
 </html>

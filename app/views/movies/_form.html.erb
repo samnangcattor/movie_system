@@ -1,6 +1,5 @@
 <section class="main-preview-player">
   <%= render "shared/announced" %>
-  <span>Your ip is:<%= @ipv4_address %></span>
   <div id="instructions" rel="noindex, nofollow">
     <% if @progress_status.present? %>
       <% if @progress_status.status_progress == Settings.status_progress.start %>

@@ -43,26 +43,40 @@ class Movie < ActiveRecord::Base
   end
 
     def get_pool_video url
+      result = []
+      link_movies = []
       uri = URI url
       body = get_login_google uri
-      data = body.split '"fmt_stream_map","'
-      data2 = data[1].split "]"
-      data3 = data2[0].split '"'
-      data4 = data3[0].split ","
-      data4
+      data = body.split '"url_encoded_fmt_stream_map","'
+      all_data = data[1].split ","
+      all_data.each do |link|
+        link_movies << (link) if link.include?("codecs")
+      end
+      link_movies.each do |link_movie|
+        link_video = link_movie.split("\\u0026quality")[0]
+        result << link_video
+      end
+      result
     rescue
       ""
     end
 
     def get_quality_video url
-      scope_video = url.split "|"
-      [scope_video[0], scope_video[1]]
+      url = get_link_movie url
+      scope_video = url.split "url="
+      movie = scope_video[1]
+      quality = scope_video[0]
+      movie.gsub! "%3F", "?"
+      movie.gsub! "%3A%2F%2F", "://"
+      movie.gsub! "%2F", "/"
+      movie.gsub! "%3D", "="
+      movie.gsub! "%26", "&"
+      [quality, movie]
     end
 
     def get_link_movie url
       url_convert = url.gsub "\\u003d", "="
-      url_result = URI.unescape url_convert
-      last_result = url_result.gsub "\\u0026", "&"
+      last_result = url_convert.gsub "\\u0026", "&"
       last_result.to_s
     end
 
@@ -72,11 +86,11 @@ class Movie < ActiveRecord::Base
       pool_videos.each do |pool_video|
         pvideo = get_quality_video pool_video
         link = get_link_redirect_google get_link_movie(pvideo[1])
-        if pvideo[0] == "18"
+        if pvideo[0].include? "18"
           link_result << get_quality_movie("360", link)
-        elsif pvideo[0]== "59"
+        elsif pvideo[0].include? "59"
           link_result << get_quality_movie("480", link)
-        elsif pvideo[0] == "22"
+        elsif pvideo[0].include? "22"
           link_result << get_quality_movie("720", link)
         end
       end
@@ -227,31 +241,9 @@ class Movie < ActiveRecord::Base
   end
 
   def get_link_redirect_google url
-    result = url.split "docs.google.com/videoplayback?"
-    # arr_params = result[1].split "&"
-    # new_url = "https://redirector.googlevideo.com/videoplayback?" + arr_params[3] +
-    #   "&" + arr_params[7] + "&" + arr_params[1] + "&" + arr_params[10] + "&" +
-    #   arr_params[11] + "&" + arr_params[8] + "&" + arr_params[9] + "&" +
-    #   arr_params[2] + "&" + arr_params[13] + "&" + arr_params[6] + "&" +
-    #   arr_params[0] + "&" + arr_params[16] + "&" + arr_params[12] + "&" +
-    #   arr_params[15] + "&" + arr_params[17] + "&" + arr_params[4] + "&" +
-    #   arr_params[5] + "&" + "filename=video.mp4"
-    result[1].gsub! "texmex", "explorer"
-    result[1].gsub! "mv=m", "mv=u"
-    new_url = "https://redirector.googlevideo.com/videoplayback?" + result[1]
-    movie_url =
-    new_url
-  end
-
-  def with_retry(tries)
-    yield
-  rescue
-    tries -= 1
-    if tries > 1
-      sleep(1)
-      retry
-    else
-      raise $!
-    end
+    url.gsub! "texmex", "explorer"
+    url.gsub! "mv=m", "mv=u"
+    url = "https://redirector.googlevideo.com/videoplayback?" + url.split("google.com/videoplayback?")[1]
+    url
   end
 end

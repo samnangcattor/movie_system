@@ -244,6 +244,7 @@ class Movie < ActiveRecord::Base
     url.gsub! "texmex", "explorer"
     url.gsub! "mv=m", "mv=u"
     url = "https://redirector.googlevideo.com/videoplayback?" + url.split("google.com/videoplayback?")[1]
-    url
+    new_url = url.split("&type=video/mp4")[0]
+    new_url
   end
 end

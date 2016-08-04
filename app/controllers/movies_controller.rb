@@ -27,11 +27,19 @@ class MoviesController < ApplicationController
  def show
     @movie = Movie.find params[:id]
     @movie_categories = @movie.categories
-    @progress_status = nil
-    filter_quality = params[:filter_quality]
     if @movie.link.robot?
-      url = "https://drive.google.com/file/d/" + @movie.link.file_id + "/view"
+      url = "https://docs.google.com/get_video_info?authuser=&docid=" + @movie.link.file_id
       @link_video = @movie.collect_movie_from_url url
+    end
+    if @link_video.count == 1
+      @link_default = @link_video[0].link
+    elsif @link_video.count == 2
+      @link_medium = @link_video[0].link
+      @link_default = @link_video[1].link
+    elsif @link_video.count == 3
+      @link_hd = @link_video[0].link
+      @link_medium = @link_video[1].link
+      @link_default = @link_video[2].link
     end
   end
 

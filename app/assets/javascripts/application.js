@@ -16,11 +16,12 @@
 //= require bootstrap-sprockets
 //= require facebook_page
 //= require fuckadblock
-//= require video
-//= require video.novtt.dev
-//= require video.novtt
-//= require video-quality-selector
-//= require blazy.min
+//= require jwplayer
+//= require polyfills.base64
+//= require polyfills.promise
+//= require provider.cast
+//= require provider.shaka
+//= require provider.youtube
 
   window.fbAsyncInit = function() {
     FB.init({
@@ -38,34 +39,9 @@
      fjs.parentNode.insertBefore(js, fjs);
    }(document, 'script', 'facebook-jssdk'));
 
-$(function() {
-    var bLazy = new Blazy({
-        breakpoints: [{
-      width: 420 // Max-width
-          , src: 'data-src-small'
-  }]
-      , success: function(element){
-      setTimeout(function(){
-    // We want to remove the loader gif now.
-    // First we find the parent container
-    // then we remove the "loading" class which holds the loader image
-    var parent = element.parentNode;
-    parent.className = parent.className.replace(/\bloading\b/,'');
-      }, 200);
-        }
-   });
-
-});
-
-$(window).bind("load", function() {
-    var timeout = setTimeout(function() {
-        $("img.lazy").trigger("sporty")
-    }, 5000);
-});
-
 $(function(){
   var primaryCookie = "html5";
-  var skinURL = "flat";
+  var skinURL = "vapor";
   var data_default = $("#extensive").data("default");
   var data_hd = $("#extensive").data("hd");
   var data_medium = $("#extensive").data("medium");

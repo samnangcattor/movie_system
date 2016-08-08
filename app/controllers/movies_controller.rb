@@ -28,7 +28,7 @@ class MoviesController < ApplicationController
     @movie = Movie.find params[:id]
     @movie_categories = @movie.categories
     if @movie.link.robot?
-      url = "https://docs.google.com/get_video_info?authuser=&docid=" + @movie.link.file_id
+      url = "https://docs.google.com/file/d/" + @movie.link.file_id + "/view"
       @link_video = @movie.collect_movie_from_url url
     end
     if @link_video.count == 1

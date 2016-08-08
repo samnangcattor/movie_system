@@ -230,7 +230,8 @@ class Movie < ActiveRecord::Base
   end
 
   def get_link_redirect_google url
-    url = "https://redirector.googlevideo.com/videoplayback?" + url.split("google.com/videoplayback?")[1]
+    new_url =  url.split(".com/videoplayback?")[1]
+    url = "https://redirector.googlevideo.com/videoplayback?" + new_url
     url
   end
 end

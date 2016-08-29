@@ -38,6 +38,7 @@ gem "headless"
 gem "sinatra", require: false
 gem "resque-pool"
 gem "resque", require: "resque/server"
+gem "rest-client"
 
 group :development, :test do
   gem "pry"

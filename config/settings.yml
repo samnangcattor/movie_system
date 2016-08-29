@@ -55,3 +55,5 @@ qualities:
   low: 360
   medium: 480
   hight: 720
+rss_feeds:
+  extratorrent: "http://extratorrent.cc/rss.xml?type=hot&cat=XVID+DIVX"

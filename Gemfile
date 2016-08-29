@@ -39,6 +39,7 @@ gem "sinatra", require: false
 gem "resque-pool"
 gem "resque", require: "resque/server"
 gem "rest-client"
+gem "imdb"
 
 group :development, :test do
   gem "pry"

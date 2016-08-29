@@ -6,6 +6,7 @@ require "googleauth"
 require "googleauth/stores/file_token_store"
 require 'capybara'
 require 'capybara/dsl'
+require "rss"
 
 
 # Require the gems listed in Gemfile, including any gems

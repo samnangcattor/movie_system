@@ -13,6 +13,7 @@ class Movie < ActiveRecord::Base
   has_many :movie_categories
   has_many :categories, through: :movie_categories
   has_one :link, dependent: :destroy
+  has_one :download, dependent: :destroy
 
   validates :title, presence: true
   validates :description, presence: true

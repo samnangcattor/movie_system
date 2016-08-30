@@ -40,6 +40,7 @@ gem "resque-pool"
 gem "resque", require: "resque/server"
 gem "rest-client"
 gem "imdb"
+gem "whenever", :require => false
 
 group :development, :test do
   gem "pry"

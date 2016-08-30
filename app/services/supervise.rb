@@ -14,5 +14,16 @@ class Supervise
         end
       end
     end
+
+    def file_mime_type file
+      mime_type = if file.name.include?(".mkv") || file.name.include?(".MKV")
+        "video/x-matroska"
+      elsif file.name.include?(".mp4") || file.name.include?(".MP4")
+        "video/mp4"
+      elsif  file.name.include?(".avi") || file.name.include?(".AVI")
+        "video/x-msvideo"
+      end
+      mime_type
+    end
   end
 end

@@ -11,7 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160513081833) do
+ActiveRecord::Schema.define(version: 20160830074427) do
+
+  create_table "authenticates", force: :cascade do |t|
+    t.string   "authenticate", limit: 255
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
 
   create_table "categories", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -26,6 +32,16 @@ ActiveRecord::Schema.define(version: 20160513081833) do
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
   end
+
+  create_table "downloads", force: :cascade do |t|
+    t.integer  "status",     limit: 4
+    t.integer  "movie_id",   limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+    t.integer  "torrent",    limit: 4
+  end
+
+  add_index "downloads", ["movie_id"], name: "index_downloads_on_movie_id", using: :btree
 
   create_table "links", force: :cascade do |t|
     t.integer  "movie_id",           limit: 4

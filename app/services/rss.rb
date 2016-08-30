@@ -17,11 +17,17 @@ class Rss
       end
       imdb_id = imdb_link.split("imdb.com/title/tt")[1].delete "/"
       imdb = Imdb::Movie.new imdb_id
-      enclosure = feed.enclosure
-      torrent = enclosure.url
+      torrent = maget_link feed.link
       title =  imdb.title + " (" + imdb.year.to_s + ")"
       {title: title, photo: imdb.poster,
         year: imdb.year, torrent: torrent}
+    end
+
+    def maget_link url
+      agent = Mechanize.new
+      page = agent.get url
+      magnet = page.search "//a[@title='Magnet link']"
+      magnet[0].attributes["href"].value
     end
   end
 end

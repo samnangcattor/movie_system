@@ -35,7 +35,6 @@ gem "capybara-webkit"
 gem "capybara"
 gem "selenium-webdriver"
 gem "headless"
-gem "sinatra", require: false
 gem "resque-pool"
 gem "resque", require: "resque/server"
 gem "rest-client"
@@ -44,7 +43,6 @@ gem "whenever", :require => false
 
 group :development, :test do
   gem "pry"
-  gem "web-console", "~> 2.0"
   gem "spring"
   gem "faker"
   gem "factory_girl_rails"

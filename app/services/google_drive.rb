@@ -7,7 +7,11 @@ class GoogleDrive
     SCOPE = "https://www.googleapis.com/auth/drive"
 
     def get_service
-      service = Google::Apis::DriveV2::DriveService.new
+      service = Google::Apis::DriveV2::DriveService.new.tap do |client|
+        client.request_options.timeout_sec = 10800
+        client.request_options.open_timeout_sec = 10800
+        client.request_options.retries = 5
+      end
       service.client_options.application_name = APPLICATION_NAME
       service.authorization = authorize
       service

@@ -3,7 +3,7 @@ class Supervise
     def import_movies
       movies_in_extra = Rss.movies_from_extra
       movies_in_extra.each do |movie|
-        download = Torrent.add movie.torrent
+        download = Torrent.add movie[:torrent]
         generate_movies movie
         last_movie = Movie.last
         Download.create status: 0, movie: last_movie, torrent: download[:id]
@@ -20,7 +20,8 @@ class Supervise
             service = GoogleDrive.get_service
             movie_file = prepare_file_upload movie.title, download.torrent
             GoogleDrive.upload_to_drive service, movie_file, "0B7KgDDTcGh7lUGl5Vk40WE5FYVk"
-            download.upate status: 1
+            download.update status: 1
+            Torrent.remove download.torrent
           end
         end
       end
@@ -32,12 +33,12 @@ class Supervise
       {"title": title, "file_path": movie_path, "mime_type": mime_type}
     end
 
-    def file_mime_type file
-      mime_type = if file.name.include?(".mkv") || file.name.include?(".MKV")
+    def file_mime_type movie_path
+      mime_type = if movie_path.include?(".mkv") || movie_path.include?(".MKV")
         "video/x-matroska"
-      elsif file.name.include?(".mp4") || file.name.include?(".MP4")
+      elsif movie_path.include?(".mp4") || movie_path.include?(".MP4")
         "video/mp4"
-      elsif file.name.include?(".avi") || file.name.include?(".AVI")
+      elsif movie_path.include?(".avi") || movie_path.include?(".AVI")
         "video/x-msvideo"
       end
       mime_type

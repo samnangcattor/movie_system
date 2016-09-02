@@ -1,18 +1,15 @@
 class UploadsController < ApplicationController
-  OOB_URI = "https://moviehdkh/oauth2callback"
+  OOB_URI = "http://localhost:3000/oauth2callback"
   APPLICATION_NAME = "Movidhdkh"
   CLIENT_SECRETS_PATH = "lib/google_drive/client_secret.json"
-  CREDENTIALS_PATH = File.join "lib/google_drive/", ".credentials", "moviehdkh.yaml"
+  CREDENTIALS_PATH = File.join "lib/google_drive/", ".credentials", "moviehdkh-com.yaml"
   SCOPE = "https://www.googleapis.com/auth/drive"
 
   def index
-    upload = params[:upload]
-    if upload.present?
-      file = params[:file]
-      service = Google::Apis::DriveV2::DriveService.new
-      service.client_options.application_name = APPLICATION_NAME
-      service.authorization = authorize
-    end
+    file = params[:file]
+    service = Google::Apis::DriveV2::DriveService.new
+    service.client_options.application_name = APPLICATION_NAME
+    service.authorization = authorize
   end
 
   def update

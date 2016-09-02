@@ -2,12 +2,22 @@ class Supervise
   class << self
     def import_movies
       movies_in_extra = Rss.movies_from_extra
+      downloads = Download.all
       movies_in_extra.each do |movie|
-        download = Torrent.add movie[:torrent]
-        generate_movies movie
-        last_movie = Movie.last
-        Download.create status: 0, movie: last_movie, torrent: download[:id]
+        if check_movie? downloads, movie
+          download = Torrent.add movie[:torrent]
+          generate_movies movie
+          last_movie = Movie.last
+          Download.create status: 0, movie: last_movie, torrent: download[:id]
+        end
       end
+    end
+
+    def check_movie? downloads, movies_extra
+      downloads.each do |download|
+        return false if download.movie.title.include? movies_extra[:title]
+      end
+      true
     end
 
     def check_torrent_status

@@ -6,6 +6,9 @@
     <% if @movies.present? %>
       <div class="new-movie">
         <%= render "content_new_movie" %>
+      </div>
+      <hr/>
+      <div class="container">
         <%= render "shared/mdgid_advertise" %>
       </div>
       <div id="paginator-new-movie">
@@ -13,6 +16,4 @@
         <%= render "shared/google_advertise" %>
       </div>
     <% end %>
-    <hr/>
-    <%= render "shared/mdgid_advertise" %>
 <% end %>

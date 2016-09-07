@@ -17,6 +17,9 @@
   </div>
 </section>
 <div class="container">
+  <%= render "shared/mdgid_advertise" %>
+</div>
+<div class="container">
   <div class="description_movie">
     <h1 id="title_movie">
       <%= @movie.title %>
@@ -36,7 +39,7 @@
       </div>
     </div>
     <div id="paginator-suggest-movie">
-      <%= render "shared/pagenator", objects: @movie_suggestions, page: 3 %>
+      <%= render "shared/google_advertise" %>
     </div>
   </div>
 </div>

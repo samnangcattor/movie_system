@@ -8,7 +8,7 @@ class MoviesController < ApplicationController
   SCOPE = "https://www.googleapis.com/auth/drive"
 
   def index
-    @movies = Movie.by_no_cinema.page params[:page_1]
+    @movies = Movie.by_no_cinema.page params[:page]
     @slideshows = Movie.by_slide
     render layout: "application"
   end

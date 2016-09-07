@@ -28,8 +28,8 @@ class Rss
         year = "2000"
         poster = "https://moviehdkh.com/assets/logo-a89ac077ebeb6e980852ad282214a68f0cf5966f43a863588b2bdad9749bc7c4.png"
       end
-        {title: title, photo: poster,
-          year: year, torrent: torrent}
+      {title: title, photo: poster,
+        year: year, torrent: torrent}
     end
 
     def maget_link url

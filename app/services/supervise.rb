@@ -94,5 +94,12 @@ class Supervise
       end
       movie_file_path
     end
+
+    def single_dowload movie
+      download = Torrent.add movie[:torrent]
+      generate_movies movie
+      last_movie = Movie.last
+      Download.create status: 0, movie: last_movie, torrent: download[:id]
+    end
   end
 end

@@ -31,7 +31,7 @@ class Supervise
             movie_file = prepare_file_upload movie.title, download.torrent
             file_uploaded = GoogleDrive.upload_to_drive service, movie_file, "0B7KgDDTcGh7lUGl5Vk40WE5FYVk"
             download.update status: 1, file_progress: 1
-            movie.link.update file_id: file_uploaded
+            movie.link.update file_id: file_uploaded.id
             Torrent.remove download.torrent
           end
         end

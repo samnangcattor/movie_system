@@ -29,8 +29,9 @@ class Supervise
             movie = download.movie
             service = GoogleDrive.get_service
             movie_file = prepare_file_upload movie.title, download.torrent
-            GoogleDrive.upload_to_drive service, movie_file, "0B7KgDDTcGh7lUGl5Vk40WE5FYVk"
-            download.update status: 1
+            file_uploaded = GoogleDrive.upload_to_drive service, movie_file, "0B7KgDDTcGh7lUGl5Vk40WE5FYVk"
+            download.update status: 1, file_progress: 1
+            movie.link.update file_id: file_uploaded
             Torrent.remove download.torrent
           end
         end
@@ -100,6 +101,21 @@ class Supervise
       generate_movies movie
       last_movie = Movie.last
       Download.create status: 0, movie: last_movie, torrent: download[:id]
+    end
+
+    def check_file_ready?
+      service = GoogleDrive.get_service
+      downloads = Download.all
+      downloads.each do |download|
+        if download.file_progress == 1
+          movie = download.movie
+          file = service.get_file movie.link.file_id
+          if file.thumbnail_link.present?
+            movie.update cinema: false
+            download.update file_progress: 0
+          end
+        end
+      end
     end
   end
 end

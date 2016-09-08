@@ -12,7 +12,12 @@
         <%= render "shared/mdgid_advertise" %>
       </div>
       <div id="paginator-new-movie">
-        <%= paginate @movies %>
+        <span class="badge pagination">
+          <%= link_to_previous_page @movies, "Previous Page" %>
+        </span>
+        <span class="badge pagination">
+          <%= link_to_next_page @movies, "Next Page" %>
+        </span>
         <%= render "shared/google_advertise" %>
       </div>
     <% end %>

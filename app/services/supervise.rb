@@ -25,14 +25,16 @@ class Supervise
       downloads.each do |download|
         if download.status == 0
           torrent_status = Torrent.get download.torrent
-          if torrent_status[0][:percentDone].to_i == 1
-            movie = download.movie
-            service = GoogleDrive.get_service
-            movie_file = prepare_file_upload movie.title, download.torrent
-            file_uploaded = GoogleDrive.upload_to_drive service, movie_file, "0B7KgDDTcGh7lUGl5Vk40WE5FYVk"
-            download.update status: 1, file_progress: 1
-            movie.link.update file_id: file_uploaded.id
-            Torrent.remove download.torrent
+          if torrent_status[0].present?
+            if torrent_status[0][:percentDone].to_i == 1
+              movie = download.movie
+              service = GoogleDrive.get_service
+              movie_file = prepare_file_upload movie.title, download.torrent
+              file_uploaded = GoogleDrive.upload_to_drive service, movie_file, "0B7KgDDTcGh7lUGl5Vk40WE5FYVk"
+              download.update status: 1, file_progress: 1
+              movie.link.update file_id: file_uploaded.id
+              Torrent.remove download.torrent
+            end
           end
         end
       end

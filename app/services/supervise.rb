@@ -53,6 +53,8 @@ class Supervise
         "video/mp4"
       elsif movie_path.include?(".avi") || movie_path.include?(".AVI")
         "video/x-msvideo"
+      elsif movie_path.include?(".wmv") || movie_path.include?(".WMV")
+        "video/x-ms-wmv"
       end
       mime_type
     end
@@ -77,7 +79,7 @@ class Supervise
         list_path_files << path
       end
       file_movie_paths = []
-      video_types = [".AVI", ".avi", ".mp4", ".MP4", ".mkv", ".MKV"]
+      video_types = [".AVI", ".avi", ".mp4", ".MP4", ".mkv", ".MKV", ".wmv", ".WMV"]
       list_path_files.each do |file_path|
         video_types.each do |type|
           if file_path.include? type

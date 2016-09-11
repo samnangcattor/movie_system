@@ -13,7 +13,6 @@ class Movie < ActiveRecord::Base
   has_many :movie_categories
   has_many :categories, through: :movie_categories
   has_one :link, dependent: :destroy
-  has_one :download, dependent: :destroy
 
   validates :title, presence: true
   validates :description, presence: true
@@ -48,30 +47,19 @@ class Movie < ActiveRecord::Base
       link_movies = []
       uri = URI url
       body = get_login_google uri
-      data = body.split '"url_encoded_fmt_stream_map","'
-      all_data = data[1].split ","
-      all_data.each do |link|
-        link_movies << (link) if link.include?("codecs")
-      end
-      link_movies.each do |link_movie|
-        link_video = link_movie.split("\\u0026quality")[0]
-        result << link_video
-      end
+      data = body.split "fmt_stream_map="
+      data_decode = URI.unescape data[1]
+      remove_ftm_list = data_decode.split("&fmt_list")[0]
+      result = remove_ftm_list.split ","
       result
     rescue
       ""
     end
 
     def get_quality_video url
-      url = get_link_movie url
-      scope_video = url.split "url="
-      movie = scope_video[1]
+      scope_video = url.split "|"
       quality = scope_video[0]
-      movie.gsub! "%3F", "?"
-      movie.gsub! "%3A%2F%2F", "://"
-      movie.gsub! "%2F", "/"
-      movie.gsub! "%3D", "="
-      movie.gsub! "%26", "&"
+      movie = scope_video[1]
       [quality, movie]
     end
 
@@ -242,10 +230,7 @@ class Movie < ActiveRecord::Base
   end
 
   def get_link_redirect_google url
-    url.gsub! "texmex", "explorer"
-    url.gsub! "mv=m", "mv=u"
     url = "https://redirector.googlevideo.com/videoplayback?" + url.split("google.com/videoplayback?")[1]
-    new_url = url.split("&type=video/mp4")[0]
-    new_url
+    url
   end
 end

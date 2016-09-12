@@ -11,7 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160908064359) do
+ActiveRecord::Schema.define(version: 20160912021342) do
+
+  create_table "authenticates", force: :cascade do |t|
+    t.string   "authenticate", limit: 255
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
 
   create_table "categories", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -57,6 +63,8 @@ ActiveRecord::Schema.define(version: 20160908064359) do
     t.string   "folder",             limit: 255
     t.boolean  "robot"
     t.text     "ulr_super_hd",       limit: 65535
+    t.integer  "status_appex",       limit: 4,     default: 0
+    t.string   "file_back_up",       limit: 255
   end
 
   add_index "links", ["movie_id"], name: "index_links_on_movie_id", using: :btree

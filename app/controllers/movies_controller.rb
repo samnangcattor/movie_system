@@ -41,7 +41,7 @@ class MoviesController < ApplicationController
         @link_video = @movie.collect_movie_from_url url
       end
       unless @link_video.present?
-        link = movie.link
+        link = @movie.link
         file_back_up = link.file_back_up
         link.update file_id: file_back_up
         url = "https://docs.google.com/file/d/" + @movie.link.file_id + "/preview"

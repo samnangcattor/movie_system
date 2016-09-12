@@ -31,7 +31,7 @@ class MoviesController < ApplicationController
         url = "https://docs.google.com/file/d/" + @movie.link.file_id + "/preview"
         @link_video = @movie.list_link_movie url
         unless @link_video.present?
-          Resque.enqueue LinksWorker, movie.id
+          Resque.enqueue LinksWorker, @movie.id
           url = "https://docs.google.com/get_video_info?authuser=&docid=" + @movie.link.file_id
           @link_video = @movie.collect_movie_from_url url
           @movie.link.update status_appex: 1

@@ -13,6 +13,7 @@ class Movie < ActiveRecord::Base
   has_many :movie_categories
   has_many :categories, through: :movie_categories
   has_one :link, dependent: :destroy
+  has_one :download, dependent: :destroy
 
   validates :title, presence: true
   validates :description, presence: true
@@ -86,6 +87,57 @@ class Movie < ActiveRecord::Base
       link_result
     rescue
       []
+    end
+
+    def list_link_movie url
+      link_result = []
+      pool_videos = list_pool_video url
+      pool_videos.each do |pool_video|
+        pvideo = list_quality_video pool_video
+        link = list_link_redirect_google get_link_movie(pvideo[1])
+        if pvideo[0].include? "18"
+          link_result << get_quality_movie("360", link)
+        elsif pvideo[0].include? "59"
+          link_result << get_quality_movie("480", link)
+        elsif pvideo[0].include? "22"
+          link_result << get_quality_movie("720", link)
+        end
+      end
+      link_result
+    rescue
+      []
+    end
+
+    def list_pool_video url
+      result = []
+      link_movies = []
+      uri = URI url
+      body = get_login_google uri
+      data = body.split '"url_encoded_fmt_stream_map","'
+      all_data = data[1].split ","
+      all_data.each do |link|
+        link_movies << (link) if link.include?("codecs")
+      end
+      link_movies.each do |link_movie|
+        link_video = link_movie.split("\\u0026quality")[0]
+        result << link_video
+      end
+      result
+    rescue
+      ""
+    end
+
+    def list_quality_video url
+      url = get_link_movie url
+      scope_video = url.split "url="
+      movie = scope_video[1]
+      quality = scope_video[0]
+      movie.gsub! "%3F", "?"
+      movie.gsub! "%3A%2F%2F", "://"
+      movie.gsub! "%2F", "/"
+      movie.gsub! "%3D", "="
+      movie.gsub! "%26", "&"
+      [quality, movie]
     end
 
   class << self
@@ -232,5 +284,13 @@ class Movie < ActiveRecord::Base
   def get_link_redirect_google url
     url = "https://redirector.googlevideo.com/videoplayback?" + url.split("com/videoplayback?")[1]
     url
+  end
+
+  def list_link_redirect_google url
+    url.gsub! "texmex", "explorer"
+    url.gsub! "mv=m", "mv=u"
+    url = "https://redirector.googlevideo.com/videoplayback?" + url.split("google.com/videoplayback?")[1]
+    new_url = url.split("&type=video/mp4")[0]
+    new_url
   end
 end

@@ -25,10 +25,6 @@
       <%= @movie.title %>
     </h1>
     <div class="text-left">
-      <%= t "movies.popover.category" %>
-      <%= render "contain_category" %>
-    </div>
-    <div class="text-left">
       <%= t "movies.popover.publish_date" %>
       <h5><%= link_to @movie.year_number, @movie.year %></h5>
     </div>

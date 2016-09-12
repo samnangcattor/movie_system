@@ -26,11 +26,30 @@ class MoviesController < ApplicationController
 
  def show
     @movie = Movie.find params[:id]
-    @movie_categories = @movie.categories
     if @movie.link.robot?
-      url = "https://docs.google.com/get_video_info?authuser=&docid=" + @movie.link.file_id
-      @link_video = @movie.collect_movie_from_url url
+      if @movie.link.status_appex == 0
+        url = "https://docs.google.com/file/d/" + @movie.link.file_id + "/preview"
+        @link_video = @movie.list_link_movie url
+        unless @link_video.present?
+          Resque.enqueue LinksWorker, movie.id
+          url = "https://docs.google.com/get_video_info?authuser=&docid=" + @movie.link.file_id
+          @link_video = @movie.collect_movie_from_url url
+          @movie.link.update status_appex: 1
+        end
+      else
+        url = "https://docs.google.com/get_video_info?authuser=&docid=" + @movie.link.file_id
+        @link_video = @movie.collect_movie_from_url url
+      end
+      unless @link_video.present?
+        link = movie.link
+        file_back_up = link.file_back_up
+        link.update file_id: file_back_up
+        url = "https://docs.google.com/file/d/" + @movie.link.file_id + "/preview"
+        @link_video = @movie.list_link_movie url
+        @movie.link.update status_appex: 0
+      end
     end
+
     if @link_video.count == 1
       @link_default = @link_video[0].link
     elsif @link_video.count == 2

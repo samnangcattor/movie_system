@@ -1,20 +1,14 @@
 <nav class="navbar navbar-default navbar-fixed-top">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar" aria-expanded="true" aria-controls="navbar">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
       <%= link_to root_path do %>
-        <%= image_tag "logo.png", id: "logo-page", alt: "Moviehd KH" %>
+        <%= image_tag "logo.png", id: "header-logo", alt: "Moviehd KH" %>
       <% end %>
     </div>
     <div id="navbar" class="navbar-collapse collapse out" aria-expanded="false">
       <ul class="nav navbar-nav">
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+          <a href="#" class="dropdown-toggle header-item" data-toggle="dropdown">
             <%= t "layouts.movie" %> <b class="caret"></b>
           </a>
           <ul class="dropdown-menu">
@@ -26,7 +20,7 @@
           </ul>
         </li>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+          <a href="#" class="dropdown-toggle header-item" data-toggle="dropdown">
             <%= t "layouts.year" %> <b class="caret"></b>
           </a>
           <ul class="dropdown-menu">
@@ -37,11 +31,11 @@
             <% end %>
           </ul>
         </li>
-        <li><%= link_to t("layouts.animie"), "http://bakaani.com/" %></li>
+        <li><%= link_to t("layouts.animie"), "http://bakaani.com/", class: "header-item" %></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><%= link_to t("layouts.request"), "https://www.facebook.com/messages/movieshdkh" %></li>
-        <li><%= link_to t("layouts.search"), searchs_path %> </li>
+        <li><%= link_to t("layouts.request"), "https://www.facebook.com/messages/movieshdkh", class: "header-item" %></li>
+        <li><%= link_to t("layouts.search"), searchs_path, class: "header-item" %> </li>
       </ul>
     </div>
   </div>

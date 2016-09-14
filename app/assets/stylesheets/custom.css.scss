@@ -1,209 +1,43 @@
 body {
   margin-top: 20px;
-  background: #222;
-  text-align: center;
   color: #aaa;
+  background: #222;
   font-family: "MotionPicture_PersonalUseOnly.ttf";
   src: url("fonts/MotionPicture_PersonalUseOnly.ttf");
-  background: radial-gradient(#333, hsl(200,30%,6%));
   font-size: 16px;
   h1 {line-height: 1.2em}
+  padding-top: 135px;
+}
 
-  #wrapper {
-    .navbar {
-      .row {
-        .logo {
-          text-align: center;
-        }
-        .link_login {
-          float: right;
-        }
-      }
-    }
+#header-logo {
+  height: 65px;
+  width: 176px;
+}
 
-    #main-nav {
-      margin-top: 100px;
-      position: relative;
-    }
-  }
+.header-item {
+  margin-top: 20px;
+}
 
-  #modal_form_login {
-    text-align: center;
-  }
+ul.list-movie {
+  overflow:hidden;
 
-  .resize-photo {
-    height: 500px !important;
-    width: calc(80%) !important;
-    margin-left: 10%;
-  }
-
-  #search-movie {
-    margin-top: 11px;
-    height: 27px;
-    width: 250px;
-  }
-
-  #logo-page {
-    height: 40px;
-    width: 130px;
-  }
-
-  .pagination > li > a, .pagination > li > span {
-    position: relative;
-    border: 1px solid #ddd;
-    float: none;
-    border-radius: 50%;
-    margin-left: 10px;
-    font-size: 15px;
-  }
-
-  .pagination > .active > a, .pagination > .active > a:hover, .pagination > .active > a:focus, .pagination > .active > span, .pagination > .active > span:hover, .pagination > .active > span:focus {
-    z-index: 2;
-    color: #fff;
-    background-color: #13AD2F;
-    border-color: #337ab7;
-    cursor: default;
-    border-radius: 50%;
-  }
-  .pagination-sm > li:last-child > a, .pagination-sm > li:last-child > span, .pagination > li:first-child > a, .pagination > li:first-child > span {
-    border-radius: 50%;
-  }
-
-  #main-movie {
-    ul {
-      position: static;
-      li {
-        margin-top: 20px;
-        width: calc(20% - 12px);
-        .resize-img-thumbnail {
-          width: 125px;
-          height: 180px;
-        }
-      }
-    }
-  }
-
-  .label-publish-date {
-    display: none;
-    font-size: 10px;
-  }
-
-  .image-hd-movie {
-    position: relative;
-    float: right;
-    width: 40px;
-    height: 28px;
-    bottom: 7px;
-  }
-
-  .movie-title {
-    font-size: 12px;
-    font-weight: bold;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 200px;
-  }
-
-  .main-preview-player {
-    text-align: center;
-    max-width: 1920px;
+  li {
+    display:inline-block;
   }
 }
 
-.facebook {
-  color: #7C97E0;
-
-  #share-fb {
-    width: 80px;
-    height: 30px;
-  }
+img.movie-img {
+  padding-bottom: 15px;
+  height: 385px;
+  width: 290px;
 }
 
-footer {
-  margin-bottom: 5px;
-  #page-facebook-title {
-    margin-bottom: 10px;
-  }
-
-  #category-name-footer {
-    font-size: 25px;
-
-    .span_category {
-      clear: both;
-      margin-right: 10px;
-    }
-    a {
-      color: #000000;
-      font-size: 17px;
-    }
-  }
-  .social-network {
-    float: left;
-    margin-top: 12px;
-
-    #youtube-logo, #plus-logo {
-      width: 60px;
-      height: 25px;
-      margin-right: 10px;
-    }
-  }
-}
-
-#player_logo{
-  position: absolute;
-  margin-left: 504px;
-  z-index: 500px;
-  width: 200px;
-}
-
-.resize-photo-movie {
-    width: 207px;
-    height: 306px;
-}
-
-.vjs-menu li.vjs-selected, .vjs-menu li.vjs-selected:focus, .vjs-menu li.vjs-selected:hover {
-  background-color: #fff;
-  color: #E60B0B;
-}
-
-.vjs-resolution-button ul.vjs-menu-content {
-  margin-top: -55px;
-  margin-left: 20px;
-}
-
-.navbar-default {
-  background-color: #131212;
-  border-color: #e7e7e7;
-}
-
-.navbar-fixed-top {
-    top: 0;
-    border-width: 0 0 0px;
-}
-
-.navbar-default .navbar-nav>li>a {
-  color: #FFD800;
-  font-weight: bold;
-}
-
-.text-warning {
-  color: #FFD800 !important;
-}
-
-.content-ads{
+.slide-img {
+  height: 450px !important;
   width: 100%;
-  height: 120px;
-  overflow: hidden;
-  position: relative;
-
-  .ads {
-    position: absolute;
-    top: -84px;
-    left: 0px
-  }
 }
 
-#announced {
-  margin-top: 73px;
+#extensive {
+  height: 370px;
+  width: 100% !important;
 }

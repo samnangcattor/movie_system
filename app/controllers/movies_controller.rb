@@ -26,7 +26,8 @@ class MoviesController < ApplicationController
 
  def show
     @movie = Movie.find params[:id]
-    if @movie.link.robot?
+    @link_video = [];
+    if @movie.link.robot? && @movie.link.file_id.present?
       if @movie.link.status_appex == 0
         url = "https://docs.google.com/file/d/" + @movie.link.file_id + "/preview"
         @link_video = @movie.list_link_movie url
@@ -62,50 +63,10 @@ class MoviesController < ApplicationController
     end
   end
 
-  def new_article_banner
-  end
-
   private
   def search_movie
     @categories = Category.all.order name: :ASC
     @years = Year.all.order number: :ASC
-  end
-
-  def get_progress_status_id movie_id, movie_link
-    progress_status = nil
-    title = nil
-    if ProgressStatus.all.map(&:progress_name).include? movie_id
-      progress_status = ProgressStatus.find_by progress_name: movie_id
-      if progress_status.status_progress == Settings.status_progress.finished
-        title = google_login movie_link
-        ProgressStatus.update progress_status.id, status_progress: Settings.status_progress.start, start_time: Time.now
-        Resque.enqueue MovieWorker, movie_id, progress_status.id, title
-      end
-    else
-      title = google_login movie_link
-      progress_status = ProgressStatus.create progress_name: movie_id, status_progress: Settings.status_progress.start, start_time: Time.now
-      Resque.enqueue MovieWorker, movie_id, progress_status.id, title
-    end
-    progress_status
-  end
-
-  def google_login movie_link
-    service = Google::Apis::DriveV2::DriveService.new
-    service.client_options.application_name = APPLICATION_NAME
-    service.authorization = authorize
-    file = service.get_file movie_link.file_id
-    old_folder_id = file.parents[0].id
-    new_folder_id = if old_folder_id == "0B7KgDDTcGh7lT0lQMXpfNGp0dVk"
-      "0B7KgDDTcGh7leDQwcHVUZ2VLQUU"
-    else
-      "0B7KgDDTcGh7lT0lQMXpfNGp0dVk"
-    end
-    title_new = "#{file.original_filename}-#{file.id}-#{new_folder_id}"
-    metadata = {title: title_new}
-    options = {add_parents: new_folder_id, remove_parents: old_folder_id}
-    service.patch_file file.id, metadata, options
-    Link.update movie_link.id, folder: new_folder_id
-    file.original_filename + "-" + file.id
   end
 
   def authorize

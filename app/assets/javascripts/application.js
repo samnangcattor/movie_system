@@ -19,9 +19,16 @@
 //= require jwplayer
 //= require polyfills.base64
 //= require polyfills.promise
+//= require polyfills.vttcue
+//= require polyfills.vttrenderer
 //= require provider.cast
+//= require provider.caterpillar
+//= require provider.flash
+//= require provider.html5
 //= require provider.shaka
 //= require provider.youtube
+//= require vttparser
+//= require jw-logo-bar
 
   window.fbAsyncInit = function() {
     FB.init({
@@ -41,102 +48,77 @@
 
 $(function(){
   var primaryCookie = "html5";
-  var skinURL = "vapor";
   var data_default = $("#extensive").data("default");
   var data_hd = $("#extensive").data("hd");
   var data_medium = $("#extensive").data("medium");
   var data_sub = $("#extensive").data("sub");
   var extensive_player = $("#extensive");
+  var color_inactive = "#f1c40f";
+  var color_active = "#f39c12";
+  var color_background = "#232221";
+  var quality = [];
 
-    if (extensive_player.length > 0){
-     var cookies = document.cookie.split(";");
-     for (i=0; i < cookies.length; i++) {
-       var x = cookies[i].substr(0, cookies[i].indexOf("="));
-       var y = cookies[i].substr(cookies[i].indexOf("=") + 1);
-       x = x.replace(/^\s+|\s+$/g,"");
-       if (x == "primaryCookie") {
-           primaryCookie = y;
-       } else if (x == "skinURL") {
-           skinURL = y;
-       }
-    }
 
-     if (data_hd != ""){
-       jwplayer("extensive").setup({
-         sources: [{
-           file: data_hd,
-           label: "720",
-           type: "mp4"
-         },{
-           file: data_medium,
-           label: "480",
-           type: "mp4"
-         },{
-           file: data_default,
-           label: "360",
-           "default": true,
-           type: "mp4"
-         }],
-         width: "100%",
-         aspectratio: "16:9",
-         skin: skinURL,
-         tracks: [{
-           file: data_sub,
-           label: "English",
-           kind: "captions",
-           "default": true
-         }],
-         primary: primaryCookie
-       });
-     }else if (data_medium != ""){
-       jwplayer("extensive").setup({
-         sources: [{
-           file: data_medium,
-           label: "480",
-           type: "mp4"
-         },{
-           file: data_default,
-           label: "360",
-           type: "mp4"
-         },{
-           file: data_default,
-           label: "Default",
-           "default": true,
-           type: "mp4"
-         }],
-         width: "100%",
-         aspectratio: "16:9",
-         skin: skinURL,
-         tracks: [{
-           file: data_sub,
-           label: "English",
-           kind: "captions",
-           "default": "true"
-         }],
-         primary: primaryCookie
-       });
-     }else {
-      jwplayer("extensive").setup({
-         sources: [{
-          file: data_default,
-          label: "360p",
-           "default": "true",
-           type: "mp4"
-         }],
-        width: "100%",
-        aspectratio: "16:9",
-        skin: skinURL,
-        tracks: [{
-          file: data_sub,
-          label: "English",
-          kind: "captions",
-          "default": true
-        }],
-        primary: primaryCookie
-      });
-    }
+  if (data_hd != "") {
+    quality = [{
+        file: data_hd,
+        type: "mp4",
+        label: "720"
+      },{
+        file: data_medium,
+        type: "mp4",
+        label: "480"
+      }, {
+        file: data_default,
+        type: "mp4",
+        default: true,
+        label: "360"
+    }];
+  } else if (data_medium != "") {
+    quality = [{
+        file: data_medium,
+        type: "mp4",
+        label: "480"
+      },{
+        file: data_default,
+        type: "mp4",
+        label: "360"
+      }, {
+        file: data_default,
+        type: "mp4",
+        default: true,
+        label: "default"
+    }];
+  } else {
+    quality = [{
+        file: data_default,
+        type: "mp4",
+        default: true,
+        label: "360"
+    }];
   }
+
+  jwplayer("extensive").setup({
+    playlist: [{
+    image: "https://moviehdkh.com/assets/logo-a89ac077ebeb6e980852ad282214a68f0cf5966f43a863588b2bdad9749bc7c4.png",
+    title: "your play button title",
+    sources: quality}],
+    height: 508,
+    primary: "html5",
+    autostart: true,
+    "sharing": {
+      "sites": ["facebook","twitter"]
+    },
+    controls: true,
+    skin : {
+      name: "flat",
+      active: color_active,
+      inactive: color_inactive,
+      background: color_background
+    }
+  });
  });
+
 
 $(function(){
   function adBlockDetected() {

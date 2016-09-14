@@ -1,21 +1,8 @@
-<section class="main-preview-player">
+<div class="container">
   <%= render "shared/announced" %>
-  <div id="instructions" rel="noindex, nofollow">
-    <% if @progress_status.present? %>
-      <% if @progress_status.status_progress == Settings.status_progress.start %>
-        <%= image_tag "loader.gif", id: "loader", height: 300, width: 300 %>
-        Please wait for <span id="duration">50s</span> for movie come
-      <% end %>
-    <% else %>
-    <div class="media-player">
-      <%= render "shared/media_player" %>
-    </div>
-    <% end %>
-    <div>
-    <h3>If the player does not work, <%= link_to "Clik Here", @link_default %> to use your device's player/try to disable IPv6</h3>
-    </div>
-  </div>
-</section>
+  <%= render "shared/media_player" %>
+  <h3>If the player does not work, <%= link_to "Clik Here", @link_default %> to use your device's player/try to disable IPv6</h3>
+</div>
 <div class="container">
   <%= render "shared/mdgid_advertise" %>
 </div>

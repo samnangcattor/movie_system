@@ -1,32 +1,4 @@
 .category {
-  ul {
-    position: static;
-    li {
-      width: calc(20% - 12px);
-      .resize-img-thumbnail {
-        width: 125px;
-        height: 180px;
-      }
-    }
-  }
-
-  .image-hd-movie {
-    position: relative;
-    float: right;
-    width: 40px;
-    height: 28px;
-    bottom: 7px;
-  }
-
-  .movie-title {
-    font-size: 12px;
-    font-weight: bold;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 200px;
-  }
-
   #category-name {
     margin-top: 50px;
     color: #a78613;

@@ -65,8 +65,12 @@ class MoviesController < ApplicationController
 
   private
   def search_movie
-    @categories = Category.all.order name: :ASC
-    @years = Year.all.order number: :ASC
+    @categories = Rails.cache.fetch("categories") do
+      Category.all.order name: :ASC
+    end
+    @years = Rails.cache.fetch("years") do
+      Year.all.order number: :ASC
+    end
   end
 
   def authorize

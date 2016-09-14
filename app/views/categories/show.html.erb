@@ -5,10 +5,10 @@
   <%= render "shared/google_advertise" %>
   <%= render "shared/mdgid_advertise" %>
   <% if @movies.present? %>
-    <div class="category">
+    <div class="category text-center">
       <h2 class="text-left" id="category-name"><%= @category.name %></h2>
       <hr/>
-      <ul class="list-unstyled list-inline">
+      <ul class="list-movie">
         <%= render @movies %>
       </ul>
       <%= paginate @movies %>

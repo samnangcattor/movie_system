@@ -35,7 +35,7 @@ images:
     is_main: 1
     not_main: 0
 page:
-  per_page_movie: 20
+  per_page_movie: 24
 status_progress:
   start: 0
   doing: 1

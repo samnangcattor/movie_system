@@ -1,4 +1,4 @@
-<div id="main-nav">
+<div id="main-nav" class="text-center">
   <div id="myCarousel" class="carousel slide" data-ride="carousel">
     <% if @slideshows.present? %>
       <ol class="carousel-indicators">
@@ -8,16 +8,16 @@
         <% end %>
       </ol>
 
-      <div class="carousel-inner" role="listbox">
+      <div class="carousel-inner slide-img" role="listbox">
         <div class="item active">
           <%= link_to @slideshows.first do %>
-            <%= image_tag @slideshows.first.link_cover, class: "resize-photo img-responsive" %>
+            <%= image_tag @slideshows.first.link_cover, class: "slide-img img-responsive" %>
           <% end %>
         </div>
         <% @slideshows.drop(1).each do |movie| %>
           <div class="item">
             <%= link_to movie do %>
-              <%= image_tag movie.link_cover, class: "resize-photo img-responsive" %>
+              <%= image_tag movie.link_cover, class: "slide-img img-responsive" %>
             <% end %>
           </div>
         <% end %>

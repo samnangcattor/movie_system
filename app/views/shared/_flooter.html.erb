@@ -16,20 +16,10 @@
         <div class="col-xs-4">
           <div class="col-xs-12">
             <div class="text-center"><i class="fa fa-location-arrow"></i> <%= t "layouts.location" %></div>
-            <div class="text-center"><i class="fa fa-envelope-o fa-fw"></i> <%= t "layouts.email" %></div>
             <div class="text-center">Find us on:</div>
           </div>
           <div class="col-xs-12">
-            <div class="col-xs-6">
-              <div class="social-network">
-                <span class="badge">
-                  <%= link_to "https://www.youtube.com/channel/UCTgXlEkhNwhx-hIxXglTdzw" do %>
-                    <%= image_tag "YouTube-logo-full_color.png", id: "youtube-logo" %>
-                  <% end %>
-                </span>
-              </div>
-            </div>
-            <div class="col-xs-6">
+            <div class="text-center">
               <div class="social-network">
                 <script src="https://apis.google.com/js/platform.js" async defer></script>
                 <div class="g-follow" data-annotation="bubble" data-height="20" data-href="//plus.google.com/u/0/106699123530264303390" data-rel="publisher"></div>
@@ -46,12 +36,12 @@
           </div>
         </div>
       </div>
-      <div class="col-sm-12 text-warning">
+      <div class="col-sm-12 text-warning text-center">
         <span class="badge logo-social"><h5><%= t "disclaimer_policy.title" %></h5></span>
         <p><%= t "disclaimer_policy.body" %></p>
       </div>
     </div>
     <hr/>
-    <div class="text-warning"><%= t "layouts.moviehd_kh" %></div>
+    <div class="text-warning text-center"><%= t "layouts.moviehd_kh" %></div>
   </div>
 </footer>

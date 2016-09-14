@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   resources :advertises, only: :index
   resources :searchs, only: :index
   resources :uploads, only: [:index, :update]
+  resources :links, only: :index
 
   namespace :admin do
     resources :users

@@ -3,7 +3,7 @@ class GoogleDrive
     OOB_URI = "https://moviehdkh/oauth2callback"
     APPLICATION_NAME = "Movidhdkh"
     CLIENT_SECRETS_PATH = "lib/google_drive/client_secret.json"
-    CREDENTIALS_PATH = File.join "lib/google_drive/", ".credentials", "moviehdkh.yaml"
+    CREDENTIALS_PATH = File.join "lib/google_drive/", ".credentials", "moviehdkh-com.yaml"
     SCOPE = "https://www.googleapis.com/auth/drive"
 
     def get_service

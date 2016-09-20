@@ -21,6 +21,22 @@
           <%= text_field_tag "torrent[torrent]", nil, class: "form-control", required: true %>
         </div>
         <div class="form-group">
+          <select class="form-control" id="movie-genre">
+            <% Category.all.map(&:name).each do |name| %>
+              <option value="<%= name %>"><%= name %></option>
+            <% end %>
+          </select>
+          <div class="row">
+            <%= link_to "javascript:void(0)" do %>
+              <i class="glyphicon glyphicon-plus" id= "add-genre">Add Genre</i>
+            <% end %>
+          </div>
+        </div>
+        <div class="form-group">
+          <%= label_tag "torrent_genre", nil, class: "label-control" %>
+          <%= text_area_tag "torrent[genre]", nil, class: "form-control", required: true, id: "text-genre" %>
+        </div>
+        <div class="form-group">
           <%= submit_tag "Sumbit", class: "btn btn-success" %>
         </div>
       <% end %>

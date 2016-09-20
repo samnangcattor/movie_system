@@ -4,6 +4,7 @@ class  Admin::TorrentsController < ApplicationController
   def index
     torrent_movie = params[:torrent]
     if torrent_movie.present?
+      torrent_movie[:genre] = torrent_movie[:genre].split "\r\n"
       Resque.enqueue TorrentsWorker, torrent_movie
     end
   end

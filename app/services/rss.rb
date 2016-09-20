@@ -15,6 +15,7 @@ class Rss
       description_html.search("//a[@href]").map(&:attributes).each do |item|
         imdb_link = item["href"].value if item["href"].value.include? "imdb.com/title"
       end
+      genres = []
       if imdb_link.present?
         imdb_id = imdb_link.split("imdb.com/title/tt")[1].delete "/"
         imdb = Imdb::Movie.new imdb_id
@@ -22,6 +23,7 @@ class Rss
         title =  imdb.title + " (" + imdb.year.to_s + ")"
         year = imdb.year
         poster = imdb.poster
+        genres = imdb.genres
       else
         torrent = maget_link feed.link
         title = feed.link.split("http://extratorrent.cc/torrent/")[1]
@@ -29,7 +31,7 @@ class Rss
         poster = "https://moviehdkh.com/assets/logo-a89ac077ebeb6e980852ad282214a68f0cf5966f43a863588b2bdad9749bc7c4.png"
       end
       {title: title, photo: poster,
-        year: year, torrent: torrent}
+        year: year, torrent: torrent, genre: genres}
     end
 
     def maget_link url

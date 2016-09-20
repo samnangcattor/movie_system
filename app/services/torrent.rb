@@ -1,5 +1,5 @@
 class Torrent
-  attr_accessor :title, :photo, :year, :torrent
+  attr_accessor :title, :photo, :year, :torrent, :genre
 
   PORT = 9091
   HOST = 'http://localhost'

@@ -98,6 +98,11 @@ $(function(){
     }];
   }
 
+  $(document).on("click", "#add-genre", function(e){
+    var conceptName = $("#movie-genre").find(":selected").text();
+    $("#text-genre").append(conceptName + "\n");
+  });
+
   jwplayer("extensive").setup({
     playlist: [{
     image: "https://moviehdkh.com/assets/logo-a89ac077ebeb6e980852ad282214a68f0cf5966f43a863588b2bdad9749bc7c4.png",

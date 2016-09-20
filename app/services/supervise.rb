@@ -66,13 +66,13 @@ class Supervise
       Movie.transaction do
         Movie.create title: movie[:title], description: description,
           link_movie: "null", year_id: year.id, photo: movie[:photo], cinema: 1
-        if genres.present?
-          last_movie = Movie.last
-          categories = []
-          genres.each{|genre| categories << (Category.find_by name: genre)}
-          categories.each do |category|
-            MovieCategory.create movie: movie, category: category
-          end
+      end
+      if genres.present?
+        last_movie = Movie.last
+        categories = []
+        genres.each{|genre| categories << (Category.find_by name: genre)}
+        categories.each do |category|
+          MovieCategory.create movie: last_movie, category_id: category
         end
       end
     end

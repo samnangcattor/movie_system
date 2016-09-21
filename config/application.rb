@@ -30,8 +30,8 @@ module MovieSystem
     # config.i18n.default_locale = :de
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
+    config.cache_store = :redis_store, "redis://localhost:6379/0/cache", {expires_in: 30.minutes}
     config.active_record.raise_in_transactional_callbacks = true
-    config.action_controller.page_cache_directory = "#{Rails.root.to_s}/public/deploy"
     config.to_prepare do
       Devise::SessionsController.layout "layout_for_sessions_controller"
     end

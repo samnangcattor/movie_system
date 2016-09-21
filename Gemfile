@@ -24,7 +24,6 @@ gem "unicorn", "~> 5.0.1"
 gem "metamagic"
 gem "sitemap_generator"
 gem "carrierwave"
-gem "actionpack-page_caching"
 gem "hover-rails"
 gem "curb"
 gem "mechanize"
@@ -40,6 +39,10 @@ gem "resque", require: "resque/server"
 gem "rest-client"
 gem "imdb"
 gem "whenever", :require => false
+gem "redis"
+gem "redis-namespace"
+gem "redis-rails"
+gem "redis-rack-cache"
 
 group :development, :test do
   gem "pry"

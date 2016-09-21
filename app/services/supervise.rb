@@ -72,7 +72,7 @@ class Supervise
         categories = []
         genres.each{|genre| categories << (Category.find_by name: genre)}
         categories.each do |category|
-          MovieCategory.create movie: last_movie, category_id: category
+          MovieCategory.create movie: last_movie, category: category
         end
       end
     end

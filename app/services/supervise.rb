@@ -130,5 +130,14 @@ class Supervise
         end
       end
     end
+
+    def get_title_video
+      titles = Title.all
+
+    end
+
+    def download_torrent
+
+    end
   end
 end

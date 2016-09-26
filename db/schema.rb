@@ -11,13 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160912021342) do
-
-  create_table "authenticates", force: :cascade do |t|
-    t.string   "authenticate", limit: 255
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
-  end
+ActiveRecord::Schema.define(version: 20160924141452) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -43,6 +37,12 @@ ActiveRecord::Schema.define(version: 20160912021342) do
   end
 
   add_index "downloads", ["movie_id"], name: "index_downloads_on_movie_id", using: :btree
+
+  create_table "genres", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
 
   create_table "links", force: :cascade do |t|
     t.integer  "movie_id",           limit: 4
@@ -131,6 +131,29 @@ ActiveRecord::Schema.define(version: 20160912021342) do
     t.datetime "updated_at",              null: false
   end
 
+  create_table "title_genres", force: :cascade do |t|
+    t.integer  "title_id",   limit: 4
+    t.integer  "genre_id",   limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  add_index "title_genres", ["genre_id"], name: "index_title_genres_on_genre_id", using: :btree
+  add_index "title_genres", ["title_id"], name: "index_title_genres_on_title_id", using: :btree
+
+  create_table "titles", force: :cascade do |t|
+    t.string   "title",      limit: 255
+    t.integer  "imdb",       limit: 4
+    t.text     "photo",      limit: 65535
+    t.text     "torrent",    limit: 65535
+    t.integer  "release",    limit: 4
+    t.integer  "year_id",    limit: 4
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  add_index "titles", ["year_id"], name: "index_titles_on_year_id", using: :btree
+
   create_table "users", force: :cascade do |t|
     t.string   "name",                   limit: 255, default: "Default User"
     t.string   "email",                  limit: 255, default: "",             null: false
@@ -151,6 +174,17 @@ ActiveRecord::Schema.define(version: 20160912021342) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+
+  create_table "videos", force: :cascade do |t|
+    t.string   "file",         limit: 255
+    t.integer  "status",       limit: 4,   default: 0
+    t.integer  "title_id",     limit: 4
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+    t.integer  "transmission", limit: 4
+  end
+
+  add_index "videos", ["title_id"], name: "index_videos_on_title_id", using: :btree
 
   create_table "years", force: :cascade do |t|
     t.integer  "number",     limit: 4

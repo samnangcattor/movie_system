@@ -57,3 +57,7 @@ qualities:
   hight: 720
 rss_feeds:
   extratorrent: "http://extratorrent.cc/rss.xml?type=hot&cat=XVID+DIVX"
+status:
+  finished: 0
+  download: 1
+  progress: 2

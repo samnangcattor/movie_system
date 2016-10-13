@@ -28,19 +28,17 @@ class MoviesController < ApplicationController
     @movie = Movie.find params[:id]
     @link_video = []
     if @movie.link.robot? && @movie.link.file_id.present?
-      url = "https://docs.google.com/file/d/" + @movie.link.file_id + "/preview"
-      @link_video = @movie.list_link_movie url
+      @link_video = Robot.link_from_drive @movie.link.file_id
     end
-
     if @link_video.count == 1
-      @link_default = @link_video[0].link
+      @link_default = @link_video[0][:file]
     elsif @link_video.count == 2
-      @link_medium = @link_video[0].link
-      @link_default = @link_video[1].link
+      @link_medium = @link_video[0][:file]
+      @link_default = @link_video[1][:file]
     elsif @link_video.count == 3
-      @link_hd = @link_video[0].link
-      @link_medium = @link_video[1].link
-      @link_default = @link_video[2].link
+      @link_hd = @link_video[0][:file]
+      @link_medium = @link_video[1][:file]
+      @link_default = @link_video[2][:file]
     end
   end
 

@@ -3,7 +3,7 @@ class GoogleDrive
     OOB_URI = "https://moviehdkh/oauth2callback"
     APPLICATION_NAME = "Movidhdkh"
     CLIENT_SECRETS_PATH = "lib/google_drive/client_secret.json"
-    CREDENTIALS_PATH = File.join "lib/google_drive/", ".credentials", "moviehdkh-com.yaml"
+    CREDENTIALS_PATH = File.join "lib/google_drive/", ".credentials", "moviehdkh-ipv4-com.yaml"
     SCOPE = "https://www.googleapis.com/auth/drive"
 
     def get_service
@@ -23,6 +23,15 @@ class GoogleDrive
         title: movie_file[:title]
       }
       service.insert_file file, upload_source: movie_file[:file_path], content_type: movie_file[:mime_type]
+    end
+
+    def permission_to_public service, file_id
+      permission = Google::Apis::DriveV2::Permission.new role: "reader", type: "anyone"
+      service.insert_permission file_id, permission
+    end
+
+    def permission_to_private service, file_id
+      service.delete_permission file_id, "anyone"
     end
 
     private

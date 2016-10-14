@@ -2,7 +2,7 @@ class UploadsController < ApplicationController
   OOB_URI = "http://localhost:3000/oauth2callback"
   APPLICATION_NAME = "Movidhdkh"
   CLIENT_SECRETS_PATH = "lib/google_drive/client_secret.json"
-  CREDENTIALS_PATH = File.join "lib/google_drive/", ".credentials", "moviehdkh-com.yaml"
+  CREDENTIALS_PATH = File.join "lib/google_drive/", ".credentials", "moviehdkh-ipv4-com.yaml"
   SCOPE = "https://www.googleapis.com/auth/drive"
 
   def index

@@ -30,7 +30,7 @@ class Supervise
               movie = download.movie
               service = GoogleDrive.get_service
               movie_file = prepare_file_upload movie.title, download.torrent
-              file_uploaded = GoogleDrive.upload_to_drive service, movie_file, "0B8qFJJCJxA49OTg1ejhES01lTm8"
+              file_uploaded = GoogleDrive.upload_to_drive service, movie_file, "0B8z8I4jOIwFlWmoxU3dRYno0VDQ"
               download.update status: 1, file_progress: 1
               movie.link.update file_id: file_uploaded.id
               Torrent.remove download.torrent
@@ -129,15 +129,6 @@ class Supervise
           end
         end
       end
-    end
-
-    def get_title_video
-      titles = Title.all
-
-    end
-
-    def download_torrent
-
     end
   end
 end

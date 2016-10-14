@@ -36,30 +36,20 @@ class MoviesController < ApplicationController
       link_video_json = redis.get "link_video-#{file_id}"
       if link_video_json.present?
         @link_video = JSON.parse link_video_json
-        if @link_video.count == 1
-          @link_default = JSON.parse(@link_video[0])["file"]
-        elsif @link_video.count == 2
-          @link_medium = JSON.parse(@link_video[0])["file"]
-          @link_default = JSON.parse(@link_video[1])["file"]
-        elsif @link_video.count == 3
-          @link_hd = JSON.parse(@link_video[0])["file"]
-          @link_medium = JSON.parse(@link_video[1])["file"]
-          @link_default = JSON.parse(@link_video[2])["file"]
-        end
       else
         @link_video = Movie.list_links file_id
         redis.set "link_video-#{file_id}", @link_video
         redis.expire "link_video-#{file_id}", 9000
-        if @link_video.count == 1
-          @link_default = @link_video[0]["file"]
-        elsif @link_video.count == 2
-          @link_medium = @link_video[0]["file"]
-          @link_default = @link_video[1]["file"]
-        elsif @link_video.count == 3
-          @link_hd = @link_video[0]["file"]
-          @link_medium = @link_video[1]["file"]
-          @link_default = @link_video[2]["file"]
-        end
+      end
+      if @link_video.count == 1
+        @link_default = JSON.parse(@link_video[0])["file"]
+      elsif @link_video.count == 2
+        @link_medium = JSON.parse(@link_video[0])["file"]
+        @link_default = JSON.parse(@link_video[1])["file"]
+      elsif @link_video.count == 3
+        @link_hd = JSON.parse(@link_video[0])["file"]
+        @link_medium = JSON.parse(@link_video[1])["file"]
+        @link_default = JSON.parse(@link_video[2])["file"]
       end
     end
   end

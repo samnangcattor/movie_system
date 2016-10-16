@@ -50,6 +50,10 @@ class MoviesController < ApplicationController
         @link_hd = JSON.parse(@link_video[0])["file"]
         @link_medium = JSON.parse(@link_video[1])["file"]
         @link_default = JSON.parse(@link_video[2])["file"]
+      elsif @link_video.count == 4
+        @link_hd = JSON.parse(@link_video[1])["file"]
+        @link_medium = JSON.parse(@link_video[2])["file"]
+        @link_default = JSON.parse(@link_video[3])["file"]
       end
     end
   end

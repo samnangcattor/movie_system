@@ -310,6 +310,11 @@ class Movie < ActiveRecord::Base
       url_size = link.size
       url = link[0..url_size - 4]
       url = "https://redirector.googlevideo.com/videoplayback?" + url.split("com/videoplayback?")[1]
+      if url.include? "nh"
+        arr_url = url.split("&").to_a
+        arr_url.delete_at 17
+        url =  arr_url.join("&").gsub "ipbits=24", "ipbits=0"
+      end
       url
     end
   end

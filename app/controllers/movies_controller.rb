@@ -39,7 +39,7 @@ class MoviesController < ApplicationController
       else
         @link_video = Movie.list_links file_id
         redis.set "link_video-#{file_id}", @link_video
-        redis.expire "link_video-#{file_id}", 9000
+        redis.expire "link_video-#{file_id}", 3600
       end
       if @link_video.count == 1
         @link_default = JSON.parse(@link_video[0])["file"]

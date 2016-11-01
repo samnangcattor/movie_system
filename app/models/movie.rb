@@ -307,13 +307,8 @@ class Movie < ActiveRecord::Base
     end
 
    def get_link_redirect_google url
-      url_size = url.url_size
-      url = url[0..url_size - 6]
-      url = url + "48"
       url = "https://redirector.googlevideo.com/videoplayback?" + url.split("com/videoplayback?")[1]
-      if url.include? "nh"
-        url =  arr_url.join("&").gsub "ipbits=24", "ipbits=0"
-      end
+      url = url.sub(/ipbits=\d+/, 'ipbits=32')
       url
     end
   end
@@ -345,6 +340,7 @@ class Movie < ActiveRecord::Base
 
   def get_link_redirect_google url
     url = "https://redirector.googlevideo.com/videoplayback?" + url.split("com/videoplayback?")[1]
+    url = url.sub(/ipbits=\d+/, 'ipbits=32')
     url
   end
 

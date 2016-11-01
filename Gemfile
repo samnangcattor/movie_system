@@ -43,6 +43,8 @@ gem "redis"
 gem "redis-namespace"
 gem "redis-rails"
 gem "redis-rack-cache"
+gem "axlsx_rails"
+gem "zip-zip"
 
 group :development, :test do
   gem "pry"

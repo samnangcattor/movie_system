@@ -20,5 +20,6 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :users
     resources :torrents, only: :index
+    resources :exports, only: [:index, :create]
   end
 end

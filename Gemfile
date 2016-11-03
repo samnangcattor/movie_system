@@ -16,7 +16,6 @@ gem "sdoc", "~> 0.4.0", group: :doc
 gem "jquery-turbolinks"
 gem "devise"
 gem "cancancan"
-gem "ransack"
 gem "font-awesome-rails"
 gem "rails_admin"
 gem "rails_admin_import", "~> 1.2"
@@ -45,6 +44,7 @@ gem "redis-rails"
 gem "redis-rack-cache"
 gem "axlsx_rails"
 gem "zip-zip"
+gem "responders"
 
 group :development, :test do
   gem "pry"

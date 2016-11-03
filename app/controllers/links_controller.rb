@@ -1,6 +1,14 @@
 class LinksController < ApplicationController
+  respond_to :json
+
   def index
-    movie = params[:movie]
-    @plain = Base64.decode64 movie if movie.present?
+    file = params[:file]
+    links = nil
+    result = []
+    links = Link.list_links file
+    links.each do |link|
+      result << JSON.parse(link)
+    end
+    respond_with video, json: result
   end
 end

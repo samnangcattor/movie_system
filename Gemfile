@@ -42,9 +42,10 @@ gem "whenever", :require => false
 gem "redis"
 gem "redis-namespace"
 gem "redis-rails"
-gem "redis-rack-cache"
+gem 'redis-rack-cache', '2.0.0.pre'
 gem "axlsx_rails"
 gem "zip-zip"
+gem "responders"
 
 group :development, :test do
   gem "pry"

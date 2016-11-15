@@ -30,7 +30,7 @@ class Link < ActiveRecord::Base
         service.get_file file_id
         access_token = service.authorization.access_token
         url = "https://drive.google.com/a/moviehdkh.com/get_video_info?docid=" +
-          file_id + "&access_token=" access_token
+          file_id + "&access_token=" + access_token
         GoogleDrive.permission_to_public service, file_id
         page = Nokogiri::HTML open(url)
         GoogleDrive.permission_to_private service, file_id

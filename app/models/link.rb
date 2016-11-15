@@ -27,6 +27,10 @@ class Link < ActiveRecord::Base
       page = ""
       file = service.get_file file_id
       if file.owners[0].display_name.include? "Dam Samnul"
+        service.get_file file_id
+        access_token = service.authorization.access_token
+        url = "https://drive.google.com/a/moviehdkh.com/get_video_info?docid=" +
+          file_id + "&access_token=" access_token
         GoogleDrive.permission_to_public service, file_id
         page = Nokogiri::HTML open(url)
         GoogleDrive.permission_to_private service, file_id
@@ -61,8 +65,8 @@ class Link < ActiveRecord::Base
 
     def get_link_redirect_google url
       url = "https://redirector.googlevideo.com/videoplayback?" + url.split("com/videoplayback?")[1]
-      url = url.sub /ipbits=\d+/, "ipbits=8"
-      url = url.sub /pl=\w+,\d+/, "pl=18"
+      url = url.sub /ipbits=\d+/, "ipbits=0"
+      url = url.sub /pl=\w+,\d+/, "pl=20"
       url
     end
   end

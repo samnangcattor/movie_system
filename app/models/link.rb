@@ -26,8 +26,7 @@ class Link < ActiveRecord::Base
       service = GoogleDrive.get_service
       page = ""
       file = service.get_file file_id
-      if file.owners[0].display_name.include? "Dam Samnul"
-        service.get_file file_id
+      if file.owners[0].display_name.include?("Dam Samnul") || file.owners[0].display_name.include?("damsamnang")
         access_token = service.authorization.access_token
         url = "https://drive.google.com/a/moviehdkh.com/get_video_info?docid=" +
           file_id + "&access_token=" + access_token

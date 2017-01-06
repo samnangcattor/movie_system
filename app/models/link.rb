@@ -8,6 +8,22 @@ class Link < ActiveRecord::Base
   REDIRECT_URL = "https://redirector.googlevideo.com/videoplayback?"
 
   class << self
+    def list_links_api file_id
+      result = []
+      service = GoogleDrive.get_service
+      file = service.get_file file_id
+      if file.owners[0].display_name.include? "Dam Samnul"
+        url = "http://api.getlinkdrive.com/getlink?url=https://drive.google.com/file/d/"+ file_id +"/view"
+        GoogleDrive.permission_to_public service, file_id
+        result_from_api = get_result_from_api url
+        result << list_url_api(result_from_api)
+        GoogleDrive.permission_to_private service, file_id
+        result
+      else
+        []
+      end
+    end
+
     def list_links file_id
       result = []
       url = Settings.video_info + file_id
@@ -22,6 +38,31 @@ class Link < ActiveRecord::Base
     end
 
     private
+    def get_result_from_api url
+      uri = URI url
+      response = Net::HTTP.get uri
+      JSON.parse response
+    end
+
+    def list_url_api links
+      result = []
+      links.each do |link|
+        ui = convert_result_from_api link["src"]
+        result << link_video(ui)
+      end
+      result
+    end
+
+
+    def convert_result_from_api url
+      httpc = HTTPClient.new
+      resp = httpc.get url
+      location = resp.header['Location'][0]
+      location.gsub "api.getlinkdrive.com", "moviehdkh.com"
+    end
+
+
+
     def page_body url, file_id
       service = GoogleDrive.get_service
       page = ""

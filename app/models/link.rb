@@ -39,16 +39,17 @@ class Link < ActiveRecord::Base
 
     private
     def get_result_from_api url
-      uri = URI url
-      response = Net::HTTP.get uri
-      JSON.parse response
+      # uri = URI url
+      # response = Net::HTTP.get uri
+      res = RestClient.get(url)
+      JSON.parse res.body
     end
 
     def list_url_api links
       result = []
       links.each do |link|
         ui = convert_result_from_api link["src"]
-        result << link_video(ui)
+        result << { file: ui, type: 'mp4', label: link['label'] }
       end
       result
     end
@@ -58,7 +59,7 @@ class Link < ActiveRecord::Base
       httpc = HTTPClient.new
       resp = httpc.get url
       location = resp.header['Location'][0]
-      location.gsub "api.getlinkdrive.com", "moviehdkh.com"
+      # location.gsub "api.getlinkdrive.com", "moviehdkh.com"
     end
 
 
@@ -88,13 +89,13 @@ class Link < ActiveRecord::Base
 
     def link_video link
       result = if link.include? "itag=37"
-        link = get_link_redirect_google link
+        # link = get_link_redirect_google link
         {file: link, type: "mp4", label: "1080"}.to_json
       elsif link.include? "itag=22"
-        link = get_link_redirect_google link
+        # link = get_link_redirect_google link
         {file: link, type: "mp4", label: "720"}.to_json
       elsif link.include? "itag=59"
-        link = get_link_redirect_google link
+        # link = get_link_redirect_google link
         {file: link, type: "mp4", label: "480"}.to_json
       elsif link.include? "itag=18"
         link = get_link_redirect_google link

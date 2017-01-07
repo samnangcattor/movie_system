@@ -6,9 +6,7 @@ class LinksController < ApplicationController
     file.gsub! ".json", ""
     result = []
     links = Link.list_links_api file
-    links.flatten.each do |link|
-      result << JSON.parse(link)
-    end
-    render json: result
+    links.flatten
+    render json: links.flatten
   end
 end

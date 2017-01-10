@@ -89,17 +89,17 @@ class Link < ActiveRecord::Base
 
     def link_video link
       result = if link.include? "itag=37"
-        # link = get_link_redirect_google link
-        {file: link, type: "mp4", label: "1080"}.to_json
+        link = get_link_redirect_google link
+        {file: link, type: "mp4", label: "1080"}
       elsif link.include? "itag=22"
-        # link = get_link_redirect_google link
-        {file: link, type: "mp4", label: "720"}.to_json
+        link = get_link_redirect_google link
+        {file: link, type: "mp4", label: "720"}
       elsif link.include? "itag=59"
-        # link = get_link_redirect_google link
-        {file: link, type: "mp4", label: "480"}.to_json
+        link = get_link_redirect_google link
+        {file: link, type: "mp4", label: "480"}
       elsif link.include? "itag=18"
         link = get_link_redirect_google link
-        {file: link, type: "mp4", label: "360", "default": true}.to_json
+        {file: link, type: "mp4", label: "360", "default": true}
       end
       result
     end
@@ -107,7 +107,8 @@ class Link < ActiveRecord::Base
     def get_link_redirect_google url
       url = "https://redirector.googlevideo.com/videoplayback?" + url.split("com/videoplayback?")[1]
       url = url.sub /ipbits=\d+/, "ipbits=0"
-      url = url.sub /pl=\w+,\d+/, "pl=20"
+      url = url.sub /pl=\w+,\d+/, "pl=24"
+      url = url.sub /&safm=\d+,\d+/, ""
       url
     end
   end

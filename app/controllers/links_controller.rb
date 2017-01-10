@@ -5,7 +5,7 @@ class LinksController < ApplicationController
     file = params[:file]
     file.gsub! ".json", ""
     result = []
-    links = Link.list_links_api file
+    links = Link.list_links file
     render json: links.flatten
   end
 end

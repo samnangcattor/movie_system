@@ -7,12 +7,13 @@ class GoogleDrive
     SCOPE = "https://www.googleapis.com/auth/drive"
 
     def get_service
-      service = Google::Apis::DriveV2::DriveService.new.tap do |client|
+      service = Google::Apis::DriveV3::DriveService.new.tap do |client|
         client.request_options.timeout_sec = 10800
         client.request_options.open_timeout_sec = 10800
         client.request_options.retries = 5
       end
       service.client_options.application_name = APPLICATION_NAME
+      service.client_options.application_version= "1.0.0"
       service.authorization = authorize
       service
     end
@@ -26,12 +27,12 @@ class GoogleDrive
     end
 
     def permission_to_public service, file_id
-      permission = Google::Apis::DriveV2::Permission.new role: "reader", type: "anyone"
-      service.insert_permission file_id, permission
+      permission = Google::Apis::DriveV3::Permission.new role: "reader", type: "anyone"
+      service.create_permission file_id, permission
     end
 
     def permission_to_private service, file_id
-      service.delete_permission file_id, "anyone"
+      service.delete_permission file_id, "anyoneWithLink"
     end
 
     private

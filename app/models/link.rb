@@ -67,7 +67,7 @@ class Link < ActiveRecord::Base
     def page_body url, file_id
       service = GoogleDrive.get_service
       page = ""
-      file = service.get_file file_id
+      file = service.get_file file_id, fields: "owners"
       if file.owners[0].display_name.include?("Dam Samnul") || file.owners[0].display_name.include?("damsamnang")
         access_token = service.authorization.access_token
         url = "https://drive.google.com/a/moviehdkh.com/get_video_info?docid=" +
@@ -107,8 +107,8 @@ class Link < ActiveRecord::Base
     def get_link_redirect_google url
       url = "https://redirector.googlevideo.com/videoplayback?" + url.split("com/videoplayback?")[1]
       url = url.sub /ipbits=\d+/, "ipbits=0"
-      url = url.sub /pl=\w+,\d+/, "pl=24"
-      url = url.sub /&safm=\d+,\d+/, ""
+      url = url.sub /pl=\w+,\d+/, "pl=21"
+      # url = url.sub /&safm=\d+,\d+/, ""
       url
     end
   end

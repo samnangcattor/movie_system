@@ -12,16 +12,13 @@ class Link < ActiveRecord::Base
       result = []
       service = GoogleDrive.get_service
       file = service.get_file file_id
-      if file.owners[0].display_name.include? "Dam Samnul"
-        url = "http://api.getlinkdrive.com/getlink?url=https://drive.google.com/file/d/"+ file_id +"/view"
-        GoogleDrive.permission_to_public service, file_id
-        result_from_api = get_result_from_api url
-        result << list_url_api(result_from_api)
-        GoogleDrive.permission_to_private service, file_id
-        result
-      else
-        []
-      end
+      url = "http://api.getlinkdrive.com/getlink?url=https://drive.google.com/file/d/"+ file_id +"/view"
+      GoogleDrive.permission_to_public service, file_id
+      result_from_api = get_result_from_api url
+      result << list_url_api(result_from_api)
+      GoogleDrive.permission_to_private service, file_id
+      result
+
     end
 
     def list_links file_id
@@ -48,7 +45,7 @@ class Link < ActiveRecord::Base
     def list_url_api links
       result = []
       links.each do |link|
-        ui = convert_result_from_api link["src"]
+        ui = link["src"].gsub "api.getlinkdrive.com", "moviehdkh.com"
         result << { file: ui, type: 'mp4', label: link['label'] }
       end
       result

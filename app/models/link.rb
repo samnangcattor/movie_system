@@ -18,7 +18,9 @@ class Link < ActiveRecord::Base
       result << list_url_api(result_from_api)
       GoogleDrive.permission_to_private service, file_id
       result
-
+    rescue
+      GoogleDrive.permission_to_private service, file_id
+      []
     end
 
     def list_links file_id

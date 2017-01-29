@@ -47,7 +47,8 @@ class Link < ActiveRecord::Base
     def list_url_api links
       result = []
       links.each do |link|
-        ui = link["src"].gsub "api.getlinkdrive.com", "moviehdkh.com"
+        # ui = link["src"].gsub "api.getlinkdrive.com", "moviehdkh.com"
+        ui = convert_result_from_api link["src"]
         result << { file: ui, type: 'mp4', label: link['label'] }
       end
       result
@@ -58,7 +59,7 @@ class Link < ActiveRecord::Base
       httpc = HTTPClient.new
       resp = httpc.get url
       location = resp.header['Location'][0]
-      # location.gsub "api.getlinkdrive.com", "moviehdkh.com"
+      location.gsub "api.getlinkdrive.com", "moviehdkh.com"
     end
 
 
